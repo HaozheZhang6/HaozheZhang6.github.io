@@ -16,12 +16,10 @@ selected_papers: true # includes a list of papers marked as "selected={true}"
 social: true  # includes social icons at the bottom of the page
 ---
 
-Hi 👋🙂
+Hii, welcome to my page! 👋
 
-I am an M.S. Graduate in Computer Science (December 2021) from [San Jose State University](https://www.sjsu.edu/cs/programs/mscs/) and a firm believer in lifelong learning. I enjoy developing solutions to challenging problems through implementing and testing well-documented, reproducible and robust code.
+I am a fifth-year PhD student in mechanical and aerospace engineering at [University of Virginia](https://www.virginia.edu/). My advisor is [Baoxing Xu](https://xugroup.weebly.com/). My research is centered around designing metastructures and developing numerical models under mechanical framework to analyze physical properties of soft-hard integrated materials and structures. 
 
-My interests in computer security, data privacy and AI led me to pursue research in privacy-preserving AI as part of [my M.S. thesis project](projects/4_project).
+In the summer of 2022, I joined [Western Digital](https://www.westerndigital.com/) as a research intern. Worked with the packaging R&D team, my research was focus on solid drive drop tests. I developed a criteria using the simulation results from FEA to predict the corresponding test performance with neural networks, which allow the team to easily know if the design meet our customers' requirement.
 
-Besides academic research, my industry experience includes internships at the Silicon Valley fintech startup, [Zact](https://www.zact.com/) , and at [Cisco](https://www.cisco.com/). During my undergraduate studies, I also worked as a Student Contractor at [Delphi Electronics & Safety Verification Lab](https://www.borgwarner.com/delphi-technologies).
-
-Besides 👩‍💻, I enjoy 🏕️, 🍱, and 📸.
+In my spare time, I enjoy traveling, playing video games and spending time with friends.
