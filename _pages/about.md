@@ -2,13 +2,13 @@
 layout: about
 title: about
 permalink: /
-subtitle: Software Engineer | Privacy-Preserving Machine Learning Enthusiast
+subtitle: Ph.D. | Mechanical Engineer
 
 profile:
   align: right
   image: profile_pic.jpg
 #  address: >
-#    <p>San Jose, California</p>
+#    <p>Charlottesville, Virginia</p>
 #    <p>USA</p>
 
 news: true  # includes a list of news items
