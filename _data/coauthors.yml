@@ -4,4 +4,12 @@
 
 "Yang":
   - firstname: ["Weizhu", "W.", "W. Y.", "Weizhu Yang"]
-    url: https://scholar.google.com/citations?user=ro3HRqsAAAAJ&hl=zh-CN
+    url: https://scholar.google.com/citations?user=ro3HRqsAAAAJ&hl
+
+"Gao":
+  - firstname: ["Yuan", "Y.", "Y. G.", "Yuan Gao"]
+    url: https://scholar.google.com/citations?user=7hoWf0MAAAAJ&hl
+
+"Lee":
+  - firstname: ["Chi Hwan", "CH.", "CH. L.", "Chi Hwan Lee"]
+    url: https://scholar.google.com/citations?user=gXwk0DsAAAAJ&hl
