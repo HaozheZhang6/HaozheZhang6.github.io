@@ -1,10 +1,10 @@
 ---
 layout: post
-date: 2021-12-16 15:59:00-0400
+date: 2021-11-30
 inline: true
 ---
 
-🎓 Graduated from the M.S. Program in Computer Science at San Jose State University (CA, USA). 📜 Manuscript produced from my thesis project has been submitted to a national conference for review.
+Our paper "Mechanical Janus Structures by Soft‐Hard Material Integration" has been published on Advanced Materials. Here is the [link](https://onlinelibrary.wiley.com/doi/abs/10.1002/adma.202208339).
 
 <div class="row justify-content-sm-center">
     <div class="col-sm-8 mt-3 mt-md-0">
