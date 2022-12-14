@@ -1,7 +1,7 @@
 ---
 layout: post
-date: 2021-08-12 15:59:00-0400
+date: 2022-08-13
 inline: true
 ---
 
-✅ Completed an 8-month Internship at [Zact](https://www.zact.com/). I thoroughly enjoyed working with the team on testing the Zact platform on mobile and web apps.
+✅ Completed an 3-month Internship at [Western Digital](https://www.westerndigital.com/). I thoroughly enjoyed working with the team on packaging team.
