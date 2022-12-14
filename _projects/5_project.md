@@ -11,18 +11,14 @@ Soft-hard material integration is ubiquitous in biological materials and structu
 
 Our research aims to understand fundamental mechanics principles that could enable creations of intelligent new design concepts and approaches of functional materials and structures capable of being readily manufactured for desired applications.
 
-{% include figure.html path="assets/img/work/Janus.png" title="Janus" class="img-fluid rounded z-depth-1" zoomable=true %}
-Mechanical Janus structure (left) and the programmable assembled superstructures in respose to compression stimuli (right)
+Here is a mechanical **Janus structure** enabled by soft and hard materials integration. We establish, in the combination of extensive experimental, theoretical, and computational studies, the design principle of soft-hard materials integrated mechanical Janus structures and address their unique rotation mechanism. We further show the systematic studies of assembling the Janus structure units into superstructures with well-ordered organizations by programing their local rotations, providing a direct route of designing superstructures by leveraging mechanical Janus structures with unique soft-hard material integration. Applications are conducted to demonstrate the features and functionalities of assembled superstructures with local ordered organizations in regulating and filtering acoustic wave propagations, thereby providing exemplification applications of mechanical Janus design in functional structures and devices.
 
-<div class="row justify-content-sm-center">
-    <div class="col-sm-4 mt-3 mt-md-0">
-        {% include figure.html path="assets/img/research/work/Janus.png" title="Janus" class="img-fluid rounded z-depth-1" zoomable=true %}
-    </div>
-</div>
+{% include figure.html path="assets/img/research/work/Janus.png" title="Janus" class="img-fluid rounded z-depth-1" zoomable=true %}
 <div class="caption">
     Mechanical Janus structure (left) and the programmable assembled superstructures in respose to compression stimuli (right) 
 </div>
 
+In addition, we also investigated the rotation mechanism of stretchable metasurfaces, and the influence of the rotation of nano-rods to their optical properties.
 
 For more information, please refer to those publications:
 
