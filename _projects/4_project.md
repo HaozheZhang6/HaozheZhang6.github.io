@@ -3,7 +3,7 @@ layout: page
 title: Mechanics design and manufacturing of biomedical devices
 #description: 
 img: assets/img/work/contact_lens.png
-importance: 3
+importance: 2
 category: work
 ---
 
