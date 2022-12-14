@@ -14,7 +14,7 @@ We design and engineer smart soft contact lenses for continuous remote assessmen
 {% include figure.html path="assets/img/work/contact_lens.png" title="Lens" class="img-fluid rounded z-depth-1" zoomable=true %}
 Schematic illustration of ERG recording in response to a light stimulus using the corneal sensor
 
-For more information, please refer to those publications:
+For more information, please refer to the publication below:
 Kyunghun Kim, Ho Joong Kim, Haozhe Zhang, Woohyun Park, Dawn Meyer, Min Ku Kim, Bongjoong Kim, Heun Park, Baoxing Xu, Pete Kollbaum, Bryan W Boudouris, Chi Hwan Lee. All-printed stretchable corneal sensor on soft contact lenses for noninvasive and painless ocular electrodiagnosis. Nature Communications 12 (2021) 1544
 
 ---
