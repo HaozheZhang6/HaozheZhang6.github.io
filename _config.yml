@@ -54,7 +54,7 @@ og_image: # The site-wide (default for all links) Open Graph preview image
 # Social integration
 # -----------------------------------------------------------------------------
 
-github_username: HaozheZhang6 # your GitHub user name
+github_username: # HaozheZhang6 # your GitHub user name
 gitlab_username: # your GitLab user name
 twitter_username: HaozheZhang666 # your Twitter handle
 linkedin_username: haozhe-zhang-89a632145 # your LinkedIn user name
