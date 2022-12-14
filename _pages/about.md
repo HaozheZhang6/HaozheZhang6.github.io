@@ -7,9 +7,9 @@ subtitle: Ph.D. | Mechanical Engineer
 profile:
   align: right
   image: profile_pic.jpg
-#  address: >
-#    <p>Charlottesville, Virginia</p>
-#    <p>USA</p>
+  address: >
+    <p>Charlottesville, Virginia</p>
+    <p>USA</p>
 
 news: true  # includes a list of news items
 selected_papers: true # includes a list of papers marked as "selected={true}"
