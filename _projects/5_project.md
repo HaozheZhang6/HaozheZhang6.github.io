@@ -9,6 +9,8 @@ category: work
 
 Soft-hard material integration is ubiquitous in biological materials and structures, such as the human body with the integration of soft muscles. The inherent distinction between these soft and hard materials has led to fundamental differences in their mechanical, thermal, and physical behaviors. Inspired by these soft-hard material integration principles, numerous man-made functional materials and structures with great mechanical/optical/electronical/acoustic properties has been designed. Our research aims to understand fundamental mechanics principles that could enable creations of intelligent new design concepts and approaches of functional materials and structures capable of being readily manufactured for desired applications.
 
+{% include figure.html path="assets/img/work/Janus.png" title="Janus" class="img-fluid rounded z-depth-1" zoomable=true %}
+Mechanical Janus structure (left) and the programmable assembled superstructures in respose to compression stimuli (right)
 
 
 For more information, please refer to those publications:
