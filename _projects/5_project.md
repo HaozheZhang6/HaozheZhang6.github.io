@@ -13,7 +13,7 @@ Our research aims to understand fundamental mechanics principles that could enab
 
 Here is a mechanical **Janus structure** enabled by soft and hard materials integration. We establish, in the combination of extensive experimental, theoretical, and computational studies, the design principle of soft-hard materials integrated mechanical Janus structures and address their unique rotation mechanism. We further show the systematic studies of assembling the Janus structure units into superstructures with well-ordered organizations by programing their local rotations, providing a direct route of designing superstructures by leveraging mechanical Janus structures with unique soft-hard material integration. Applications are conducted to demonstrate the features and functionalities of assembled superstructures with local ordered organizations in regulating and filtering acoustic wave propagations, thereby providing exemplification applications of mechanical Janus design in functional structures and devices.
 
-{% include figure.html path="assets/img/research/work/Janus.png" title="Janus" class="img-fluid rounded z-depth-1" zoomable=true %}
+{% include figure.html path="assets/img/work/Janus.png" title="Janus" class="img-fluid rounded z-depth-1" zoomable=true %}
 <div class="caption">
     Mechanical Janus structure (left) and the programmable assembled superstructures in respose to compression stimuli (right) 
 </div>
