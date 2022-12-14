@@ -1,22 +1,18 @@
 ---
 layout: page
-title: Privacy Preserving for Multiple Computer Vision Tasks
+title: Mechanics design and manufacturing of biomedical devices
 #description: 
-img: assets/img/cs298/cs298.png
+img: assets/img/work/wearable_devices.png
 importance: 1
 category: work
 ---
 
 ---
 
-Privacy-preserving visual recognition is an important area of research that is gaining momentum in the field of computer vision. In a production environment, it is critical to have neural network models learn continually from user data. However, sharing raw user data with a server is less desirable from a regulatory, security and privacy perspective. 
+Micro/nanofluidic devices and systems have attracted ever-growing attention in healthcare applications over the past decades due to low-cost yet easy-customizable functions with the demand of only a small volume of sample fluid. The continuous development, in particular, supported by the emerging of new materials, capable of meeting critical needs in next-generation, wearable, and multifunctional biomedical devices for at-home, personalized healthcare monitoring is challenging the principles and strategies of structural design, manufacturing, and their seamless integration. Our work is to develop mechanics-centered design and processing strategies and approaches for immediate applications in biomedical engineering and healthcare monitoring. Topics of interest include pain management electronic devices and porous materials-liquid based sensors and actuators.
 
-Federated learning addresses the problem of privacy-preserving visual recognition. More specifically, we closely examine and dissect a framework known as Dual User Adaptation (DUA) presented by Lange et al. at CVPR 2020, due to its novel idea of bringing about user-adaptation on both the server-side and user device side. Data in the server and user device is predefined into a series of tasks prior to training and testing. However, since user data is constantly evolving, it’s important to see how DUA performs on unseen data or tasks. A few implementations are also executed to see if the performance of the DUA model can be improved on unseen data. In addition, two other federated learning frameworks are implemented to compare how it performs with DUA. 
-
-Through this research we show that retraining the classifier layer of the merged model with all data categories greatly improves the performance for real-world implementation of DUA.
-
-For more information, please refer to the report of my M.S. writing project.
-
-{% pdf "/assets/pdf/cs298/cs298_report.pdf" %}
+For more information, please refer to those publications:
+1. Mingyu Sang, Kyowon Kang, Yue Zhang, Haozhe Zhang, Kiho Kim, Myeongki Cho, Jongwoon Shin, Jung-Hoon Hong, Taemin Kim, Shin Kyu Lee, Woon-Hong Yeo, Jung Woo Lee, Taeyoon Lee, Baoxing Xu and Ki Jun Yu. Ultra-high Sensitive Au-doped Silicon Nanomembrane Based Wearable Sensor Arrays for Continuous Skin Temperature Monitoring with High Precision. Advanced Materials. 2021, 2105865
+2. Kyunghun Kim, Ho Joong Kim, Haozhe Zhang, Woohyun Park, Dawn Meyer, Min Ku Kim, Bongjoong Kim, Heun Park, Baoxing Xu, Pete Kollbaum, Bryan W Boudouris, Chi Hwan Lee. All-printed stretchable corneal sensor on soft contact lenses for noninvasive and painless ocular electrodiagnosis. Nature Communications 12 (2021) 1544
 
 ---
