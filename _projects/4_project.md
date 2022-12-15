@@ -23,6 +23,6 @@ The smart contact lense we designed is for continuous remote assessment of ocula
 
 For more information, please refer to the publication below:
 
-Kyunghun Kim*, Ho Joong Kim*, Haozhe Zhang*^, Woohyun Park, Dawn Meyer, Min Ku Kim, Bongjoong Kim, Heun Park, Baoxing Xu, Pete Kollbaum, Bryan W Boudouris, Chi Hwan Lee. All-printed stretchable corneal sensor on soft contact lenses for noninvasive and painless ocular electrodiagnosis. Nature Communications 12 (2021) 1544 (* denotes equal contribution)
+Kyunghun Kim*, Ho Joong Kim*, Haozhe Zhang*^, Woohyun Park, Dawn Meyer, Min Ku Kim, Bongjoong Kim, Heun Park, Baoxing Xu, Pete Kollbaum, Bryan W Boudouris, Chi Hwan Lee. All-printed stretchable corneal sensor on soft contact lenses for noninvasive and painless ocular electrodiagnosis. **Nature Communications** 12 (2021) 1544 (* denotes equal contribution)
 
 ---
