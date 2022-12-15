@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Mechanics of Soft-Hard Integrated Materials and Structures
-description:Breif Ph.D. Thesis overview 
+description:Breif Ph.D. thesis overview 
 img: assets/img/work/Janus.png
 importance: 1
 category: work
