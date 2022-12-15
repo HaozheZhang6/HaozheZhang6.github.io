@@ -7,7 +7,7 @@ importance: 1
 category: work
 ---
 
-
+---
 Soft-hard material integration is ubiquitous in biological materials and structures, such as the human body with the integration of soft muscles. The inherent distinction between these soft and hard materials has led to fundamental differences in their mechanical, thermal, and physical behaviors. Inspired by these soft-hard material integration principles, numerous man-made functional materials and structures with great mechanical/optical/electronical/acoustic properties has been designed. 
 
 Our research aims to understand fundamental mechanics principles that could enable creations of intelligent new design concepts and approaches of functional materials and structures capable of being readily manufactured for desired applications.
@@ -45,4 +45,4 @@ Moreover, we also designed a two-dimensional robot by integrating soft-hard mate
 For more information, please refer to:
 
 Haozhe Zhang^, Baoxing Xu. Soft-hard material integration enabled programmable robotic locomotion. **Applied Physics Letters**. 121(2022)214104
-
+---
