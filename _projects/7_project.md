@@ -2,7 +2,7 @@
 layout: page
 title: Collabrating projects
 #description: 
-img: assets/img/work/elastomer.jpg
+img: assets/img/work/elastomer.png
 importance: 3
 category: work
 ---
