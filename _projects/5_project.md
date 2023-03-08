@@ -45,4 +45,3 @@ Moreover, we also designed a two-dimensional robot by integrating soft-hard mate
 For more information, please refer to:
 
 Haozhe Zhang^, Baoxing Xu. Soft-hard material integration enabled programmable robotic locomotion. **Applied Physics Letters**. 121(2022)214104
----
