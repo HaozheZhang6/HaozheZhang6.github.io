@@ -2,13 +2,13 @@
 layout: about
 title: about
 permalink: /
-subtitle: Ph.D. | Mechanical Engineer
+subtitle: Ph.D. | Cell Engineer @ Tesla
 
 profile:
   align: right
   image: profile_pic.jpg
   address: >
-    <p>Charlottesville, Virginia</p>
+    <p>Palo Alto, CA</p>
     <p>USA</p>
 
 news: true  # includes a list of news items
@@ -18,7 +18,7 @@ social: true  # includes social icons at the bottom of the page
 
 Hii, welcome to my page! 👋
 
-I am a fifth-year PhD student in mechanical and aerospace engineering at [University of Virginia](https://www.virginia.edu/). My advisor is [Baoxing Xu](https://xugroup.weebly.com/). My research is centered around designing metastructures and developing numerical models under mechanical framework to analyze physical properties of soft-hard integrated materials and structures. 
+I am a cell engineer at [Tesla](https://www.tesla.com), working on next generation in-house cell. Before joining Tesla, I finished my PhD in mechanical engineering at [University of Virginia](https://www.virginia.edu/). My advisor was [Baoxing Xu](https://xugroup.weebly.com/). My research was centered around designing metastructures and developing numerical models under mechanical framework to analyze physical properties of soft-hard integrated materials and structures. 
 
 In the summer of 2022, I joined [Western Digital](https://www.westerndigital.com/) as a research intern. Worked with the packaging R&D team, my research was focus on solid drive drop tests. I developed a criteria using the simulation results from FEA to predict the corresponding test performance with neural networks, which allow the team to easily know if the design meet our customers' requirement.
 
