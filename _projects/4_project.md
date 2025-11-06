@@ -2,9 +2,9 @@
 layout: page
 title: Mechanics Design and Manufacturing of Biomedical Devices
 description: Brief project overview
-img: assets/img/work/contact_lens.png
+img: assets/img/interests/contact_lens.png
 importance: 2
-category: work
+category: interests
 ---
 
 ---
@@ -13,7 +13,7 @@ Monitoring the human bio-sigials including temperature and electrophysiological 
 
 The smart contact lense we designed is for continuous remote assessment of ocular health and chronic diseases. These devices are built upon various commercial brands of soft contact lenses that offer ergonomic designs to safely fit a variety of corneal shapes and sizes in human eyes. The pragmatic applicaiton of these devices is boundless ranging from (1) at-home management of chronic ocular diseases such as glaucoma to (2) painless ocular drug delivery and to (3) contact lens research and development. 
 
-{% include figure.html path="assets/img/work/contact_lens.png" title="Lens" class="img-fluid rounded z-depth-1" zoomable=true %}
+{% include figure.html path="assets/img/interests/contact_lens.png" title="Lens" class="img-fluid rounded z-depth-1" zoomable=true %}
 <div class="caption">
     Schematic illustration of ERG recording in response to a light stimulus using the corneal sensor. 
 </div>
@@ -24,7 +24,7 @@ Kyunghun Kim*, Ho Joong Kim*, Haozhe Zhang*^, Woohyun Park, Dawn Meyer, Min Ku K
 
  To monitoring the body temperature with high accuracy, here we introduce ultrasensitive and stretchable gold-doped silicon nanomembrane (Au-doped SiNM) epidermal temperature sensor array for the first time. The ultrasensitivity is achieved by shifting freeze-out region to intrinsic region in carrier density and modulation of fermi energy level of p-type SiNM through the development of a novel gold-doping strategy.
 
-{% include figure.html path="assets/img/work/thermal sensor.png" title="sensors" class="img-fluid rounded z-depth-1" zoomable=true %}
+{% include figure.html path="assets/img/interests/thermal sensor.png" title="sensors" class="img-fluid rounded z-depth-1" zoomable=true %}
 <div class="caption">
      Ultrathin Au-doped SiNM temperature sensors attached conformally on various positions of bod for real-time temperature monitoring. 
 </div>
