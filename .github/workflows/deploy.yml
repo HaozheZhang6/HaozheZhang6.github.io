@@ -30,7 +30,10 @@ jobs:
       with:
         node-version: '20'
     - name: Install Mermaid CLI
-      run: npm install --global @mermaid-js/mermaid-cli@10.9.1
+      run: |
+        npm install --global @mermaid-js/mermaid-cli@10.9.1
+        echo "$(npm bin --location=global)" >> "$GITHUB_PATH"
+        mmdc --version
     - name: Build site
       env:
         JEKYLL_ENV: production
