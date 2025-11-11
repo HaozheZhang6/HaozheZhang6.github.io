@@ -275,6 +275,7 @@ enable_navbar_social:       true  # enables displaying social links in the
 enable_project_categories:  true   # enables categorization of projects into
                                    # multiple categories
 enable_medium_zoom:         false   # enables image zoom feature (as on medium.com)
+enable_mermaid_diagrams:    false   # enables processing mermaid diagrams that require the mermaid CLI
 
 
 # -----------------------------------------------------------------------------
