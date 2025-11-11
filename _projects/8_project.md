@@ -2,7 +2,6 @@
 layout: page
 title: Milkyway
 description: A study in cosmic curiosity
-img: https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1200&q=80
 importance: 4
 category: interests
 ---
