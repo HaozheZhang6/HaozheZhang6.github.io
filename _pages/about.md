@@ -2,7 +2,7 @@
 layout: about
 title: about
 permalink: /
-subtitle: Ph.D. | Cell Research Engineer @ Tesla
+subtitle: Ph.D. | Modeling Engineer @ Tesla
 
 profile:
   align: right
@@ -16,10 +16,13 @@ selected_papers: true # includes a list of papers marked as "selected={true}"
 social: true  # includes social icons at the bottom of the page
 ---
 
-Hiii, welcome to my page! 👋
 
-I am a cell research engineer at [Tesla](https://www.tesla.com), working on the next-generation in-house cell. Before joining Tesla, I finished my PhD in mechanical engineering at [University of Virginia](https://www.virginia.edu/). My advisor was [Baoxing Xu](https://xugroup.weebly.com/). My research was centered around designing meta-structures and developing numerical models under mechanical framework to analyze physical properties of soft-hard integrated materials and structures. 
+Hey, welcome to my page! 👋
 
-In the summer of 2022, I joined [Western Digital](https://www.westerndigital.com/) as a research intern. Worked with the packaging R&D team, my research was focus on solid drive drop tests. I developed a criteria using the simulation results from FEA to predict the corresponding test performance with neural networks, which allow the team to easily know if the design meet our customers' requirement.
+I’m a modeling engineer at **Tesla**, where I work at the intersection of physics-based modeling and machine learning for next-generation battery cells. My work spans theoretical+computational modeling, reinforcement learning for automation and data-driven methods for performance optimization, and scale-up.
 
-In my spare time, I enjoy traveling, playing video games and spending time with friends.
+Beyond physics, I’m deeply enthusiastic about and specialize in **large language models (LLMs)** and **agentic systems**, with hands-on experience building LLM-powered voice-agent ([krono](https://www.laurion.com)), and RL-based infrastructure for decision-making and automation.
+
+Before Tesla, I earned my PhD in mechanical engineering from **University of Virginia (UVA)**  and BS from **University of Science and Technology of China (USTC)**.
+
+In my spare time, I enjoy traveling and playing video games (League).
