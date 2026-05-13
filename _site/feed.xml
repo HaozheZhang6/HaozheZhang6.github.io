@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.3.4">Jekyll</generator><link href="https://haozhezhang6.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://haozhezhang6.github.io/" rel="alternate" type="text/html" hreflang="en" /><updated>2026-05-11T23:32:14-07:00</updated><id>https://haozhezhang6.github.io/feed.xml</id><title type="html">Haozhe Zhang</title><subtitle>Ph.D. @ UVA
+</subtitle><entry><title type="html">BenchCAD — evaluating LLMs on the part of code where output is physical</title><link href="https://haozhezhang6.github.io/research/2026/05/11/benchcad.html" rel="alternate" type="text/html" title="BenchCAD — evaluating LLMs on the part of code where output is physical" /><published>2026-05-11T09:00:00-07:00</published><updated>2026-05-11T09:00:00-07:00</updated><id>https://haozhezhang6.github.io/research/2026/05/11/benchcad</id><content type="html" xml:base="https://haozhezhang6.github.io/research/2026/05/11/benchcad.html"><![CDATA[<p>Most LLM code evals live in two regimes: text-style tasks and “does this compile.” The compile bar is low — you can write a Python script that runs perfectly and accomplishes nothing useful. CAD is one of the very few code domains where a wrong program produces a wrong <em>physical</em> object that someone has to machine and then throw away. That’s the gap <a href="https://benchcad.github.io/BenchCAD_webpage/">BenchCAD</a> tries to fill.</p>
+
+<p>Concretely, the dataset is 17k+ CadQuery programs across 106 industrial part families. Every program executes. Every part has been rendered. These aren’t synthetic shapes — they’re the kind of parts that show up on a real bill of materials: gears, springs, drills, brackets, impellers, fan shrouds. For each one we set up four tasks:</p>
+
+<ul>
+  <li>show a rendered part, ask a question about it (VQA);</li>
+  <li>show a program, ask the model to describe the part (code QA);</li>
+  <li>show a part, ask the model to write the program (vision-to-code);</li>
+  <li>show a program plus a new constraint, ask the model to edit it.</li>
+</ul>
+
+<p>No reward model, no human juries. The reward is whether the generated code executes and the resulting render matches the target.</p>
+
+<p>Three things came out of running frontier models on this that I didn’t expect:</p>
+
+<p><strong>Models can fake outer geometry but not structure.</strong> Silhouettes come out roughly right almost across the board. Open up the part and the engineering falls apart — threads vanish, fillets disappear, draft angles round to zero. The cartoon is right; the part isn’t.</p>
+
+<p><strong>CAD work is mostly editing, and that’s where models are weakest.</strong> No real engineer authors a part from scratch. You start from an existing program and change three lines. The vision-to-code task is hard, but edit-to-spec is harder, and that’s the task that matters most in practice.</p>
+
+<p><strong>Part families don’t transfer.</strong> Fine-tuning on gears helps with gears. It helps surprisingly little with springs — less than a human’s intuition predicts. The structure that engineers use to cluster parts isn’t the structure the model has learned.</p>
+
+<p>If you do mechanical design and want to run a model on your own pipeline, the leaderboard, submission form, and full task setup are at the <a href="https://benchcad.github.io/BenchCAD_webpage/">project page</a>. The paper has all the gory details: <a href="https://arxiv.org/abs/2605.10865">arXiv:2605.10865</a>.</p>]]></content><author><name></name></author><category term="research" /><category term="llm" /><category term="cad" /><category term="benchmark" /><summary type="html"><![CDATA[A benchmark for programmatic CAD with 17k execution-verified parts, and what we learned running frontier models on it]]></summary></entry><entry><title type="html">A practitioner’s tour of RL for LLMs — DPO, GRPO, GSPO, AReaL</title><link href="https://haozhezhang6.github.io/engineering/2026/03/15/rl-training-notes.html" rel="alternate" type="text/html" title="A practitioner’s tour of RL for LLMs — DPO, GRPO, GSPO, AReaL" /><published>2026-03-15T14:00:00-07:00</published><updated>2026-03-15T14:00:00-07:00</updated><id>https://haozhezhang6.github.io/engineering/2026/03/15/rl-training-notes</id><content type="html" xml:base="https://haozhezhang6.github.io/engineering/2026/03/15/rl-training-notes.html"><![CDATA[<p>Every six weeks the field invents a new acronym for “PPO with one of the components rearranged.” Here’s the alphabet soup I’m actually running today, why we picked each, and what I’d tell someone starting from scratch.</p>
+
+<h2 id="the-lineage-in-90-seconds">The lineage in 90 seconds</h2>
+
+<p><strong>Classic RLHF (PPO).</strong> SFT → train a reward model → run PPO against it. Four models in memory (policy, ref, critic, RM), brittle hyperparameters, expensive rollouts. This is what InstructGPT used and what most people still picture when they hear “RLHF.” It works; it’s just heavy.</p>
+
+<p><strong>DPO.</strong> <a href="https://arxiv.org/abs/2305.18290">Direct Preference Optimization</a> showed the RM-then-PPO loop is mathematically equivalent to a classification objective on preference pairs. So you skip RL entirely and do supervised learning on (prompt, preferred, dispreferred). Two models, no critic, no rollouts. We used DPO for early preference tuning — stylistic stuff like tone, refusals, persona. It works for that. It does <em>not</em> give you reasoning. You cannot DPO your way to math.</p>
+
+<p><strong>GRPO.</strong> <a href="https://arxiv.org/abs/2402.03300">DeepSeek’s contribution</a>. Drop the critic from PPO and replace it with a group-relative advantage: sample K answers per prompt, normalize their rewards within the group, that’s the baseline. Cuts memory ~50% versus PPO. The bigger deal is that it pairs naturally with <em>verifiable</em> rewards — math correctness, code execution, format match — instead of a learned reward model. If your task has a verifier, GRPO is the right default. R1 made this famous and rightly so.</p>
+
+<p><em>“Clip GRPO”</em> you’ll see in the wild is just GRPO with PPO-style importance-ratio clipping, which most implementations do anyway. Not a separate algorithm.</p>
+
+<p><strong>GSPO.</strong> The <a href="https://arxiv.org/abs/2507.18071">Qwen3 paper</a>. GRPO’s token-level importance ratios are noisy, especially on MoE — you can get pathological updates where one expert is being trained on data that was generated by a totally different expert. GSPO redefines the importance ratio at the sequence level with length normalization. Trains MoE without the ladder of stabilization hacks GRPO needs. If you’re touching MoE, just use GSPO.</p>
+
+<p><strong>AReaL.</strong> The Ant / Tsinghua <a href="https://arxiv.org/abs/2505.24298">async RL infrastructure</a>. Not an algorithm — a system. The old loop was synchronous: generate a batch, then train on it, GPUs idle while the longest generation finishes. AReaL decouples generation workers and training workers entirely. Throughput up ~2.7×. The paper does it on math reasoning but the design generalizes anywhere you’re rollout-bound.</p>
+
+<h2 id="what-id-actually-do-today">What I’d actually do today</h2>
+
+<ul>
+  <li><strong>Verifiable rewards (math, code, format) →</strong> GRPO with clipping. The verifier matters more than the algorithm. Spend your time on the reward signal.</li>
+  <li><strong>MoE →</strong> GSPO. Don’t fight GRPO’s instability when there’s a better tool.</li>
+  <li><strong>Only have preferences →</strong> DPO. Don’t pretend you have a reward function when you don’t.</li>
+  <li><strong>Rollout-bound on big models →</strong> go async. AReaL or roll your own. Synchronous RL is hard to justify on anything large.</li>
+</ul>
+
+<h2 id="the-things-that-actually-bit-us">The things that actually bit us</h2>
+
+<p><strong>Reward hacking is not a theoretical concern.</strong> Our first attempt to reward “structured math output” produced solutions wrapped in beautiful LaTeX that contained no actual math. The model learned the format perfectly and ignored the substance. Whatever you reward, hold out an independent sanity check the model can’t game.</p>
+
+<p><strong>Off-policy data goes stale fast.</strong> After a few hundred steps, samples from the original policy are basically noise. Either regenerate rollouts often or keep a very small staleness window. AReaL handles this with a staleness-aware PPO variant; if you’re DIY, at least track the divergence.</p>
+
+<p><strong>Hyperparameter sensitivity is the dirty secret.</strong> The same algorithm with slightly different <code class="language-plaintext highlighter-rouge">kl_coef</code>, group size K, batch size, or learning rate moves between “modest improvement” and “catastrophic forgetting.” Budget for a real sweep on small models <em>before</em> scaling up. The cost is much lower than discovering at 70B that your <code class="language-plaintext highlighter-rouge">kl_coef</code> was off by a factor of three.</p>
+
+<p><strong>Verifier quality dominates everything.</strong> The best optimizer with a noisy verifier is worse than the worst optimizer with a clean one. Most of our wins didn’t come from algorithm changes — they came from improving the reward signal: tightening the math checker, adding execution timeouts, catching format-only cheats.</p>
+
+<h2 id="tldr">TL;DR</h2>
+
+<p>If you’re starting today: use a clean verifier, use GRPO, run it async, and don’t blame the algorithm before you’ve audited your reward.</p>]]></content><author><name></name></author><category term="engineering" /><category term="llm" /><category term="rl" /><category term="training" /><summary type="html"><![CDATA[What I'd tell someone starting RL on language models today — the alphabet soup explained, plus the things that actually bit us]]></summary></entry><entry><title type="html">Voice is going to be the next interface — notes from building krono</title><link href="https://haozhezhang6.github.io/engineering/2025/11/30/krono.html" rel="alternate" type="text/html" title="Voice is going to be the next interface — notes from building krono" /><published>2025-11-30T18:00:00-08:00</published><updated>2025-11-30T18:00:00-08:00</updated><id>https://haozhezhang6.github.io/engineering/2025/11/30/krono</id><content type="html" xml:base="https://haozhezhang6.github.io/engineering/2025/11/30/krono.html"><![CDATA[<p>I think voice is about to become a primary software interface, and most people are still pricing it as a novelty. The reason that take is hard to take seriously is that voice has been a graveyard — Siri, Alexa, Google Assistant, all built on rules and intent classifiers, all painful. What’s different now is that you can put a real reasoner behind the microphone. The product shape changes entirely once that’s possible.</p>
+
+<p>We’ve been building <a href="https://www.laurion.com/krono">krono</a> on that bet — a voice agent for the markets, where you talk to it about positions, news, and trade ideas. Most of what we learned has very little to do with finance and a lot to do with what it actually takes to make voice feel alive.</p>
+
+<h2 id="the-stack">The stack</h2>
+
+<p>A year of trying things landed us roughly here:</p>
+
+<ul>
+  <li><strong>WebRTC for transport.</strong> No real alternative if you want browser-native low latency. We tried polling, we tried WebSockets — anything above WebRTC shows up as audible jitter the moment the user has a flaky connection.</li>
+  <li><strong>Silero VAD for voice activity.</strong> Small, MIT-licensed, runs in the browser. The naive “is there energy in the audio frame” approach falls apart on background music, traffic, breathing — Silero just works.</li>
+  <li><strong>A semantic turn-detection model on top of VAD.</strong> This is the part most demos skip. VAD says “the audio is silent right now”; it does not say “the user finished their sentence.” If you respond on VAD alone, you cut people off mid-thought. A small classifier reads the partial transcript and decides “is this an end of turn.” Adds ~100 ms; kills the most painful failure mode.</li>
+  <li><strong>Streaming STT → LLM → streaming TTS, all overlapped.</strong> The user-perceived latency is <code class="language-plaintext highlighter-rouge">max(STT chunk, LLM first-token, TTS first-audio)</code>, not the sum. Build it as <code class="language-plaintext highlighter-rouge">await this; await that;</code> and you ship a slow product no matter how good your model is.</li>
+</ul>
+
+<h2 id="why-we-trained-a-small-model-for-news-filtering">Why we trained a small model for news filtering</h2>
+
+<p>This is the design choice I get asked about the most. Standard answer: throughput and cost. Real answer: that, plus a determinism thing that’s easy to underrate.</p>
+
+<p>The news firehose for US equities is thousands of headlines per minute. For each one we want a single yes/no: “is this material for any ticker the user cares about.” We are not going to pay a frontier model to read every wire. Even with batching, the latency budget doesn’t work — by the time the LLM finishes scoring, the headline is stale and the price has moved.</p>
+
+<p>So we trained our own. ~100M-parameter encoder, fine-tuned on a few hundred thousand labeled headlines and the corresponding intraday price reaction. On this specific task it beats GPT-class models by a wide margin. It also has properties the big model doesn’t: it always returns a calibrated score, never refuses, never adds an editorial paragraph. At scale, the variance of a frontier model is its own failure mode.</p>
+
+<p>The bigger LLM still has a job. It writes the summary the user actually <em>hears</em> once the small model has decided what’s worth surfacing. That’s the right division of labor — cheap deterministic classifiers in the hot path, expensive reasoner at the synthesis end.</p>
+
+<h2 id="what-surprised-me">What surprised me</h2>
+
+<p><strong>Dead air is fatal.</strong> Two seconds of silence in a voice product feels like the system crashed. Users hang up. So you end up engineering filler — “let me check that for you” — <em>before</em> you do any real work. Nobody writes about this and it’s most of the perceived quality.</p>
+
+<p><strong>Session memory matters more than per-turn answer quality.</strong> A user opens with “how’s NVDA today” and ends forty seconds later on a competitor’s earnings call. If you don’t carry that thread, every individual answer is technically correct and the conversation is useless.</p>
+
+<p><strong>Tool-use is where the reliability lives.</strong> Pure LLMs hallucinate prices, full stop. Every numeric claim about a security in krono is backed by a tool call within the same turn. The interesting design question was about how aggressively to force the tool — too eager and the model sounds robotic, too lazy and it’ll cheerfully invent a P/E ratio.</p>
+
+<p>If you want to try it: <a href="https://www.laurion.com/krono">laurion.com/krono</a>. Honest feedback welcome.</p>]]></content><author><name></name></author><category term="engineering" /><category term="llm" /><category term="voice" /><category term="agents" /><category term="finance" /><summary type="html"><![CDATA[WebRTC, Silero VAD, semantic turn detection, and why we trained a small classifier instead of calling GPT for news filtering]]></summary></entry></feed>

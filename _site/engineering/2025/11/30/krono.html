@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <!-- Head -->
+  <head>    <!-- Metadata, OpenGraph and Schema.org -->
+    
+
+    <!-- Standard metadata -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Haozhe Zhang | Voice is going to be the next interface — notes from building krono</title>
+    <meta name="author" content="Haozhe  Zhang" />
+    <meta name="description" content="WebRTC, Silero VAD, semantic turn detection, and why we trained a small classifier instead of calling GPT for news filtering" />
+    <meta name="keywords" content="jekyll, jekyll-theme, academic-website, portfolio-website" />
+
+
+    <!-- Bootstrap & MDB -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-DF7Zhf293AJxJNTmh5zhoYYIMs2oXitRfBjY+9L//AY=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdbootstrap@4.20.0/css/mdb.min.css" integrity="sha256-jpjYvU3G3N6nrrBwXJoVEYI/0zw8htfFnhT9ljN3JJw=" crossorigin="anonymous" />
+
+    <!-- Fonts & Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.1/css/academicons.min.css" integrity="sha256-i1+4qU2G2860dGGIOJscdC30s9beBXjFfzjWLjBRsBg=" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons">
+
+    <!-- Code Syntax Highlighting -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jwarby/jekyll-pygments-themes@master/github.css" media="none" id="highlight_theme_light" />
+
+    <!-- Styles -->
+    
+    <link rel="shortcut icon" href="/assets/img/android-chrome-512x512.png"/>
+    
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="canonical" href="https://haozhezhang6.github.io/engineering/2025/11/30/krono.html">
+    
+    <!-- Dark Mode -->
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jwarby/jekyll-pygments-themes@master/native.css" media="none" id="highlight_theme_dark" />
+
+    <script src="/assets/js/theme.js"></script>
+    <script src="/assets/js/dark_mode.js"></script>
+    
+
+  </head>
+
+  <!-- Body -->
+  <body class="fixed-top-nav ">
+
+    <!-- Header --><header>
+
+  <!-- Nav Bar -->
+  <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top">
+    <div class="container">
+      <a class="navbar-brand title font-weight-lighter" href="https://HaozheZhang6.github.io/">Haozhe Zhang</a>
+      <!-- Navbar Toggle -->
+      <button class="navbar-toggler collapsed ml-auto" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar top-bar"></span>
+        <span class="icon-bar middle-bar"></span>
+        <span class="icon-bar bottom-bar"></span>
+      </button>
+
+      <div class="collapse navbar-collapse text-right" id="navbarNav">
+        <ul class="navbar-nav ml-auto flex-nowrap">
+
+          <!-- About -->
+          <li class="nav-item ">
+            <a class="nav-link" href="/">about</a>
+          </li>
+          
+          <!-- Blog -->
+          <li class="nav-item ">
+            <a class="nav-link" href="/blog/">blog</a>
+          </li>
+          <!-- Other pages -->
+          <li class="nav-item ">
+            <a class="nav-link" href="/projects/">projects</a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" href="/publications/">publications</a>
+          </li>
+
+          <!-- Toogle theme mode -->
+          <div class="toggle-container">
+            <a id="light-toggle">
+              <i class="fas fa-moon"></i>
+              <i class="fas fa-sun"></i>
+            </a>
+          </div>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+
+    <!-- Content -->
+    <div class="container mt-5">
+      <!-- _layouts/post.html -->
+
+<div class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Voice is going to be the next interface — notes from building krono</h1>
+    <p class="post-meta">November 30, 2025</p>
+    <p class="post-tags">
+      <a href="/blog/2025"> <i class="fas fa-calendar fa-sm"></i> 2025 </a>
+        ·  
+        <a href="/blog/tag/llm">
+          <i class="fas fa-hashtag fa-sm"></i> llm</a>  
+          <a href="/blog/tag/voice">
+          <i class="fas fa-hashtag fa-sm"></i> voice</a>  
+          <a href="/blog/tag/agents">
+          <i class="fas fa-hashtag fa-sm"></i> agents</a>  
+          <a href="/blog/tag/finance">
+          <i class="fas fa-hashtag fa-sm"></i> finance</a>  
+          
+        ·  
+        <a href="/blog/category/engineering">
+          <i class="fas fa-tag fa-sm"></i> engineering</a>  
+          
+
+    </p>
+  </header>
+
+  <article class="post-content">
+    <p>I think voice is about to become a primary software interface, and most people are still pricing it as a novelty. The reason that take is hard to take seriously is that voice has been a graveyard — Siri, Alexa, Google Assistant, all built on rules and intent classifiers, all painful. What’s different now is that you can put a real reasoner behind the microphone. The product shape changes entirely once that’s possible.</p>
+
+<p>We’ve been building <a href="https://www.laurion.com/krono" target="_blank" rel="noopener noreferrer">krono</a> on that bet — a voice agent for the markets, where you talk to it about positions, news, and trade ideas. Most of what we learned has very little to do with finance and a lot to do with what it actually takes to make voice feel alive.</p>
+
+<h2 id="the-stack">The stack</h2>
+
+<p>A year of trying things landed us roughly here:</p>
+
+<ul>
+  <li>
+<strong>WebRTC for transport.</strong> No real alternative if you want browser-native low latency. We tried polling, we tried WebSockets — anything above WebRTC shows up as audible jitter the moment the user has a flaky connection.</li>
+  <li>
+<strong>Silero VAD for voice activity.</strong> Small, MIT-licensed, runs in the browser. The naive “is there energy in the audio frame” approach falls apart on background music, traffic, breathing — Silero just works.</li>
+  <li>
+<strong>A semantic turn-detection model on top of VAD.</strong> This is the part most demos skip. VAD says “the audio is silent right now”; it does not say “the user finished their sentence.” If you respond on VAD alone, you cut people off mid-thought. A small classifier reads the partial transcript and decides “is this an end of turn.” Adds ~100 ms; kills the most painful failure mode.</li>
+  <li>
+<strong>Streaming STT → LLM → streaming TTS, all overlapped.</strong> The user-perceived latency is <code class="language-plaintext highlighter-rouge">max(STT chunk, LLM first-token, TTS first-audio)</code>, not the sum. Build it as <code class="language-plaintext highlighter-rouge">await this; await that;</code> and you ship a slow product no matter how good your model is.</li>
+</ul>
+
+<h2 id="why-we-trained-a-small-model-for-news-filtering">Why we trained a small model for news filtering</h2>
+
+<p>This is the design choice I get asked about the most. Standard answer: throughput and cost. Real answer: that, plus a determinism thing that’s easy to underrate.</p>
+
+<p>The news firehose for US equities is thousands of headlines per minute. For each one we want a single yes/no: “is this material for any ticker the user cares about.” We are not going to pay a frontier model to read every wire. Even with batching, the latency budget doesn’t work — by the time the LLM finishes scoring, the headline is stale and the price has moved.</p>
+
+<p>So we trained our own. ~100M-parameter encoder, fine-tuned on a few hundred thousand labeled headlines and the corresponding intraday price reaction. On this specific task it beats GPT-class models by a wide margin. It also has properties the big model doesn’t: it always returns a calibrated score, never refuses, never adds an editorial paragraph. At scale, the variance of a frontier model is its own failure mode.</p>
+
+<p>The bigger LLM still has a job. It writes the summary the user actually <em>hears</em> once the small model has decided what’s worth surfacing. That’s the right division of labor — cheap deterministic classifiers in the hot path, expensive reasoner at the synthesis end.</p>
+
+<h2 id="what-surprised-me">What surprised me</h2>
+
+<p><strong>Dead air is fatal.</strong> Two seconds of silence in a voice product feels like the system crashed. Users hang up. So you end up engineering filler — “let me check that for you” — <em>before</em> you do any real work. Nobody writes about this and it’s most of the perceived quality.</p>
+
+<p><strong>Session memory matters more than per-turn answer quality.</strong> A user opens with “how’s NVDA today” and ends forty seconds later on a competitor’s earnings call. If you don’t carry that thread, every individual answer is technically correct and the conversation is useless.</p>
+
+<p><strong>Tool-use is where the reliability lives.</strong> Pure LLMs hallucinate prices, full stop. Every numeric claim about a security in krono is backed by a tool call within the same turn. The interesting design question was about how aggressively to force the tool — too eager and the model sounds robotic, too lazy and it’ll cheerfully invent a P/E ratio.</p>
+
+<p>If you want to try it: <a href="https://www.laurion.com/krono" target="_blank" rel="noopener noreferrer">laurion.com/krono</a>. Honest feedback welcome.</p>
+
+  </article>
+
+</div>
+
+    </div>
+
+    <!-- Footer -->    
+    <footer class="fixed-bottom">
+      <div class="container mt-0">
+        © Copyright 2026 Haozhe  Zhang. Powered by <a href="https://jekyllrb.com/" target="_blank" rel="noopener noreferrer">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio" target="_blank" rel="noopener noreferrer">al-folio</a> theme. Hosted by <a href="https://pages.github.com/" target="_blank" rel="noopener noreferrer">GitHub Pages</a>.
+
+      </div>
+    </footer>
+
+    <!-- JavaScripts -->
+    <!-- jQuery -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+    <!-- Bootsrap & MDB scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.2/dist/umd/popper.min.js" integrity="sha256-l/1pMF/+J4TThfgARS6KwWrk/egwuVvhRzfLAMQ6Ds4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" integrity="sha256-SyTu6CwrfOhaznYZPoolVw2rxoY7lKYKQvqbtqN93HI=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mdbootstrap@4.20.0/js/mdb.min.js" integrity="sha256-NdbiivsvWt7VYCt6hYNT3h/th9vSTL4EDWeGs5SN3DA=" crossorigin="anonymous"></script>
+
+    <!-- Masonry & imagesLoaded -->
+  <script defer src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+  <script defer src="/assets/js/masonry.js" type="text/javascript"></script>
+    <!-- Load Common JS -->
+  <script src="/assets/js/common.js"></script>
+
+    <!-- MathJax -->
+  <script type="text/javascript">
+    window.MathJax = {
+      tex: {
+        tags: 'ams'
+      }
+    };
+  </script>
+  <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js"></script>
+  <script defer src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+
+    
+  </body>
+</html>
+
