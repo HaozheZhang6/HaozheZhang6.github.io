@@ -27,7 +27,7 @@ bilingual: true
 
 LLM RL 这几年新缩写出得很密——PPO (Schulman et al., 2017)、DPO (Rafailov et al., 2023)、GRPO (Shao et al., DeepSeek 2024)、DAPO (ByteDance & Tsinghua AIR, 2025)、GSPO (Qwen3, 2025)、SAPO (Gao et al., Qwen, 2025)、AReaL (Ant Research, 2025)。但文献里很少把"改了什么"和"为什么改"放在一起说清楚。这篇是按时间顺序串这条 timeline。KL estimator（K1 / K2 / K3）那一段单独拆到 [估 KL penalty 的三个 estimator]({% post_url 2026-03-22-kl-estimators %}) 里。
 
-表面看是不同 reward、不同 objective，本质上每一版都在解同一个问题：把 reward signal 注入 policy，同时控制 **gradient variance** 和每步 **compute**。Variance 高就训不稳，需要更多 sample 平均、更小 learning rate、更多 KL 约束；compute 高就养不起几个模型、rollout 贵、scale 不上去。PPO 这两条都拉满，后面每个新缩写都是在这两条轴上往左下挪——少一个模型、少一些 rollout、KL 估计更稳、importance ratio 不抖。
+表面看是不同 reward、不同 objective，本质上每一版都在解同一个问题：把 reward signal（reward model 给一条 response 的打分）注入 policy（被训练的 LLM 自己），同时控制 **gradient variance**（梯度方差，太大就训不稳）和每步 **compute**（单步的计算和显存预算）。Variance 高就训不稳，需要更多 sample 平均、更小 learning rate、更多 KL 约束；compute 高就养不起几个模型、rollout（从当前 policy 采几条 response 拿来算 reward）贵、scale 不上去。PPO 这两条都拉满，后面每个新缩写都是在这两条轴上往左下挪——少一个模型、少一些 rollout、KL 估计更稳、importance ratio（新旧 policy 对同一 token 的概率比）不抖。
 
 ### PPO：四个模型的 baseline {#cn-ppo}
 
@@ -135,7 +135,7 @@ SAPO 同时是 sequence-coherent（继承 GSPO）+ token-adaptive（细颗粒度
 
 LLM RL has produced a dense run of new acronyms over the past few years — PPO (Schulman et al., 2017), DPO (Rafailov et al., 2023), GRPO (Shao et al., DeepSeek 2024), DAPO (ByteDance & Tsinghua AIR, 2025), GSPO (Qwen3, 2025), SAPO (Gao et al., Qwen, 2025), AReaL (Ant Research, 2025). The literature rarely puts "what changed" and "why" on the same page. These notes thread the timeline. The KL estimator (K1 / K2 / K3) section lives in its own post, [Three ways to estimate the KL penalty]({% post_url 2026-03-22-kl-estimators %}).
 
-Strip the surface and every variant is the same problem: inject a reward signal into the policy while keeping **gradient variance** and per-step **compute** under control. High variance means unstable training, smaller learning rate, more KL regularization. High compute means too many models in VRAM and rollouts you can't afford. PPO maxes out both, and every method after it is a step in the other direction — one fewer model, fewer rollouts, a lower-variance KL estimator, a steadier importance ratio.
+Strip the surface and every variant is the same problem: inject a reward signal (the scalar score a reward model assigns to a response) into the policy (the LLM being trained) while keeping **gradient variance** and per-step **compute** under control. High variance means unstable training, smaller learning rate, more KL regularization. High compute means too many models in VRAM and rollouts (response samples drawn from the current policy to compute reward) you can't afford. PPO maxes out both, and every method after it is a step in the other direction — one fewer model, fewer rollouts, a lower-variance KL estimator, a steadier importance ratio (the new-vs-old policy probability ratio for the same token).
 
 ### PPO: the four-model baseline {#en-ppo}
 

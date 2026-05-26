@@ -12,7 +12,7 @@ bilingual: true
 
 ## 中文 {#cn}
 
-TQQQ 一直是雪球和 reddit 上被讨论最多的杠杆产品之一——"长期 Nasdaq 涨，3 倍杠杆就是 3 倍收益"这套说法每隔几个月就被重新搬出来。一直觉得这话哪里不对，但具体哪里说不清，所以把 2010 年以来的数据全拉出来跑了一遍。
+TQQQ（3 倍杠杆 Nasdaq-100 ETF，标的指数涨 1% 它涨 3%，跌 1% 它跌 3%）一直是雪球和 reddit 上被讨论最多的杠杆产品之一——"长期 Nasdaq 涨，3 倍杠杆就是 3 倍收益"这套说法每隔几个月就被重新搬出来。一直觉得这话哪里不对，但具体哪里说不清，所以把 2010 年以来的数据全拉出来跑了一遍。
 
 跑出来第一个数字就比预期刺眼：2024 年 1 月 all in TQQQ 的人到今天**年化 66%**，2021 年 1 月 all in 的人**年化 28%，中途账户跌过 82%**。同一个产品，起步差 3 年的两个人，两段完全不同的人生。
 
@@ -253,7 +253,7 @@ Retail 的神话假设下一个 10 年完全等于过去 10 年。**可能是，
 
 ## English {#en}
 
-TQQQ is one of the most-pitched leveraged products on retail forums — "Nasdaq goes up long-term, so 3× leverage is just 3× the return" gets repeated every few months. Something about it always felt off without being able to pin down exactly what, so I pulled every day of data since 2010 and ran the numbers.
+TQQQ (a 3× leveraged Nasdaq-100 ETF — when the underlying index moves 1% it moves 3% in the same direction) is one of the most-pitched leveraged products on retail forums — "Nasdaq goes up long-term, so 3× leverage is just 3× the return" gets repeated every few months. Something about it always felt off without being able to pin down exactly what, so I pulled every day of data since 2010 and ran the numbers.
 
 The first result was sharper than I expected. Someone who all-in'd TQQQ in January 2024 has earned **66 % a year** through today; someone who all-in'd in January 2021 has earned **28 % a year, but watched their account drop 82 % along the way**. Same product, two starts three years apart, two completely different lived experiences.
 

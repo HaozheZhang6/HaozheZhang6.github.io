@@ -12,7 +12,7 @@ bilingual: true
 
 ## 中文 {#cn}
 
-2022 年发生了一件理论上不该发生的事：标准 60/40（60% SPY + 40% 长期国债 TLT）一年跌了 **23%**，比纯持 SPY 还多跌 2 个点。债券原本是放在那儿给股票崩盘兜底的"保险腿"，赔得比"主险"还狠。
+2022 年发生了一件理论上不该发生的事：标准 60/40（**60/40** 是过去几十年退休账户的默认资产配置——60% 股票 + 40% 债券；这里具体跑的是 60% SPY = S&P 500 指数 ETF + 40% 长期国债 TLT = iShares 20+ Year Treasury ETF）一年跌了 **23%**，比纯持 SPY 还多跌 2 个点。债券原本是放在那儿给股票崩盘兜底的"保险腿"，赔得比"主险"还狠。
 
 机制其实不复杂——通胀冲到 9%，Fed 一年从 0% 把利率拉到 5%，股票跌（未来现金流折现更重）+ 长债跌（票息折现率突然跳高），两个理论上无关的资产被通胀**变成正相关**。但**这是过去 40 年里第一次**。"60/40 + 长债"是这几十年里退休账户的默认答案，2022 之前没人觉得这有什么问题。一个退休年龄的人在 2022 看到自己的"稳健配置"跌得比纯股票还狠，是一件很难消化的事。
 
@@ -233,7 +233,7 @@ BTC（或 MSTR 这个代理）经常被宣传为"数字黄金"——uncorrelated
 
 ## English {#en}
 
-In 2022 something happened that wasn't supposed to: the textbook 60/40 (60 % SPY + 40 % long-duration TLT) lost **23 %** on the year — two percentage points worse than holding 100 % SPY. The bond leg was supposed to be there *because* stocks crash; it lost more than the thing it was insuring.
+In 2022 something happened that wasn't supposed to: the textbook 60/40 (the default retirement allocation for decades — 60 % equities + 40 % bonds; here specifically 60 % SPY = S&P 500 index ETF + 40 % TLT = iShares 20+ Year Treasury ETF) lost **23 %** on the year — two percentage points worse than holding 100 % SPY. The bond leg was supposed to be there *because* stocks crash; it lost more than the thing it was insuring.
 
 The mechanism isn't subtle. Inflation hit 9 %, the Fed pulled rates from 0 % to 5 % in a year, stocks fell (future cash flows discounted harder) and long bonds fell (coupon discount rate jumped), and two theoretically uncorrelated assets got **made correlated by inflation**. But that was the first time in forty years. "60/40 + long bonds" has been the default retirement portfolio for decades; nobody thought it had a problem before 2022. Watching your "conservative" allocation underperform pure equity in a down year is, for someone near retirement, a hard thing to absorb.
 

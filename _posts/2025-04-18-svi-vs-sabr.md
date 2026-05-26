@@ -12,7 +12,7 @@ bilingual: true
 
 ## 中文 {#cn}
 
-去年春天偶然对 stochastic volatility 起了兴趣。option pricing 教科书一上来就是 Black-Scholes 的 constant-vol 假设，但实际市场给的是一个 K 和 T 两个维度的曲面，而且这个曲面还在动。底层是一组耦合的 SDE，理论自洽性高，实际拟合一直 messy。
+去年春天偶然对 stochastic volatility（波动率本身按一个随机过程在演化，不是常数）起了兴趣。option pricing（给 call/put 期权定价）教科书一上来就是 Black-Scholes 的 constant-vol 假设，但实际市场给的是一个 K（strike，行权价）和 T（到期时间）两个维度的 vol surface（波动率曲面），而且这个曲面还在动。底层是一组耦合的 SDE（stochastic differential equation），理论自洽性高，实际拟合一直 messy。
 
 vol surface fitting 这件事，[Gatheral & Jacquier 2014](https://arxiv.org/abs/1204.0646) 把 SVI 这一支推到 SSVI / no-butterfly 的完整框架后基本定型；SABR 自 [Hagan 2002](https://www.researchgate.net/publication/235622441_Managing_Smile_Risk) 之后也有大量改进（[Hagan et al. 2014 "Arbitrage-Free SABR"](https://www.researchgate.net/publication/265252097_Arbitrage-Free_SABR) 用 PDE 替掉 asymptotic 是其中一个代表）。但 desk 上谁该用哪个，文献里的回答比想象中模糊。挑了 vanilla SVI 和 vanilla Hagan-SABR——工业上最常用的两个 baseline——在 AAPL 真实数据上跑了一次对比，记一下。
 
@@ -62,7 +62,7 @@ SVI 灵活，理论上能把曲线弯到 implied density 局部为负，产生 b
 
 ## English {#en}
 
-Last spring I picked up an interest in stochastic volatility. Option-pricing textbooks open with Black-Scholes' constant-vol assumption, but the real market gives you a surface over strikes and tenors that keeps moving. The system underneath is a coupled SDE — theoretically clean, practically a mess to fit.
+Last spring I picked up an interest in stochastic volatility (vol itself evolving as its own random process, not a constant). Option-pricing textbooks open with Black-Scholes' constant-vol assumption, but the real market gives you a vol surface (implied vol as a function of both strike and time-to-expiry) that keeps moving. The system underneath is a coupled SDE (stochastic differential equation) — theoretically clean, practically a mess to fit.
 
 The SVI lineage was closed out by [Gatheral and Jacquier 2014](https://arxiv.org/abs/1204.0646) into SSVI with no-butterfly conditions; SABR has had its share of upgrades since [Hagan 2002](https://www.researchgate.net/publication/235622441_Managing_Smile_Risk), notably [Hagan et al. 2014 "Arbitrage-Free SABR"](https://www.researchgate.net/publication/265252097_Arbitrage-Free_SABR), which replaces the asymptotic expansion with a PDE solve. But which model a desk should actually use is less clear in the literature than you'd expect. So I ran vanilla SVI against vanilla Hagan-SABR — the two textbook baselines — on real AAPL data.
 

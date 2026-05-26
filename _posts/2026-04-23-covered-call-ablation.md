@@ -12,7 +12,7 @@ bilingual: true
 
 ## 中文 {#cn}
 
-上个月吃饭聊到一个朋友——他从 2019 年开始一直在 SPY 上写 covered call，每个月一套：挑一个 OTM 3% 的 strike，把 call 卖掉，收 5-10 美元/股的 premium，等到月底 expire。大多数月份合约归零，premium 揣兜里；有几个月 SPY 涨太凶，他得按 strike 把股票交出去，让出一截 upside。
+上个月吃饭聊到一个朋友——他从 2019 年开始一直在 SPY（S&P 500 指数 ETF）上写 covered call（持股的同时卖出一个 call 期权，把"股价涨过某个 strike 之后"的所有上涨封顶，换 premium 现金），每个月一套：挑一个 OTM 3% 的 strike（OTM = out-of-the-money，strike 比现价高 3%），把 call 卖掉，收 5-10 美元/股的 premium（期权买方付给卖方的钱），等到月底 expire。大多数月份合约归零，premium 揣兜里；有几个月 SPY 涨太凶，他得按 strike 把股票交出去，让出一截 upside。
 
 他纠结的是最朴素的那个问题：这事到底是在挣钱，还是源源不断把 upside 送给 long call 的那群人？复盘了几年也不太会算"如果当时没写、纯持 SPY 是什么样"这条对照线——而这条对照线才是关键。
 
@@ -162,7 +162,7 @@ QYLD 我一般不推荐。它的 ATM call 写法太极端，本质是把 Nasdaq 
 
 ## English {#en}
 
-Dinner last month with a friend who's been writing covered calls on SPY since 2019. Same routine every month: pick a strike a few percent above spot, sell the call, collect $5–10 a share, wait for expiration. Most months the contract dies worthless and he keeps the cash. A few months SPY rips past the strike and he gives up some upside.
+Dinner last month with a friend who's been writing covered calls on SPY (the S&P 500 index ETF) since 2019. A "covered call" is selling a call option against shares you already hold — you cap your upside above some strike in exchange for cash premium (the price the option buyer pays you). Same routine every month: pick a strike a few percent above spot (out-of-the-money, OTM), sell the call, collect $5–10 a share, wait for expiration. Most months the contract dies worthless and he keeps the cash. A few months SPY rips past the strike and he gives up some upside.
 
 The thing he kept turning over was the basic one. Was the option-writing actually paying him, or was he just donating upside to whoever was on the other side? He'd never had a clean way to back out the counterfactual — what "just held SPY" would have looked like over the same window — and that counterfactual is the whole game.
 

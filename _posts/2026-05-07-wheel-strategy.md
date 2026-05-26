@@ -12,7 +12,7 @@ bilingual: true
 
 ## 中文 {#cn}
 
-YouTube 上有个频道每周都教"the wheel"策略：在 SPY 上卖 cash-secured put，赌它不会跌穿你的 strike；万一跌穿了就被 assign 拿到股票，再卖 covered call，再赌它不会涨过你的 strike。**99% 的单子都是赚钱的**，主播每次都把这个数字打在缩略图上。看起来稳得不能再稳。
+YouTube 上有个频道每周都教"the wheel"策略：在 SPY（S&P 500 指数 ETF）上卖 cash-secured put（卖出一个 put 期权,同时把 strike × 100 美元的现金锁住当抵押），赌它不会跌穿你的 strike（行权价）；万一跌穿了就被 assign（按 strike 强制买入股票），再卖 covered call（持股 + 卖个 call,把上涨封顶换 premium）,再赌它不会涨过你的 strike。**99% 的单子都是赚钱的**，主播每次都把这个数字打在缩略图上。看起来稳得不能再稳。
 
 我跑了 33 年的数据，又跑了最近 1-5 年的窗口。这里讲讲 99% 胜率最后到底变成多少钱，以及为什么这玩意儿不该是你 SPY 的主策略。
 
@@ -195,7 +195,7 @@ Wheel-10% 在 33 年里卖了 271 个 put，**只有 3 个被 assign**。卖了 
 
 ## English {#en}
 
-There's a YouTube channel that teaches "the wheel" strategy every week: sell a cash-secured put on SPY, hope it doesn't get assigned; if it does, you take the shares and sell a covered call against them; cycle forever. **99 % of the individual trades are profitable**, and the host puts that number on every thumbnail. It looks unbeatable.
+There's a YouTube channel that teaches "the wheel" strategy every week: sell a cash-secured put on SPY (S&P 500 ETF — "cash-secured" means you lock up strike × 100 dollars as collateral, so if the put gets exercised you have the cash to buy the shares); hope it doesn't get assigned (assigned = forced to buy at the strike because price fell below it). If it does, you take the shares and sell a covered call against them (covered call = holding shares + selling a call to cap upside in exchange for premium). Cycle forever. **99 % of the individual trades are profitable**, and the host puts that number on every thumbnail. It looks unbeatable.
 
 I ran the numbers across 33 years of SPY data and across every recent 1-5 year window. Here's what 99 % per-trade success actually pays, and why this shouldn't be your SPY strategy.
 

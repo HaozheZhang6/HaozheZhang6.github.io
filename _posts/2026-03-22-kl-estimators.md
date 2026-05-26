@@ -25,7 +25,7 @@ PPO 和 GRPO 这套 RL 框架每一步都要算一个
 
 $$\mathrm{KL}(\pi \,\|\, \pi_{\text{ref}}) = \mathbb{E}_{x \sim \pi}\!\left[\log \frac{\pi(x)}{\pi_{\text{ref}}(x)}\right]$$
 
-作为 reference policy 的 anchor 防止训练把模型行为推得太远。整个 vocab 上求和精确计算这个量太贵——一个 step 的 logits 张量已经吃掉一大块 VRAM，再叠一个 full-vocab KL summation 显存就不够——所以社区都用 **sample-based estimator** 近似。
+作为 reference policy（被冻结的初始 LLM，比如 SFT 完那个）的 anchor，防止训练把模型行为推得太远。这里 KL（Kullback-Leibler divergence，衡量两个概率分布有多不同的标准度量）越大越说明当前 policy 偏离了初始 policy。整个 vocab 上求和精确计算这个量太贵——一个 step 的 logits 张量已经吃掉一大块 VRAM，再叠一个 full-vocab KL summation 显存就不够——所以社区都用 **sample-based estimator**（用从 policy 采样的少量 token 去估这个期望，而不是穷举全 vocab）近似。
 
 Schulman (2020) 那篇 [Approximating KL Divergence](http://joschu.net/blog/kl-approx.html) blog 整理了三个 estimator，社区一般叫 **K1**、**K2**、**K3**。Paper 里几乎不写为什么选了哪一个，但同一份 RL 配方换一个 estimator，最终 reward 能差到 single-digit 百分点。这篇是把三个 estimator 的推导、bias / variance 分析、和实际选哪一个放在一起。
 
@@ -126,7 +126,7 @@ PPO and GRPO both need to compute
 
 $$\mathrm{KL}(\pi \,\|\, \pi_{\text{ref}}) = \mathbb{E}_{x \sim \pi}\!\left[\log \frac{\pi(x)}{\pi_{\text{ref}}(x)}\right]$$
 
-at every training step, as the reference-policy anchor that prevents the model from drifting too far. Computing this exactly by summing over the entire vocabulary isn't feasible — the logits tensor for a single step already eats a substantial fraction of VRAM, and a full-vocab KL summation pushes it over. So the community estimates it from samples.
+at every training step, as the reference-policy anchor — π_ref is the frozen initial LLM (usually the post-SFT checkpoint) — that prevents the model from drifting too far. KL here is Kullback-Leibler divergence, the standard measure of how different two distributions are; a bigger KL means the current policy has drifted further from where it started. Computing this exactly by summing over the entire vocabulary isn't feasible — the logits tensor for a single step already eats a substantial fraction of VRAM, and a full-vocab KL summation pushes it over. So the community estimates it from a handful of sampled tokens instead.
 
 Schulman (2020), [Approximating KL Divergence](http://joschu.net/blog/kl-approx.html), lays out three **sample-based estimators**, conventionally called **K1**, **K2**, and **K3**. Papers almost never document which one they used, but swapping K1 for K3 inside the same RL recipe moves the final reward by single-digit percentage points. This post walks through the derivations, the bias / variance trade-offs, and which one to actually use.
 
