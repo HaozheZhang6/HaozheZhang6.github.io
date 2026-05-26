@@ -404,9 +404,25 @@ footer.sticky-bottom {
     }
   }
 
-  .grid-sizer, .grid-item {
-    width: 250px;
-    margin-bottom: 10px;
+  // Project grid via CSS Grid (masonry JS disabled — see _config.yml).
+  // Native grid gives an instant first paint, no JS-load FOUC, and the
+  // aspect-ratio reservation on .card.hoverable figure keeps row heights
+  // predictable enough that empty space below shorter cards is minimal.
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 10px;
+    margin-bottom: 1rem;
+  }
+
+  // .grid-sizer is a masonry layout helper; hide it under CSS Grid.
+  .grid-sizer {
+    display: none;
+  }
+
+  .grid-item {
+    width: auto;
+    margin-bottom: 0;
   }
 
   h2.category {
@@ -758,7 +774,68 @@ html.transition *:after {
   }
 }
 
+// Same trick for cards that *do* have an image: reserve aspect ratio
+// on the figure so masonry can size the card on first paint instead
+// of waiting for image bytes. object-fit covers any aspect-mismatch.
+.grid-item .card.hoverable {
+  figure {
+    margin: 0;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    border-radius: 4px 4px 0 0;
+
+    picture,
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+  }
+}
+
 // Smoother masonry transition
 .grid-item .card {
   transition: transform 0.15s ease-out;
+}
+
+// Edited-date marker in post header
+.post-edited {
+  color: var(--global-text-color-light);
+  font-style: italic;
+  font-size: 0.95em;
+}
+
+// Language toggle on bilingual posts (中文 / English)
+.post-lang-toggle {
+  margin-top: 0.75rem;
+  margin-bottom: 0;
+  display: flex;
+  gap: 0.5rem;
+
+  .lang-btn {
+    display: inline-block;
+    padding: 0.2rem 0.7rem;
+    font-size: 0.85rem;
+    line-height: 1.4;
+    border: 1px solid var(--global-divider-color);
+    border-radius: 999px;
+    color: var(--global-text-color-light);
+    background: transparent;
+    text-decoration: none;
+    transition: background 0.12s ease, color 0.12s ease, border-color 0.12s ease;
+
+    &:hover {
+      background: var(--global-theme-color);
+      color: #fff;
+      border-color: var(--global-theme-color);
+      text-decoration: none;
+    }
+  }
+}
+
+// Smooth-scroll for the language anchor jumps
+html {
+  scroll-behavior: smooth;
 }
