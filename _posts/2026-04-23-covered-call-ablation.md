@@ -53,8 +53,6 @@ Backtest 把每种组合都跑了一遍：strike 位置（1 / 3 / 5 / 7 / 10% OT
 
 但右边两列别忽略。covered call 在事情走坏时损失大约是纯 SPY 的一半。最近 7 年是这样，过去 33 年里**每一次主要 drawdown 事件都是这样**——这不是 2020 年那一次的运气：
 
-![Drawdown by event](https://haozhezhang6.github.io/assets/img/blog/covered-call-ablation/drawdown_by_event.png)
-
 | 事件 | SPY MaxDD | CC MaxDD | CC 节省 |
 |---|---|---|---|
 | Dot-com (2000-2002) | −48% | −23% | 砍半 |
@@ -62,9 +60,13 @@ Backtest 把每种组合都跑了一遍：strike 位置（1 / 3 / 5 / 7 / 10% OT
 | COVID (2020 春) | −34% | −20% | 砍 42% |
 | Fed 加息 (2022) | −25% | −11% | 砍 56% |
 
-把整个 33 年的 drawdown 曲线叠在一起看更直观——每一次 SPY 探底，CC 那条线都浅得多：
+![Equity curves of the best covered-call variants vs SPY](https://haozhezhang6.github.io/assets/img/blog/covered-call-ablation/best_curves.png)
 
-![Drawdown comparison](https://haozhezhang6.github.io/assets/img/blog/covered-call-ablation/drawdown_comparison.png)
+![Drawdown by event: SPY vs covered call](https://haozhezhang6.github.io/assets/img/blog/covered-call-ablation/drawdown_by_event.png)
+
+![33-year drawdown curves overlaid](https://haozhezhang6.github.io/assets/img/blog/covered-call-ablation/drawdown_comparison.png)
+
+把整个 33 年的 drawdown 曲线叠在一起看更直观——每一次 SPY 探底，CC 那条线都浅得多：
 
 这个 robustness 是策略真正的产品价值。**目标是退休那天账户数字最大**——别选这个，直接拿 SPY。**目标是下次大跌时少难受一点**——covered call 帮得上忙。两件事都对，但是两个不同的诉求。
 
@@ -76,6 +78,8 @@ Backtest 把每种组合都跑了一遍：strike 位置（1 / 3 / 5 / 7 / 10% OT
 |---|---|---|---|---|---|
 | 纯持 SPY | −1% | 11% | 20% | −55% | 15% |
 | Covered call | 6% | 10% | 22% | −23% | **0%** |
+
+![Sharpe vs CAGR across rolling windows](https://haozhezhang6.github.io/assets/img/blog/covered-call-ablation/pareto_sharpe_cagr.png)
 
 5 年中位数 return 基本打平。CC 最好的 10% 窗口反而比 SPY 还高一点（22% vs 20%），因为震荡市里 premium 一直在收，没被 cap 截掉太多。
 
@@ -100,6 +104,10 @@ Backtest 把每种组合都跑了一遍：strike 位置（1 / 3 / 5 / 7 / 10% OT
 **Wider strikes**。5%、7%、10% OTM。Premium 掉得比 cap 被打穿的频率掉得还快，策略漏血。7% 看得最清楚——premium 大约是 3% 的一半，但 cap 在大涨月还是被打穿三分之一。两头不讨好。
 
 **Longer DTE**。30 / 45 / 60 天。反直觉的是：**短期合约更优**。15 DTE 循环捕捉到的 vol-of-vol 更多，单个糟糕月份的影响摊薄。Frictional cost（更多交易、更多 slippage）是主要代价，但策略扣完还是赢。
+
+![Sharpe ablation: OTM distance vs DTE](https://haozhezhang6.github.io/assets/img/blog/covered-call-ablation/heatmap_otm_vs_dte_sharpe.png)
+
+![Sharpe ablation: OTM distance vs VIX regime](https://haozhezhang6.github.io/assets/img/blog/covered-call-ablation/heatmap_otm_vs_vix_sharpe.png)
 
 ### 税这块比大家以为的重要
 
@@ -203,8 +211,6 @@ Buy-and-hold won on CAGR in every recent window. By 2–7 percentage points. The
 
 But look at the drawdown column. The covered call lost about half as much when things went bad. This isn't a 2020 fluke — it's been true in **every major stress event** across 33 years of SPY data:
 
-![Drawdown by event](https://haozhezhang6.github.io/assets/img/blog/covered-call-ablation/drawdown_by_event.png)
-
 | Event | SPY MaxDD | CC MaxDD | CC saved |
 |---|---|---|---|
 | Dot-com (2000-2002) | −48 % | −23 % | half |
@@ -212,9 +218,13 @@ But look at the drawdown column. The covered call lost about half as much when t
 | COVID (Spring 2020) | −34 % | −20 % | 42 % cut |
 | Fed hikes (2022) | −25 % | −11 % | 56 % cut |
 
-Or overlay the whole 33-year drawdown curve — every time SPY drops, the CC line is meaningfully shallower:
+![Equity curves of the best covered-call variants vs SPY](https://haozhezhang6.github.io/assets/img/blog/covered-call-ablation/best_curves.png)
 
-![Drawdown comparison](https://haozhezhang6.github.io/assets/img/blog/covered-call-ablation/drawdown_comparison.png)
+![Drawdown by event: SPY vs covered call](https://haozhezhang6.github.io/assets/img/blog/covered-call-ablation/drawdown_by_event.png)
+
+![33-year drawdown curves overlaid](https://haozhezhang6.github.io/assets/img/blog/covered-call-ablation/drawdown_comparison.png)
+
+Or overlay the whole 33-year drawdown curve — every time SPY drops, the CC line is meaningfully shallower:
 
 That robustness is the actual product. If you're trying to maximize the number on your statement at retirement, you should know going in: this is not the right strategy. Just hold SPY. If you're going to look at your account during the next sell-off and you'd like to feel a *bit* less awful, covered call helps. Both can be true.
 
@@ -226,6 +236,8 @@ The recent-start table can be misleading — we picked specific years. A more ho
 |---|---|---|---|---|---|
 | Buy-and-hold | −1 % | 11 % | 20 % | −55 % | 15 % of windows |
 | Covered call | 6 % | 10 % | 22 % | −23 % | **0 % of windows** |
+
+![Sharpe vs CAGR across rolling windows](https://haozhezhang6.github.io/assets/img/blog/covered-call-ablation/pareto_sharpe_cagr.png)
 
 A 5-year median return basically identical. The cap on upside makes the best windows roughly equal (22 % for CC, 20 % for B&H — the premium catches up when bull rallies are mild and the market spends time chopping around). The cap *binds* hardest in the worst windows for the underlying, where the option-writer is collecting fat premium during stress and that fully covers what they give up on the cap.
 
@@ -250,6 +262,10 @@ I think of it like flood insurance. Most years you're paying a premium for nothi
 **Wider strikes.** 5 %, 7 %, 10 % OTM. The premium drops faster than the cap-binding rate drops, so the strategy bleeds. The data is clearest at 7 % — premium roughly half of the 3 % version, but the cap still binds in about a third of strong months. Worst of both worlds.
 
 **Longer-dated contracts.** 30 / 45 / 60 day cycles. Counterintuitively, *shorter* dominates. 15-day cycles capture more of the volatility-of-volatility — you reset more frequently, so a single bad month hurts less than it does on a 60-day position. Calendar friction is the main cost (more trades, more slippage), but the strategy still wins after that.
+
+![Sharpe ablation: OTM distance vs DTE](https://haozhezhang6.github.io/assets/img/blog/covered-call-ablation/heatmap_otm_vs_dte_sharpe.png)
+
+![Sharpe ablation: OTM distance vs VIX regime](https://haozhezhang6.github.io/assets/img/blog/covered-call-ablation/heatmap_otm_vs_vix_sharpe.png)
 
 ### Taxes are a bigger deal than people admit
 

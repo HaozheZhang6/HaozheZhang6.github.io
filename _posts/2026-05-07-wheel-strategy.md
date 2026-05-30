@@ -65,13 +65,13 @@ YouTube 上有个频道每周都教"the wheel"策略：在 SPY（S&P 500 指数 
 | 2022 | −25% | −12% | −16% | 0% |
 | 2024 | −19% | −12% | −12% | 0% |
 
+![Daily equity curves, all five strategies](https://haozhezhang6.github.io/assets/img/blog/wheel-strategy/equity_curves.png)
+
 Wheel-10% 在 2.4 年里**完全没有回撤**——0%。代价就是 0.4% 的 CAGR。这其实就是 wheel 真正的产品：**保险级别的平滑度，外加保险公司利润级别的收益**。
 
 ### Vanity metric 陷阱——这一张图说完
 
 把 33 年的胜率跟最终财富画在一起：
-
-![Win rate vs final wealth](https://haozhezhang6.github.io/assets/img/blog/wheel-strategy/win_rate_vs_wealth.png)
 
 | Variant | 卖 put 数 | Put 胜率 | 卖 call 数 | Call 胜率 |
 |---|---|---|---|---|
@@ -79,6 +79,8 @@ Wheel-10% 在 2.4 年里**完全没有回撤**——0%。代价就是 0.4% 的 C
 | Wheel 5% | 333 | **94%** | 67 | 70% |
 | Wheel 7% | 370 | **97%** | 30 | 63% |
 | Wheel 10% | 271 | **99%** | 129 | **98%** |
+
+![Per-trade win rate vs final wealth (the vanity-metric chart)](https://haozhezhang6.github.io/assets/img/blog/wheel-strategy/win_rate_vs_wealth.png)
 
 Wheel-10% 在 33 年里卖了 271 个 put，**只有 3 个被 assign**。卖了 129 个 call，**只有 3 个被 assign**。基本每一笔交易都是赢的。
 
@@ -105,6 +107,8 @@ Wheel-10% 在 33 年里卖了 271 个 put，**只有 3 个被 assign**。卖了 
 | Wheel 5% | 17% | **83%** |
 | Wheel 7% | 8% | 92% |
 | Wheel 10% | 32% | 68% |
+
+![Time spent holding shares vs sitting in cash](https://haozhezhang6.github.io/assets/img/blog/wheel-strategy/phase_split.png)
 
 经典的 5% OTM wheel **83% 的时间在现金状态**。SPY 一年涨 10%，现金一年涨 5%，premium 一年加 3-4%。算一下：你 83% 的时间在拿 5+3=8% 的回报，只有 17% 的时间拿到完整的 10%——加权平均还不到 9%。这就是为什么不可能跑赢 SPY。
 
@@ -248,13 +252,13 @@ The drawdown column is where the wheel finally has an advantage:
 | 2022 | −25 % | −12 % | −16 % | 0 % |
 | 2024 | −19 % | −12 % | −12 % | 0 % |
 
+![Daily equity curves, all five strategies](https://haozhezhang6.github.io/assets/img/blog/wheel-strategy/equity_curves.png)
+
 Wheel-10% over 2.4 years had **zero drawdown**. The cost was 0.4 % CAGR. That is the wheel's actual product: **insurance-grade smoothness, at insurance-company-profit-margin returns.**
 
 ### The vanity-metric trap — one chart to end the debate
 
 Plot per-trade win rate against final wealth across the 33-year backtest:
-
-![Win rate vs final wealth](https://haozhezhang6.github.io/assets/img/blog/wheel-strategy/win_rate_vs_wealth.png)
 
 | Variant | Puts sold | Put win rate | Calls sold | Call win rate |
 |---|---|---|---|---|
@@ -262,6 +266,8 @@ Plot per-trade win rate against final wealth across the 33-year backtest:
 | Wheel 5 % | 333 | **94 %** | 67 | 70 % |
 | Wheel 7 % | 370 | **97 %** | 30 | 63 % |
 | Wheel 10 % | 271 | **99 %** | 129 | **98 %** |
+
+![Per-trade win rate vs final wealth (the vanity-metric chart)](https://haozhezhang6.github.io/assets/img/blog/wheel-strategy/win_rate_vs_wealth.png)
 
 Wheel-10% sold 271 puts in 33 years. **Only 3 ever assigned.** Sold 129 calls, **only 3 ever assigned**. Basically every trade was a winner.
 
@@ -288,6 +294,8 @@ The cleanest angle is to look at daily position state:
 | Wheel 5 % | 17 % | **83 %** |
 | Wheel 7 % | 8 % | 92 % |
 | Wheel 10 % | 32 % | 68 % |
+
+![Time spent holding shares vs sitting in cash](https://haozhezhang6.github.io/assets/img/blog/wheel-strategy/phase_split.png)
 
 The canonical 5 %-OTM wheel sits in cash **83 % of the time**. SPY earns ~10 %/year. Cash earns ~5 %. Premium adds 3-4 %. Math: you're getting 5+3 = 8 % during 83 % of days, plus full 10 % during 17 % — weighted average comes out under 9 %. That's why it can't catch SPY.
 

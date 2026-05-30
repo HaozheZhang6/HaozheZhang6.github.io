@@ -69,6 +69,10 @@ bilingual: true
 | **100% SPY** | **14.8%** | 0.86 | −34% | 0.44 | 1.00 | **$1.09M** |
 | 60/40 MSTR | **23.7%** | 0.82 | −59% | 0.40 | 0.42 | **$4.0M** |
 
+![Sharpe vs max drawdown (Pareto scatter)](https://haozhezhang6.github.io/assets/img/blog/diversifier-matrix/sharpe_vs_maxdd.png)
+
+![Daily equity curves, all five strategies](https://haozhezhang6.github.io/assets/img/blog/diversifier-matrix/equity_curves.png)
+
 注意三个排序：
 
 1. **60/40 GLD 在每个 metric 上都打赢 60/40 TLT**——Sharpe (1.04 vs 0.96)、MaxDD (−22% vs −28%)、CAGR (13.3% vs 9.9%)、Calmar (0.60 vs 0.36)。黄金跟 SPY 的相关性 (0.06) 接近 0，比 TLT 的 (−0.29) 在不同 regime 下都稳定——TLT 在通缩里负相关、在通胀里正相关，不可靠。
@@ -86,8 +90,6 @@ bilingual: true
 | 2023 | 23.5% | 13.4% | 15.1% | 15.6% | **27.2%** | 68.6% |
 | 2024 | 22.5% | 12.5% | 14.6% | 14.9% | **30.3%** | 46.7% |
 
-![CAGR by start year](https://haozhezhang6.github.io/assets/img/blog/diversifier-matrix/cagr_by_start_year.png)
-
 三件事 internalize：
 
 **1. 60/40 GLD 在每一个最近窗口里都打赢 100% SPY**。再读一遍。最近 2-7 年，40% 资金放在黄金里 + 60% 在股票里，比 100% 股票赚得**还多**。回撤还浅：
@@ -98,6 +100,8 @@ bilingual: true
 | 2022 | −25% | −19% |
 | 2024 | −19% | −12% |
 
+![CAGR by start year](https://haozhezhang6.github.io/assets/img/blog/diversifier-matrix/cagr_by_start_year.png)
+
 **2. 60/40 TLT 每个最近窗口都比 100% SPY 跑输 5-10 个百分点**。Diversification 的"成本"在最近 5 年是巨大的。起始 2022 的 60/40 TLT CAGR 3.9%——同期现金 ~5%。**"安全"配置跑输现金**。
 
 **3. 黄金过去 3 年的涨势非常猛**。起始 2024 的 60/40 GLD 在 2.4 年里涨了 75%——央行购买、地缘政治、美元忧虑同时发生。这不代表未来会一直这样。要看长期可预期回报，看 17 年那张总排名表。
@@ -105,8 +109,6 @@ bilingual: true
 ### 2022 — 诊断年
 
 光看汇总不够直观。看 2022 这一年单独发生了什么：
-
-![2022 drawdown](https://haozhezhang6.github.io/assets/img/blog/diversifier-matrix/drawdown_2022.png)
 
 | 组合 | 2022 MaxDD | 2022 总回报 |
 |---|---|---|
@@ -119,6 +121,8 @@ bilingual: true
 | **60/40 GLD** | **−19%** | **−11%** |
 | 60/40 DBC | −17% | **−4%** |
 | 60/40 SH | −5% | −3% |
+
+![2022 max drawdown by defender](https://haozhezhang6.github.io/assets/img/blog/diversifier-matrix/drawdown_2022.png)
 
 骇人的事实：**60/40 长债组合在 2022 比 100% SPY 跌得还多**。教科书的"保险"变成了风险放大器。任何一个跑标准 60/40 TLT 的退休者在 2022 比纯持 SPY 多承担 2 个点的 drawdown，作为"分散化"的对价。
 
@@ -290,6 +294,10 @@ For each candidate, 60 % SPY + 40 % defender, rebalanced quarterly to target wei
 | **100 % SPY** | **14.8 %** | 0.86 | −34 % | 0.44 | 1.00 | **$1.09 M** |
 | 60/40 MSTR | **23.7 %** | 0.82 | −59 % | 0.40 | 0.42 | **$4.0 M** |
 
+![Sharpe vs max drawdown (Pareto scatter)](https://haozhezhang6.github.io/assets/img/blog/diversifier-matrix/sharpe_vs_maxdd.png)
+
+![Daily equity curves, all five strategies](https://haozhezhang6.github.io/assets/img/blog/diversifier-matrix/equity_curves.png)
+
 Three orderings to notice:
 
 1. **60/40 GLD beats 60/40 TLT on every metric** — Sharpe (1.04 vs 0.96), MaxDD (−22 % vs −28 %), CAGR (13.3 % vs 9.9 %), Calmar (0.60 vs 0.36). Gold's correlation with SPY (0.06) is closer to zero than TLT's (−0.29), and more importantly, it stays stable across regimes — TLT goes negative in deflation, positive in inflation, so it's not actually a reliable hedge.
@@ -307,8 +315,6 @@ Three orderings to notice:
 | 2023 | 23.5 % | 13.4 % | 15.1 % | 15.6 % | **27.2 %** | 68.6 % |
 | 2024 | 22.5 % | 12.5 % | 14.6 % | 14.9 % | **30.3 %** | 46.7 % |
 
-![CAGR by start year](https://haozhezhang6.github.io/assets/img/blog/diversifier-matrix/cagr_by_start_year.png)
-
 Three things to internalize:
 
 **1. 60/40 GLD beat 100 % SPY in every recent window.** Read it again. Over the last 2-7 years, holding 40 % in gold and 60 % in stocks earned *more* than holding 100 % stocks. With shallower drawdowns:
@@ -319,6 +325,8 @@ Three things to internalize:
 | 2022 | −25 % | −19 % |
 | 2024 | −19 % | −12 % |
 
+![CAGR by start year](https://haozhezhang6.github.io/assets/img/blog/diversifier-matrix/cagr_by_start_year.png)
+
 **2. 60/40 TLT lagged 100 % SPY by 5-10 percentage points in every recent window.** The "diversification cost" has been enormous in the last 5 years. The 60/40 TLT starting 2022 earned 3.9 % CAGR — over a stretch when *cash* paid about 5 %. The "safe" allocation underperformed cash.
 
 **3. Gold has been on a tear the last 3 years.** The 60/40 GLD starting 2024 returned 75 % over 2.4 years. Central-bank buying, geopolitical tension, US dollar worries all converged. Don't extrapolate — for long-run expectations, look at the 17-year rolling table.
@@ -326,8 +334,6 @@ Three things to internalize:
 ### 2022 — the diagnostic year
 
 Aggregate numbers can hide what happened. Look at what each portfolio did in 2022:
-
-![2022 drawdown](https://haozhezhang6.github.io/assets/img/blog/diversifier-matrix/drawdown_2022.png)
 
 | Portfolio | 2022 MaxDD | 2022 total return |
 |---|---|---|
@@ -340,6 +346,8 @@ Aggregate numbers can hide what happened. Look at what each portfolio did in 202
 | **60/40 GLD** | **−19 %** | **−11 %** |
 | 60/40 DBC | −17 % | **−4 %** |
 | 60/40 SH | −5 % | −3 % |
+
+![2022 max drawdown by defender](https://haozhezhang6.github.io/assets/img/blog/diversifier-matrix/drawdown_2022.png)
 
 The headline shock: **the textbook 60/40-with-long-bonds dropped MORE than 100 % SPY in 2022.** The hedge became a risk amplifier. Anyone running standard 60/40 TLT in retirement that year took 2 percentage points of *extra* drawdown for the privilege of "diversifying."
 
