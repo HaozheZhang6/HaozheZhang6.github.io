@@ -377,6 +377,9 @@ def filename_slug(path):
 def split_list(s):
     if not s:
         return []
+    s = s.strip()
+    if s.startswith("[") and s.endswith("]"):  # YAML flow sequence: [a, b, c]
+        s = s[1:-1]
     if "," in s:
         return [x.strip() for x in s.split(",") if x.strip()]
     return [x.strip() for x in s.split() if x.strip()]
