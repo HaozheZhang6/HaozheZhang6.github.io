@@ -230,7 +230,7 @@ TikTok / WSB 上的经典宣传："30 岁 all in $100k TQQQ，65 岁退休拿 $5
 
 数学没考虑三件事：
 
-**1. 没人能 35 年不卖**。2018 圣诞、2020 新冠、2022 加息——每一次都是足够把绝大多数持有者洗出去的级别。3.7 倍的财富倍数要求你在 −82% drawdown 中不卖。**统计上几乎没有人做得到**。
+**1. 没人能 35 年不卖**。2018 圣诞、2020 新冠、2022 加息——每一次都是足够把绝大多数持有者洗出去的级别。17 倍的财富倍数要求你在 −82% drawdown 中不卖。**统计上几乎没有人做得到**。
 
 **2. Survivorship bias**。2010 年存在的 3× 杠杆 ETF 还活着的就这几个。Direxion 的某些 sector 3× 产品、VelocityShares 的一整条线——blow up、关停、reverse split 到死。提前知道哪个能活下来是非凡 hindsight。
 
@@ -340,18 +340,18 @@ The detail:
 
 | Started | Years | TQQQ CAGR | TQQQ MaxDD | $100k → |
 |---|---|---|---|---|
-| 2019 | 7.4 | 47 % | −82 % | $3.75 M |
+| 2019 | 7.4 | 47 % | −82 % | $1.72 M |
 | 2020 | 6.4 | 36 % | −82 % | $720 k |
 | 2021 | 5.4 | 28 % | **−82 %** | $370 k |
 | 2022 | 4.4 | 16 % | −81 % | $190 k |
-| 2023 | 3.4 | **96 %** | −58 % | $850 k |
+| 2023 | 3.4 | **96 %** | −58 % | $952 k |
 | 2024 | 2.4 | 66 % | −58 % | $330 k |
 
 ![CAGR by start year](https://haozhezhang6.github.io/assets/img/blog/leveraged-etf-decay/cagr_by_start_year.png)
 
 The jarring contrast: **all-in $100 k in TQQQ from January 2021 is $370 k today** — a 3.7× return. The cost was watching it drop to **$35 k** along the way (−82 %) and **being stuck there for over a year** before recovering. The same $100 k in plain QQQ became $239 k without the hellish path.
 
-**Someone who started in January 2023** (right after the 2022 bottom) — $100 k became $850 k. The dream window. Any TQQQ-buyer who hit the dip in early 2022 is rich.
+**Someone who started in January 2023** (right after the 2022 bottom) — $100 k became $952 k. The dream window. Any TQQQ-buyer who hit the dip in early 2022 is rich.
 
 These two start dates are 24 months apart. Completely different outcomes. **That's what "timing dominates" means.**
 
@@ -478,7 +478,7 @@ A California top-bracket taxable account loses about a third of headline returns
 
 ### The stop-loss conversation
 
-The person who actually compounded $100 k → $3.75 M in TQQQ since 2019 **mostly doesn't exist**. By Q4 2022, with the account down 82 % from the November 2021 peak — from $2 M to $400 k — almost everyone sold. Sitting through that is the exception, not the norm.
+The person who actually compounded $100 k → $1.72 M in TQQQ since 2019 **mostly doesn't exist**. By Q4 2022, with the account down 82 % from the November 2021 peak — from ~$900 k to ~$170 k — almost everyone sold. Sitting through that is the exception, not the norm.
 
 Two rule-based exits worth considering:
 
@@ -493,7 +493,7 @@ TikTok and WSB sell this story constantly: "30 years old, all-in $100 k TQQQ, re
 
 The arithmetic ignores three things:
 
-**1. Nobody can hold for 35 years without selling.** Dec 2018, Mar 2020, the 2022 hiking cycle — every one of those was severe enough to flush most holders. The 36× wealth multiple requires *not selling* through −82 % drawdowns. **Statistically almost nobody does.**
+**1. Nobody can hold for 35 years without selling.** Dec 2018, Mar 2020, the 2022 hiking cycle — every one of those was severe enough to flush most holders. The 17× wealth multiple requires *not selling* through −82 % drawdowns. **Statistically almost nobody does.**
 
 **2. Survivorship bias.** Other 3× ETFs that existed in 2010 — Direxion sector products, the entire VelocityShares lineup — blew up, closed, or reverse-split into oblivion. Picking the survivor in advance is non-trivial.
 

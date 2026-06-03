@@ -16,7 +16,7 @@ bilingual: true
 
 voice modality 跟 chat 真正的差距是延迟。用户能感觉到的只有一个数字——讲完到 agent 第一次出声的那段时间——而人对这一个数字的敏感度比对几乎任何其他交互延迟都高。ITU-T G.114 给的工业 baseline 是单向语音延迟 ≤ 400 ms 算自然、400–600 ms 还能忍、超过 600–700 ms 就开始"感觉机器人在卡"。人之间对话的 inter-turn gap median 大概 200 ms。所以 sub-1 秒端到端是 voice agent 工程的底线，sub-500 ms 才算真接近人。
 
-一条 turn 端到端的延迟拆开大概是 ~50 ms 网络 + ~30 ms WebRTC pickup + ~200 ms VAD/endpointing（voice activity detection,判断用户讲完了没）+ ~50 ms streaming ASR（automatic speech recognition,语音转文字）+ ~300 ms LLM TTFT（time-to-first-token,从 prompt 进去到第一个 token 出来）+ ~200 ms TTS（text-to-speech）first chunk，合计 ~830 ms。跟公开 benchmark 上做得最好的几套 730–750 ms（GPT-4 Nano + Cartesia Sonic-Turbo，[dev.to 30-stack benchmark](https://dev.to/cloudx/cracking-the-1-second-voice-loop-what-we-learned-after-30-stack-benchmarks-427)）相差不大。后面每一个工程决策都是奔着把这条 loop 压在 1 秒以内。
+一条 turn 端到端的延迟拆开大概是 ~50 ms 网络 + ~30 ms WebRTC pickup + ~200 ms VAD/endpointing（voice activity detection,判断用户讲完了没）+ ~50 ms streaming ASR（automatic speech recognition,语音转文字）+ ~300 ms LLM TTFT（time-to-first-token,从 prompt 进去到第一个 token 出来）+ ~200 ms TTS（text-to-speech）first chunk，合计 ~830 ms。跟公开 benchmark 上做得最好的几套 730–750 ms（GPT-4.1 nano + Cartesia Sonic-Turbo，[dev.to 30-stack benchmark](https://dev.to/cloudx/cracking-the-1-second-voice-loop-what-we-learned-after-30-stack-benchmarks-427)）相差不大。后面每一个工程决策都是奔着把这条 loop 压在 1 秒以内。
 
 ### 为什么是 WebRTC，不是 WebSocket
 
@@ -28,7 +28,7 @@ WebRTC 不便宜，要处理 ICE 做 NAT 穿透、DTLS/SRTP 做媒体加密、SD
 
 下一步是 VAD 和 endpointing——决定"用户讲完一句话了没"。这一层做错的代价不对称：慢了 agent 显得反应迟钝（一条 1500 ms 静默规则单这一项就吃掉超过一半 1 秒预算），快了 agent 抢话——[AssemblyAI 把这个叫"the biggest challenge in voice agent development"](https://www.assemblyai.com/blog/turn-detection-endpointing-voice-agent)。
 
-帧级 VAD 用 [`webrtcvad`](https://github.com/wiseman/py-webrtcvad)：10 ms 一帧、纯 CPU、GMM-based、单帧延迟可忽略。它不是最准的，[Picovoice 的 VAD benchmark](https://picovoice.ai/blog/best-voice-activity-detection-vad/) 显示 5% false-positive rate 下 Silero VAD 的 true-positive 是 87.7%、WebRTC VAD 是 50%，差 4 倍。留着只因为 webrtcvad 做"音频里有没有人声"够用，语义层面的判断放在上一档。
+帧级 VAD 用 [`webrtcvad`](https://github.com/wiseman/py-webrtcvad)：10 ms 一帧、纯 CPU、GMM-based、单帧延迟可忽略。它不是最准的，[Picovoice 的 VAD benchmark](https://picovoice.ai/blog/best-voice-activity-detection-vad/) 显示 5% false-positive rate 下 Silero VAD 的 true-positive 是 87.7%、WebRTC VAD 是 50%，漏检率差约 4 倍。留着只因为 webrtcvad 做"音频里有没有人声"够用，语义层面的判断放在上一档。
 
 [LiveKit 的 turn detection 综述](https://livekit.com/blog/turn-detection-voice-agents-vad-endpointing-model-based-detection) 把工业界做法分成四类——纯 silence rule、STT provider 给的 end-of-utterance 信号、partial transcript 上的小分类器、纯 audio prosody 模型。我们走 LiveKit 同一条路：在 webrtcvad 之上加一个小一档的 turn detector，吃 streaming ASR 的 partial transcript token stream，判一句话语义是否完整。决策合并成"音频静默 400 ms 且分类器认为是句尾"，推断 ~50 ms，抢话问题缓解掉大半但没根治——剩下那部分需要 prosody、社交线索、对话状态，光靠 text 还不够。
 
@@ -72,7 +72,7 @@ An hour-each-way commute doesn't pair well with radio or Spotify. Siri, Alexa, a
 
 What voice changes about a chat product is the latency it forces you to hit. The user notices one number — the gap between finishing a sentence and the agent's first audio chunk — and they notice it more than almost any other number in interactive systems. ITU-T G.114's baseline puts one-way speech latency ≤ 400 ms in the "natural" range, 400–600 ms in "acceptable," and above 600–700 ms it starts to read as a robot stalling. Human-to-human inter-turn gap median is around 200 ms. Sub-1s end-to-end is the floor for voice agents; sub-500 ms is where it stops feeling like a machine.
 
-A single turn breaks down roughly as ~50 ms network + ~30 ms WebRTC pickup + ~200 ms VAD/endpointing (voice activity detection + deciding when the user is done speaking) + ~50 ms streaming ASR (automatic speech recognition — speech to text) + ~300 ms LLM TTFT (time-to-first-token, prompt-in to first output token) + ~200 ms TTS (text-to-speech) first chunk, totaling ~830 ms — within range of the best published end-to-end numbers (730–750 ms for GPT-4 Nano + Cartesia Sonic-Turbo, [dev.to 30-stack benchmark](https://dev.to/cloudx/cracking-the-1-second-voice-loop-what-we-learned-after-30-stack-benchmarks-427)). Every engineering decision in the rest of this post is in service of that budget.
+A single turn breaks down roughly as ~50 ms network + ~30 ms WebRTC pickup + ~200 ms VAD/endpointing (voice activity detection + deciding when the user is done speaking) + ~50 ms streaming ASR (automatic speech recognition — speech to text) + ~300 ms LLM TTFT (time-to-first-token, prompt-in to first output token) + ~200 ms TTS (text-to-speech) first chunk, totaling ~830 ms — within range of the best published end-to-end numbers (730–750 ms for GPT-4.1 nano + Cartesia Sonic-Turbo, [dev.to 30-stack benchmark](https://dev.to/cloudx/cracking-the-1-second-voice-loop-what-we-learned-after-30-stack-benchmarks-427)). Every engineering decision in the rest of this post is in service of that budget.
 
 ### Why WebRTC, not WebSocket
 

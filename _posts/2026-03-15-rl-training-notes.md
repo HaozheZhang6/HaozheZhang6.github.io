@@ -53,7 +53,7 @@ KL penalty 这一项要 sample 估计，三种 estimator（K1 / K2 / K3）的推
 
 GRPO 在标准 math reasoning 上跑得很顺，但在 long-CoT、long-rollout 这种 setting 下问题就出来了。DAPO（ByteDance & Tsinghua AIR, NeurIPS 2025）报告了四个具体的稳定性洞和对应的修法。
 
-第一个是 **entropy collapse**。PPO 的对称 clip `[1−ε, 1+ε]` 在 token-level 上对 high-prob token 不利——它压住了向上探索的空间，policy 越训越窄，最后只输出几个 mode。DAPO 的 **Clip-Higher** 把上下两边做成不对称（典型 ε_high = 0.28、ε_low = 0.20），让 low-prob token 有机会被向上 explore。
+第一个是 **entropy collapse**。PPO 的对称 clip `[1−ε, 1+ε]` 在 token-level 上对 low-prob token 不利——它压住了向上探索的空间，policy 越训越窄，最后只输出几个 mode。DAPO 的 **Clip-Higher** 把上下两边做成不对称（典型 ε_high = 0.28、ε_low = 0.20），让 low-prob token 有机会被向上 explore。
 
 第二个是 wasted compute。GRPO 一组 K 个 rollout 如果 reward 全一样（典型是全对或全错），group baseline 算出 advantage 全为 0，整组对 gradient 完全没贡献，但 forward / backward 算力照花。**Dynamic Sampling** 是在 rollout 后重新检查每组的 reward 分布，全相同的 prompt 直接丢掉重采，保证 batch 里每个 prompt 至少有一条非 0 advantage。
 
@@ -77,7 +77,7 @@ SAPO 同时是 sequence-coherent（继承 GSPO）+ token-adaptive（细颗粒度
 
 ### 两个不动算法、提 throughput 的 trick {#cn-tricks}
 
-第一个是 **advantage filtering**：rollout 出来一个 batch，看 `|A|` 的分布，把 `|A| ≈ 0` 那些 sample 直接丢掉。它们对 policy gradient 贡献接近 0，但 forward / backward 一样花算力。在 GRPO 的 group-relative baseline 下，每组里 reward 落在中位数附近那条就是这类"学不到东西"的样本。Filter 之后 effective batch 缩水，但 wall-clock 推进更快，配套要重新调 lr / target batch。
+第一个是 **advantage filtering**：rollout 出来一个 batch，看 `|A|` 的分布，把 `|A| ≈ 0` 那些 sample 直接丢掉。它们对 policy gradient 贡献接近 0，但 forward / backward 一样花算力。在 GRPO 的 group-relative baseline 下，每组里 reward 落在均值附近那条就是这类"学不到东西"的样本。Filter 之后 effective batch 缩水，但 wall-clock 推进更快，配套要重新调 lr / target batch。
 
 第二个是在 normalized advantage 或 reward 上叠一个小幅 Gaussian 噪声——看起来反直觉，但 GRPO 这种 group-normalized setting 下，一条 reward 显著高过其他人的 sample 会把 policy 过度推向那一条；加点 noise 让 update 不至于 over-fit 到 dominant sample 上，保住 exploration。
 
@@ -161,7 +161,7 @@ The KL penalty term needs a sample-based estimator. The three options (K1 / K2 /
 
 GRPO is fine on standard math reasoning, but on long-CoT, long-rollout training, four specific stability problems show up. DAPO (ByteDance & Tsinghua AIR, NeurIPS 2025) documents each and offers a fix.
 
-The first is **entropy collapse**. PPO's symmetric clip `[1−ε, 1+ε]` is biased against keeping room for high-probability tokens — it allows downward moves to clamp them — and the policy narrows over training until it produces only a few modes. DAPO replaces the symmetric band with **Clip-Higher**: an asymmetric clip with `ε_high > ε_low` (typically 0.28 vs 0.20), giving low-probability tokens more room to be explored upward.
+The first is **entropy collapse**. PPO's symmetric clip `[1−ε, 1+ε]` is biased against low-probability tokens — the upper bound 1+ε caps how much a low-prob token's probability can rise in one step, suppressing exploration, and the policy narrows over training until it produces only a few modes. DAPO replaces the symmetric band with **Clip-Higher**: an asymmetric clip with `ε_high > ε_low` (typically 0.28 vs 0.20), giving low-probability tokens more room to be explored upward.
 
 The second is wasted compute. If all K rollouts in a GRPO group land at the same reward (all correct or all wrong), the group baseline zeros out the advantage and the entire group contributes nothing to the gradient — yet forward and backward still cost the same. **Dynamic Sampling** rechecks group reward dispersion after rollout, drops prompts whose K rollouts agree, and resamples until every prompt in the training batch carries some non-zero advantage.
 
@@ -185,7 +185,7 @@ SAPO ends up both sequence-coherent (inherited from GSPO) and token-adaptive (th
 
 ### Two algorithm-free throughput tricks {#en-tricks}
 
-**Advantage filtering**: in a rollout batch, look at the distribution of `|A|` and drop the samples close to zero. They contribute almost nothing to the policy gradient but still cost the same forward and backward pass. Under GRPO's group-relative baseline, the response whose reward sits near the group median is exactly this kind. Filtering shrinks effective batch size, accelerates wall-clock progress, and requires retuning lr and target batch.
+**Advantage filtering**: in a rollout batch, look at the distribution of `|A|` and drop the samples close to zero. They contribute almost nothing to the policy gradient but still cost the same forward and backward pass. Under GRPO's group-relative baseline, the response whose reward sits near the group mean is exactly this kind. Filtering shrinks effective batch size, accelerates wall-clock progress, and requires retuning lr and target batch.
 
 Adding a small Gaussian to the normalized advantage looks counterintuitive — noise shouldn't help training. But under group-normalized advantages, a single response with much higher reward than the others pulls the policy hard toward itself; a touch of noise prevents that update from over-fitting to a dominant sample and preserves exploration.
 

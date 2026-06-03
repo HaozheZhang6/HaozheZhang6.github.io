@@ -44,7 +44,7 @@ World simulator 真正解锁的是 RL 训练循环：rollout 一个 hypothetical
 
 ### 顺着这条路看 humanoid robot
 
-回到机器人。Optimus、Figure、Apptronik 这些 humanoid 公司里，外界谈得最多的还是"它能走得多稳、能跑多快"。但 locomotion 这一块从 Boston Dynamics 2010 年那条 BigDog 一路走到 [Unitree](https://www.unitree.com/) 那条狗，已经基本是 solved problem——MPC + RL fine-tune 就能跑得很自然，Unitree 那条狗几千美元就能拿到。Tesla 自己的线，FSD 已经把"3D scene understanding + long-horizon planning + control"这一整套打过一遍了，locomotion 是其中比驾驶简单的子问题（自由度少、约束 explicit、控制 frequency 也低）。
+回到机器人。Optimus、Figure、Apptronik 这些 humanoid 公司里，外界谈得最多的还是"它能走得多稳、能跑多快"。但 locomotion 这一块从 Boston Dynamics 2005 年那条 BigDog 一路走到 [Unitree](https://www.unitree.com/) 那条狗，已经基本是 solved problem——MPC + RL fine-tune 就能跑得很自然，Unitree 那条狗几千美元就能拿到。Tesla 自己的线，FSD 已经把"3D scene understanding + long-horizon planning + control"这一整套打过一遍了，locomotion 是其中比驾驶简单的子问题（自由度少、约束 explicit、控制 frequency 也低）。
 
 humanoid 真正难的是 manipulation 和 grounded perception——抓一个没见过形状的物品、在 cluttered 环境下完成任务、理解人类语言指令对应到 physical action。这部分跟自动驾驶的难点是同构的：world understanding 和 long-horizon planning。Tesla 的 bet 就是 FSD stack 在 humanoid 上能复用——OccNet 直接变成机器人周围的 occupancy estimate，end-to-end 那个大网络换一下 action space 就能 transfer。除非有人特别要求做后空翻，否则 locomotion 不会是 bottleneck。
 
@@ -86,7 +86,7 @@ What a world simulator actually unlocks is the RL training loop: roll out a hypo
 
 ### Why locomotion isn't the bottleneck for humanoid robots
 
-Back to robots. In the humanoid race — Optimus, Figure, Apptronik — the question outside engineering circles is still "how stably can it walk, how fast can it run." But locomotion as a research problem has been mostly solved since Boston Dynamics' BigDog in 2010, and the line that runs through [Unitree's quadrupeds](https://www.unitree.com/) made it cheap and accessible — MPC plus RL fine-tuning produces natural-looking gaits, and a Unitree dog runs a few thousand dollars. Tesla has already trained the full stack of "3D scene understanding + long-horizon planning + control" on FSD, and locomotion is a simpler sub-problem than driving — fewer degrees of freedom, more explicit constraints, lower control frequency.
+Back to robots. In the humanoid race — Optimus, Figure, Apptronik — the question outside engineering circles is still "how stably can it walk, how fast can it run." But locomotion as a research problem has been mostly solved since Boston Dynamics' BigDog in 2005, and the line that runs through [Unitree's quadrupeds](https://www.unitree.com/) made it cheap and accessible — MPC plus RL fine-tuning produces natural-looking gaits, and a Unitree dog runs a few thousand dollars. Tesla has already trained the full stack of "3D scene understanding + long-horizon planning + control" on FSD, and locomotion is a simpler sub-problem than driving — fewer degrees of freedom, more explicit constraints, lower control frequency.
 
 What's actually hard for humanoids is manipulation and grounded perception — picking up an unfamiliar object, finishing a task in a cluttered scene, mapping language instructions to physical actions. The difficulty here is isomorphic to autonomous driving: world understanding and long-horizon planning. Tesla's bet is that the FSD stack ports onto humanoid directly — OccNet becomes occupancy around the robot, the end-to-end network swaps its action space and transfers. Locomotion only becomes a bottleneck if someone specifically wants backflips.
 

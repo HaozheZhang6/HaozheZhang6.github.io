@@ -34,7 +34,18 @@ w(k) = a + b · (ρ · (k − m) + √((k − m)² + σ²))
 
 AAPL 2024-09-13 snapshot，10 个 expiry 从 13 天到 6 个月。每个 expiry 的流程是 pull call mid quote → solve BS implied vol → 同时用 SVI 和 SABR 拟合 → 算 per-strike RMSE。SVI 还要做一个 butterfly-arbitrage diagnostic：implied density `g(k) = ∂²C/∂K²` 处处 ≥ 0 等价于该 slice 无 butterfly 套利。
 
-| Expiry | T (y) | SVI RMSE (bps) | SABR RMSE (bps) | |---|---:|---:|---:| | 2024-09-27 | 0.04 | **121** | 577 | | 2024-10-18 | 0.10 | **40** | 287 | | 2024-11-15 | 0.17 | **18** | 97 | | 2024-12-20 | 0.27 | **14** | 40 | | 2025-01-17 | 0.35 | 10 | **13** | | 2025-03-21 | 0.52 | 7 | **5** |
+| Expiry | T (y) | SVI RMSE (bps) | SABR RMSE (bps) |
+|---|---|---|---|
+| 2024-09-27 | 0.04 | 121 | 577 |
+| 2024-10-04 | 0.06 | 68 | 285 |
+| 2024-10-11 | 0.08 | 84 | 424 |
+| 2024-10-18 | 0.10 | 40 | 287 |
+| 2024-10-25 | 0.12 | 125 | 282 |
+| 2024-11-01 | 0.13 | 158 | 246 |
+| 2024-11-15 | 0.17 | 18 | 97 |
+| 2024-12-20 | 0.27 | 14 | 40 |
+| 2025-01-17 | 0.35 | 10 | 13 |
+| 2025-03-21 | 0.52 | 7 | 5 |
 
 ### 结果是一个干净的 regime split
 
@@ -84,7 +95,18 @@ Five purely descriptive parameters, none traceable to an SDE. Without an SDE, SV
 
 AAPL on 2024-09-13, ten expiries from 13 days to six months. For each expiry: pull call mids → solve BS implied vol → fit both SVI and SABR → compute per-strike RMSE. SVI additionally gets a butterfly-arbitrage diagnostic — the implied density `g(k) = ∂²C/∂K²` must stay ≥ 0 everywhere, otherwise the slice contains a butterfly arb.
 
-| Expiry | T (y) | SVI RMSE (bps) | SABR RMSE (bps) | |---|---:|---:|---:| | 2024-09-27 | 0.04 | **121** | 577 | | 2024-10-18 | 0.10 | **40** | 287 | | 2024-11-15 | 0.17 | **18** | 97 | | 2024-12-20 | 0.27 | **14** | 40 | | 2025-01-17 | 0.35 | 10 | **13** | | 2025-03-21 | 0.52 | 7 | **5** |
+| Expiry | T (y) | SVI RMSE (bps) | SABR RMSE (bps) |
+|---|---|---|---|
+| 2024-09-27 | 0.04 | 121 | 577 |
+| 2024-10-04 | 0.06 | 68 | 285 |
+| 2024-10-11 | 0.08 | 84 | 424 |
+| 2024-10-18 | 0.10 | 40 | 287 |
+| 2024-10-25 | 0.12 | 125 | 282 |
+| 2024-11-01 | 0.13 | 158 | 246 |
+| 2024-11-15 | 0.17 | 18 | 97 |
+| 2024-12-20 | 0.27 | 14 | 40 |
+| 2025-01-17 | 0.35 | 10 | 13 |
+| 2025-03-21 | 0.52 | 7 | 5 |
 
 ### The result is a clean regime split
 

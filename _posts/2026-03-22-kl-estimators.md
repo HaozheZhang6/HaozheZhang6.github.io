@@ -80,7 +80,7 @@ $$\begin{aligned}
 
 $$(r-1)$$ 期望为 0，加到 K1 上不改变期望——$$\mathbb{E}[K_3] = \mathbb{E}[K_1] + \mathbb{E}[r-1] = \mathrm{KL} + 0 = \mathrm{KL}$$——所以 K3 仍然 **unbiased**。
 
-为什么 variance 比 K1 低？control variate 这个 trick 的关键是被加的那一项跟原 estimator **同向相关**：$$r$$ 大的时候 $$(r-1)$$ 大、$$-\log r$$ 小（甚至为负）；$$r$$ 小的时候反过来——两者的噪声部分相互抵消，加起来 variance 下降。
+为什么 variance 比 K1 低？control variate 这个 trick 的关键是被加的那一项跟原 estimator **反向相关**：$$r$$ 大的时候 $$(r-1)$$ 大、$$-\log r$$ 小（甚至为负）；$$r$$ 小的时候反过来——两者的噪声部分相互抵消，加起来 variance 下降。
 
 K3 还有个意外的好处：永远 **non-negative**。在 $$r = 1$$ 附近 Taylor 展开
 
@@ -179,7 +179,7 @@ $$\begin{aligned}
 &= \sum_x \pi_{\text{ref}}(x) - 1 = 0.
 \end{aligned}$$
 
-Adding it to K1 leaves the expectation untouched ($$\mathbb{E}[K_3] = \mathbb{E}[K_1] + \mathbb{E}[r-1] = \mathrm{KL} + 0 = \mathrm{KL}$$), but variance drops because $$(r-1)$$ and $$-\log r$$ are **positively correlated** — when one is high the other is also high, and adding them cancels part of their shared noise.
+Adding it to K1 leaves the expectation untouched ($$\mathbb{E}[K_3] = \mathbb{E}[K_1] + \mathbb{E}[r-1] = \mathrm{KL} + 0 = \mathrm{KL}$$), but variance drops because $$(r-1)$$ and $$-\log r$$ are **negatively correlated** — when r is large, (r-1) is large but -log r is small (often negative), and vice versa, and adding them cancels part of their shared noise.
 
 K3 is also always non-negative. Taylor-expanding $$-\log r$$ around $$r = 1$$:
 

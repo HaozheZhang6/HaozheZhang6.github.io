@@ -82,7 +82,7 @@ Wheel-10% 在 2.4 年里**完全没有回撤**——0%。代价就是 0.4% 的 C
 
 ![Per-trade win rate vs final wealth (the vanity-metric chart)](https://haozhezhang6.github.io/assets/img/blog/wheel-strategy/win_rate_vs_wealth.png)
 
-Wheel-10% 在 33 年里卖了 271 个 put，**只有 3 个被 assign**。卖了 129 个 call，**只有 3 个被 assign**。基本每一笔交易都是赢的。
+Wheel-10% 在 33 年里卖了 271 个 put，**只有 2 个被 assign**。卖了 129 个 call，**只有 2 个被 assign**。基本每一笔交易都是赢的。
 
 最终账户值：**$221,000**（$100k 本金起步）。
 
@@ -173,7 +173,7 @@ Wheel-10% 在 33 年里卖了 271 个 put，**只有 3 个被 assign**。卖了 
 1. **必须在 tax-advantaged account 里跑**。Taxable 账户里 STCG 把 alpha 全吃掉。
 1. **预设好停止规则**。下跌 15% 退出，连续 assign 3 次减仓。写在纸上。
 1. **不要用"99% 胜率"说服自己或别人**。用多年 CAGR vs 纯持 SPY 来评判。
-1. **对 SPY 这个特定 underlying，3% OTM 月度 covered call 才是正解**——每一个 wheel 配置、每一个起始年份都被它打趴下。
+1. **对 SPY 这个特定 underlying，5% OTM 月度 covered call 才是正解**——每一个 wheel 配置、每一个起始年份都被它打趴下。
 
 #### 一些技术细节
 
@@ -269,7 +269,7 @@ Plot per-trade win rate against final wealth across the 33-year backtest:
 
 ![Per-trade win rate vs final wealth (the vanity-metric chart)](https://haozhezhang6.github.io/assets/img/blog/wheel-strategy/win_rate_vs_wealth.png)
 
-Wheel-10% sold 271 puts in 33 years. **Only 3 ever assigned.** Sold 129 calls, **only 3 ever assigned**. Basically every trade was a winner.
+Wheel-10% sold 271 puts in 33 years. **Only 2 ever assigned.** Sold 129 calls, **only 2 ever assigned**. Basically every trade was a winner.
 
 Final account value: **$221,000** (starting from $100k).
 
@@ -360,7 +360,7 @@ These rules are **not in the backtest**. A risk-managed wheel might recover 2-3 
 1. **Tax-advantaged account only.** STCG eats too much of the return otherwise.
 1. **Pre-commit to stop rules.** Drop 15 % from CSP → exit. Three consecutive assignments → cut size. Write it down.
 1. **Don't use "99 % win rate" to convince yourself or anyone else.** Use multi-year CAGR vs plain SPY.
-1. **For SPY specifically, a 3 % OTM monthly covered call dominates every wheel variant in every recent window we tested.**
+1. **For SPY specifically, a 5 % OTM monthly covered call dominates every wheel variant in every recent window we tested.**
 
 #### Boring stuff
 

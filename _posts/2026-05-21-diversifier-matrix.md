@@ -12,7 +12,7 @@ bilingual: true
 
 ## 中文 {#cn}
 
-2022 年发生了一件理论上不该发生的事：标准 60/40（**60/40** 是过去几十年退休账户的默认资产配置——60% 股票 + 40% 债券；这里具体跑的是 60% SPY = S&P 500 指数 ETF + 40% 长期国债 TLT = iShares 20+ Year Treasury ETF）一年跌了 **23%**，比纯持 SPY 还多跌 2 个点。债券原本是放在那儿给股票崩盘兜底的"保险腿"，赔得比"主险"还狠。
+2022 年发生了一件理论上不该发生的事：标准 60/40（**60/40** 是过去几十年退休账户的默认资产配置——60% 股票 + 40% 债券；这里具体跑的是 60% SPY = S&P 500 指数 ETF + 40% 长期国债 TLT = iShares 20+ Year Treasury ETF）一年跌了 **23%**，比纯持 SPY 还多跌 4 个点。债券原本是放在那儿给股票崩盘兜底的"保险腿"，赔得比"主险"还狠。
 
 机制其实不复杂——通胀冲到 9%，Fed 一年从 0% 把利率拉到 5%，股票跌（未来现金流折现更重）+ 长债跌（票息折现率突然跳高），两个理论上无关的资产被通胀**变成正相关**。但**这是过去 40 年里第一次**。"60/40 + 长债"是这几十年里退休账户的默认答案，2022 之前没人觉得这有什么问题。一个退休年龄的人在 2022 看到自己的"稳健配置"跌得比纯股票还狠，是一件很难消化的事。
 
@@ -24,7 +24,7 @@ bilingual: true
 
 **起始 2019 年的 60/40 + 黄金 (60% SPY + 40% GLD)，到今天的 CAGR 是 18.6%。同期 60/40 + 长债 (TLT) 只有 10.1%。100% 纯 SPY 是 17.6%。**
 
-读这句话三遍。**黄金做的 60/40 不仅打赢了债券做的 60/40，还打赢了 100% 纯股票**，同时 MaxDD 比 100% SPY 浅 36%（−22% vs −34%）。这是这个 repo 里"diversification 真的有用"最干净的证据——但具体生效的是**黄金**，不是债券。
+读这句话三遍。**黄金做的 60/40 不仅打赢了债券做的 60/40，还打赢了 100% 纯股票**，同时 MaxDD 比 100% SPY 浅 34%（−22% vs −34%）。这是这个 repo 里"diversification 真的有用"最干净的证据——但具体生效的是**黄金**，不是债券。
 
 ### 几个关键术语
 
@@ -71,13 +71,13 @@ bilingual: true
 
 ![Sharpe vs max drawdown (Pareto scatter)](https://haozhezhang6.github.io/assets/img/blog/diversifier-matrix/sharpe_vs_maxdd.png)
 
-![Daily equity curves, all five strategies](https://haozhezhang6.github.io/assets/img/blog/diversifier-matrix/equity_curves.png)
+![Daily equity curves — top-5 60/40 strategies vs 100% SPY](https://haozhezhang6.github.io/assets/img/blog/diversifier-matrix/equity_curves.png)
 
 注意三个排序：
 
 1. **60/40 GLD 在每个 metric 上都打赢 60/40 TLT**——Sharpe (1.04 vs 0.96)、MaxDD (−22% vs −28%)、CAGR (13.3% vs 9.9%)、Calmar (0.60 vs 0.36)。黄金跟 SPY 的相关性 (0.06) 接近 0，比 TLT 的 (−0.29) 在不同 regime 下都稳定——TLT 在通缩里负相关、在通胀里正相关，不可靠。
 1. **Sharpe 1.0+ 的 tier 是 GLD、SH、IEF**——黄金、SPY 反向、中期国债。教科书的 TLT 长债**不在第一梯队**。
-1. **100% SPY 在 Sharpe 上打赢 7 个 60/40 配置**。教科书"加债券改善 risk-adjusted return"只在 GLD、SH、IEF、AGG、USMV、SHY 上对——而真正 Sharpe 跟 MaxDD 都赢 SPY 的只有 **GLD**。
+1. **100% SPY 在 Sharpe 上打赢 6 个 60/40 配置**。教科书"加债券改善 risk-adjusted return"只在 GLD、SH、IEF、AGG、USMV、SHY 上对——而真正 Sharpe 跟 MaxDD 都赢 SPY 的只有 **GLD**。
 
 ### 最近 1-5 年实际赚了多少——关键的一张图
 
@@ -104,7 +104,7 @@ bilingual: true
 
 **2. 60/40 TLT 每个最近窗口都比 100% SPY 跑输 5-10 个百分点**。Diversification 的"成本"在最近 5 年是巨大的。起始 2022 的 60/40 TLT CAGR 3.9%——同期现金 ~5%。**"安全"配置跑输现金**。
 
-**3. 黄金过去 3 年的涨势非常猛**。起始 2024 的 60/40 GLD 在 2.4 年里涨了 75%——央行购买、地缘政治、美元忧虑同时发生。这不代表未来会一直这样。要看长期可预期回报，看 17 年那张总排名表。
+**3. 黄金过去 3 年的涨势非常猛**。起始 2024 的 60/40 GLD 在 2.4 年里涨了 87%——央行购买、地缘政治、美元忧虑同时发生。这不代表未来会一直这样。要看长期可预期回报，看 17 年那张总排名表。
 
 ### 2022 — 诊断年
 
@@ -237,7 +237,7 @@ BTC（或 MSTR 这个代理）经常被宣传为"数字黄金"——uncorrelated
 
 ## English {#en}
 
-In 2022 something happened that wasn't supposed to: the textbook 60/40 (the default retirement allocation for decades — 60 % equities + 40 % bonds; here specifically 60 % SPY = S&P 500 index ETF + 40 % TLT = iShares 20+ Year Treasury ETF) lost **23 %** on the year — two percentage points worse than holding 100 % SPY. The bond leg was supposed to be there *because* stocks crash; it lost more than the thing it was insuring.
+In 2022 something happened that wasn't supposed to: the textbook 60/40 (the default retirement allocation for decades — 60 % equities + 40 % bonds; here specifically 60 % SPY = S&P 500 index ETF + 40 % TLT = iShares 20+ Year Treasury ETF) lost **23 %** on the year — four percentage points worse than holding 100 % SPY. The bond leg was supposed to be there *because* stocks crash; it lost more than the thing it was insuring.
 
 The mechanism isn't subtle. Inflation hit 9 %, the Fed pulled rates from 0 % to 5 % in a year, stocks fell (future cash flows discounted harder) and long bonds fell (coupon discount rate jumped), and two theoretically uncorrelated assets got **made correlated by inflation**. But that was the first time in forty years. "60/40 + long bonds" has been the default retirement portfolio for decades; nobody thought it had a problem before 2022. Watching your "conservative" allocation underperform pure equity in a down year is, for someone near retirement, a hard thing to absorb.
 
@@ -249,7 +249,7 @@ I ran 13 candidates — Treasuries at various durations, broad bond indices, gol
 
 **Starting at the beginning of 2019, a 60/40 with gold (60 % SPY + 40 % GLD) has compounded at 18.6 % a year. The same starting point with long bonds (60/40 TLT) returned 10.1 %. Plain 100 % SPY returned 17.6 %.**
 
-Read that again. **The gold-based 60/40 beat the bond-based 60/40 AND beat 100 % equity-only**, while taking a drawdown 36 % shallower than 100 % SPY (−22 % vs −34 %). This is the cleanest "diversification actually works" result in this repo — but specifically for *gold*, not bonds.
+Read that again. **The gold-based 60/40 beat the bond-based 60/40 AND beat 100 % equity-only**, while taking a drawdown 34 % shallower than 100 % SPY (−22 % vs −34 %). This is the cleanest "diversification actually works" result in this repo — but specifically for *gold*, not bonds.
 
 ### A few terms
 
@@ -296,13 +296,13 @@ For each candidate, 60 % SPY + 40 % defender, rebalanced quarterly to target wei
 
 ![Sharpe vs max drawdown (Pareto scatter)](https://haozhezhang6.github.io/assets/img/blog/diversifier-matrix/sharpe_vs_maxdd.png)
 
-![Daily equity curves, all five strategies](https://haozhezhang6.github.io/assets/img/blog/diversifier-matrix/equity_curves.png)
+![Daily equity curves — top-5 60/40 strategies vs 100% SPY](https://haozhezhang6.github.io/assets/img/blog/diversifier-matrix/equity_curves.png)
 
 Three orderings to notice:
 
 1. **60/40 GLD beats 60/40 TLT on every metric** — Sharpe (1.04 vs 0.96), MaxDD (−22 % vs −28 %), CAGR (13.3 % vs 9.9 %), Calmar (0.60 vs 0.36). Gold's correlation with SPY (0.06) is closer to zero than TLT's (−0.29), and more importantly, it stays stable across regimes — TLT goes negative in deflation, positive in inflation, so it's not actually a reliable hedge.
 1. **The Sharpe 1.0+ tier is GLD, SH, IEF** — gold, inverse SPY, intermediate bonds. The textbook TLT long bond is **in the second tier**.
-1. **100 % SPY beats 7 of the 13 60/40 portfolios on Sharpe**. The textbook claim "add bonds for risk-adjusted return" only works at GLD, SH, IEF, AGG, USMV, SHY — and the only one that beats SPY on BOTH Sharpe AND MaxDD is **GLD**.
+1. **100 % SPY beats 6 of the 13 60/40 portfolios on Sharpe**. The textbook claim "add bonds for risk-adjusted return" only works at GLD, SH, IEF, AGG, USMV, SHY — and the only one that beats SPY on BOTH Sharpe AND MaxDD is **GLD**.
 
 ### Recent 1-5 year reality — the chart that matters
 
@@ -329,7 +329,7 @@ Three things to internalize:
 
 **2. 60/40 TLT lagged 100 % SPY by 5-10 percentage points in every recent window.** The "diversification cost" has been enormous in the last 5 years. The 60/40 TLT starting 2022 earned 3.9 % CAGR — over a stretch when *cash* paid about 5 %. The "safe" allocation underperformed cash.
 
-**3. Gold has been on a tear the last 3 years.** The 60/40 GLD starting 2024 returned 75 % over 2.4 years. Central-bank buying, geopolitical tension, US dollar worries all converged. Don't extrapolate — for long-run expectations, look at the 17-year rolling table.
+**3. Gold has been on a tear the last 3 years.** The 60/40 GLD starting 2024 returned 87 % over 2.4 years. Central-bank buying, geopolitical tension, US dollar worries all converged. Don't extrapolate — for long-run expectations, look at the 17-year ranking table.
 
 ### 2022 — the diagnostic year
 

@@ -66,7 +66,7 @@ Backtest 把每种组合都跑了一遍：strike 位置（1 / 3 / 5 / 7 / 10% OT
 
 ![33-year drawdown curves overlaid](https://haozhezhang6.github.io/assets/img/blog/covered-call-ablation/drawdown_comparison.png)
 
-把整个 33 年的 drawdown 曲线叠在一起看更直观——每一次 SPY 探底，CC 那条线都浅得多：
+把整个 33 年的 drawdown 曲线叠在一起看更直观——每一次 SPY 探底，CC 那条线都浅得多。
 
 这个 robustness 是策略真正的产品价值。**目标是退休那天账户数字最大**——别选这个，直接拿 SPY。**目标是下次大跌时少难受一点**——covered call 帮得上忙。两件事都对，但是两个不同的诉求。
 
@@ -224,7 +224,7 @@ But look at the drawdown column. The covered call lost about half as much when t
 
 ![33-year drawdown curves overlaid](https://haozhezhang6.github.io/assets/img/blog/covered-call-ablation/drawdown_comparison.png)
 
-Or overlay the whole 33-year drawdown curve — every time SPY drops, the CC line is meaningfully shallower:
+Or overlay the whole 33-year drawdown curve — every time SPY drops, the CC line is meaningfully shallower.
 
 That robustness is the actual product. If you're trying to maximize the number on your statement at retirement, you should know going in: this is not the right strategy. Just hold SPY. If you're going to look at your account during the next sell-off and you'd like to feel a *bit* less awful, covered call helps. Both can be true.
 
@@ -304,13 +304,13 @@ Three mainstream long-call setups, briefly:
 - **LEAPS (1-2 year long calls)** — the standard retail synthetic-leverage tool. Buy a 2-year SPY $500 call for $50/share, you control $35 k of SPY notional at about 7× effective leverage. **Theta decay is much milder** — a LEAPS loses 5-15 % of premium per year, far less than short-dated. Versus leveraged ETFs (TQQQ, UPRO): LEAPS are path-independent (a mid-period crash and recovery still nets you upside), while leveraged ETFs reset daily (the same crash-and-recovery costs you vol drag). For 1-2 year horizons, LEAPS typically beat leveraged ETFs.
 - **Call spreads (buy a lower-strike call, sell a higher-strike call)** — defines maximum profit and loss. Cheaper than a naked long call, but caps the upside. Right tool when you have a view like "I think SPY rallies to $XXX but not past $YYY."
 
-**Does VIX timing work for *buying* calls? Theoretically yes: low VIX = cheap calls = good to buy; high VIX = expensive calls = good to sell. Two practical traps: (1) low VIX usually means the market has already rallied, so chasing more upside has diminishing returns; (2) high VIX usually means SPY is falling, so buying calls then is buying a V-shaped recovery bet — historically a low-success setup. We didn't run a specific long-call-timing backtest** — that's a candidate for a future experiment. But the industry consensus is that long-call P&L is structured "many small losses, occasional big wins," exactly the inverse of the seller's "many small wins, occasional big losses."
+**Does VIX timing work for buying calls?** Theoretically yes: low VIX = cheap calls = good to buy; high VIX = expensive calls = good to sell. Two practical traps: (1) low VIX usually means the market has already rallied, so chasing more upside has diminishing returns; (2) high VIX usually means SPY is falling, so buying calls then is buying a V-shaped recovery bet — historically a low-success setup. **We didn't run a specific long-call-timing backtest** — that's a candidate for a future experiment. But the industry consensus is that long-call P&L is structured "many small losses, occasional big wins," exactly the inverse of the seller's "many small wins, occasional big losses."
 
 The blunt summary: **99 % of your investing dollars should not be in long calls.** If you're long-term bullish SPY, just hold SPY. If you want leverage, LEAPS are more efficient than rolling short-dated calls. If you want to express a specific event view (earnings, Fed), use a call spread to cap downside. **Pure short-dated long calls are a way to donate money to covered-call writers** — which is, conveniently, exactly the role this report has been suggesting you should play instead.
 
 ### What I'd actually tell my friend
 
-If David is reading this — yes, I think you should keep doing it, but I'd change one thing. Move it to an IRA. The strategy is a Sharpe trade, not a return trade. You're paying ordinary income tax on a return that pre-tax barely beats buy-and-hold. In a tax-advantaged account that arithmetic flips. Your $200k taxable position would be better off in plain SPY. Your $80k IRA running the same monthly 3 % covered call is doing exactly what the data says it should — earning roughly the index, with half the bad days.
+If he's reading this — yes, I think you should keep doing it, but I'd change one thing. Move it to an IRA. The strategy is a Sharpe trade, not a return trade. You're paying ordinary income tax on a return that pre-tax barely beats buy-and-hold. In a tax-advantaged account that arithmetic flips. Your $200k taxable position would be better off in plain SPY. Your $80k IRA running the same monthly 3 % covered call is doing exactly what the data says it should — earning roughly the index, with half the bad days.
 
 Also, while we're at it: don't try to time VIX. Don't widen the strikes. The 3 % monthly is the sweet spot for a reason — wider gives up too much premium, narrower binds too often. You're already running the right configuration. Just put it in the right wrapper.
 
