@@ -10,9 +10,9 @@ period: 2021 — 2022
 
 ---
 
-Monitoring the human bio-sigials including temperature and electrophysiological with high accuracy provides a fast, facile, yet powerful route about the human body in a wide range of health information standards. One of my research interests is on designing and engineering smart devices for biomedical engineering and healthcare monitoring.
+Monitoring the human bio-signals including temperature and electrophysiological with high accuracy provides a fast, facile, yet powerful route about the human body in a wide range of health information standards. One of my research interests is on designing and engineering smart devices for biomedical engineering and healthcare monitoring.
 
-The smart contact lense we designed is for continuous remote assessment of ocular health and chronic diseases. These devices are built upon various commercial brands of soft contact lenses that offer ergonomic designs to safely fit a variety of corneal shapes and sizes in human eyes. The pragmatic applicaiton of these devices is boundless ranging from (1) at-home management of chronic ocular diseases such as glaucoma to (2) painless ocular drug delivery and to (3) contact lens research and development. 
+The smart contact lens we designed is for continuous remote assessment of ocular health and chronic diseases. These devices are built upon various commercial brands of soft contact lenses that offer ergonomic designs to safely fit a variety of corneal shapes and sizes in human eyes. The pragmatic application of these devices is boundless ranging from (1) at-home management of chronic ocular diseases such as glaucoma to (2) painless ocular drug delivery and to (3) contact lens research and development. 
 
 {% include figure.html path="assets/img/interests/contact_lens.png" title="Lens" class="img-fluid rounded z-depth-1" zoomable=true %}
 <div class="caption">
@@ -27,7 +27,7 @@ Kyunghun Kim*, Ho Joong Kim*, Haozhe Zhang*^, Woohyun Park, Dawn Meyer, Min Ku K
 
 {% include figure.html path="assets/img/interests/thermal sensor.png" title="sensors" class="img-fluid rounded z-depth-1" zoomable=true %}
 <div class="caption">
-     Ultrathin Au-doped SiNM temperature sensors attached conformally on various positions of bod for real-time temperature monitoring. 
+     Ultrathin Au-doped SiNM temperature sensors attached conformally on various positions of body for real-time temperature monitoring. 
 </div>
 
 For more information, please refer to the publication below:

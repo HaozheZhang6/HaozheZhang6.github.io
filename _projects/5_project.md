@@ -17,7 +17,7 @@ Here is a mechanical Janus structure enabled by soft and hard materials integrat
 
 {% include figure.html path="assets/img/interests/Janus.png" title="Janus" class="img-fluid rounded z-depth-1" zoomable=true %}
 <div class="caption">
-    Mechanical Janus structure (left) and the programmable assembled superstructures in respose to compression stimuli (right) 
+    Mechanical Janus structure (left) and the programmable assembled superstructures in response to compression stimuli (right) 
 </div>
 
 For more information, please refer to:
@@ -29,7 +29,7 @@ In addition, we also investigated the mechanism of stretchable metasurfaces. Com
 
 {% include figure.html path="assets/img/interests/metasurface.png" title="meta" class="img-fluid rounded z-depth-1" zoomable=true %}
 <div class="caption">
-    Stretchable metasurface with a periodical arrangement of optical scatter antennas, and the effect of rotation to wavelight 
+    Stretchable metasurface with a periodical arrangement of optical scatter antennas, and the effect of rotation on wavelength 
 </div>
 
 For more information, please refer to:

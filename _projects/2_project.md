@@ -12,4 +12,4 @@ A voice agent for daily stock-market conversation — earnings, macro, ticker ne
 
 Stack: FastAPI + WebRTC, `webrtcvad`, Whisper ASR (SenseVoice as self-hosted fallback), Edge-TTS, GLM-4.5-air, Supabase + Upstash Redis.
 
-[news_agent repo](https://github.com/HaozheZhang6/news_agent) · [Writeup](/engineering/2025/12/01/voice-agent.html)
+[laurionai.com](https://www.laurionai.com/) · [Writeup](/agents/2025/11/30/voice-agent.html)
