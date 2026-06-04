@@ -2,7 +2,7 @@
 layout: page
 title: BenchCAD
 description: Industry-standard benchmark for programmatic CAD with LLMs
-img: assets/img/projects/benchcad.webp
+img: assets/img/projects/benchcad.png
 importance: 1
 category: ai
 period: May 2026
