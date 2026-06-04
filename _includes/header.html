@@ -29,7 +29,7 @@
 
           <!-- About -->
           <li class="nav-item {% if page.title == 'about' %}active{% endif %}">
-            <a class="nav-link" href="{{ '/' | relative_url }}">about
+            <a class="nav-link" href="{{ '/' | relative_url }}">About
               {%- if page.title == "about" -%}
               <span class="sr-only">(current)</span>
               {%- endif -%}
@@ -38,7 +38,7 @@
           {% if site.blog_name %}
           <!-- Blog -->
           <li class="nav-item {% if page.url contains 'blog' %}active{% endif %}">
-            <a class="nav-link" href="{{ '/blog/' | relative_url }}">blog
+            <a class="nav-link" href="{{ '/blog/' | relative_url }}">Blog
               {%- if page.title == "blog" -%}
               <span class="sr-only">(current)</span>
               {%- endif -%}
@@ -52,7 +52,7 @@
           {%- if p.dropdown %}
           <li class="nav-item dropdown {% if page.title == p.title %}active{% endif %}">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false">{{ p.title }}
+              aria-haspopup="true" aria-expanded="false">{{ p.title | capitalize }}
               {%- if page.title == p.title -%}
               <span class="sr-only">(current)</span>
               {%- endif -%}
@@ -69,7 +69,7 @@
           </li>
           {%- else %}
           <li class="nav-item {% if page.title == p.title %}active{% endif %}">
-            <a class="nav-link" href="{{ p.url | relative_url }}">{{ p.title }}
+            <a class="nav-link" href="{{ p.url | relative_url }}">{{ p.title | capitalize }}
               {%- if page.title == p.title -%}
               <span class="sr-only">(current)</span>
               {%- endif -%}
