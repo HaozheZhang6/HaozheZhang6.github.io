@@ -25,6 +25,6 @@ My background is heavy on physics. I’ve spent years working out closed-form th
 
 Outside the day job, what pulls me from one thing to the next is curiosity and a long-running urge to build new things. I keep gravitating toward LLMs, agentic systems, RL training infrastructure, voice agents for narrow domains, and AI for hardware — all self-taught.
 
-Before Tesla, I earned my PhD in mechanical engineering from the University of Virginia and a BS from the University of Science and Technology of China.
+Before Tesla, I earned my PhD in mechanical engineering from the University of Virginia and a BS from the University of Science and Technology of China. My doctoral work centered on theoretical and computational modeling of multi-physics fields.
 
 In my spare time, I enjoy traveling and playing Leagues.
