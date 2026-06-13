@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 等待相变 / Waiting for the Phase Transition
+title: 微观连续,宏观突变 / Continuous Below, Discontinuous Above
 date: 2026-06-12
 description: 从电池老化的 knee point 聊到相变——为什么连续的微观规律,会在宏观突然跳变;湍流、智能涌现、百倍股,以及线性世界里的非线性人生。
 tags: [phase-transition, battery, emergence, turbulence]
