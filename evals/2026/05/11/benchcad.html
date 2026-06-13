@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <!-- Head -->
+  <head>    <!-- Metadata, OpenGraph and Schema.org -->
+    
+
+    <!-- Standard metadata -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Haozhe Zhang | 工业 CAD 远看是 RLVR 的好题目，做起来才发现每一层都很糙 / Industrial CAD looks like a clean RLVR target — every layer turns out rough</title>
+    <meta name="author" content="Haozhe  Zhang" />
+    <meta name="description" content="商业 VLM 在 vision-text 对齐上很差，小模型又学不到几何公式——没有合适的 benchmark，所以做了 BenchCAD" />
+    <meta name="keywords" content="jekyll, jekyll-theme, academic-website, portfolio-website" />
+
+
+    <!-- Bootstrap & MDB -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-DF7Zhf293AJxJNTmh5zhoYYIMs2oXitRfBjY+9L//AY=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdbootstrap@4.20.0/css/mdb.min.css" integrity="sha256-jpjYvU3G3N6nrrBwXJoVEYI/0zw8htfFnhT9ljN3JJw=" crossorigin="anonymous" />
+
+    <!-- Fonts & Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.1/css/academicons.min.css" integrity="sha256-i1+4qU2G2860dGGIOJscdC30s9beBXjFfzjWLjBRsBg=" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons">
+
+    <!-- Code Syntax Highlighting -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jwarby/jekyll-pygments-themes@master/github.css" media="none" id="highlight_theme_light" />
+
+    <!-- Styles -->
+    
+    <link rel="shortcut icon" href="/assets/img/android-chrome-512x512.png"/>
+    
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="canonical" href="https://haozhezhang6.github.io/evals/2026/05/11/benchcad.html">
+    
+    <!-- Dark Mode -->
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jwarby/jekyll-pygments-themes@master/native.css" media="none" id="highlight_theme_dark" />
+
+    <script src="/assets/js/theme.js"></script>
+    <script src="/assets/js/dark_mode.js"></script>
+    
+
+  </head>
+
+  <!-- Body -->
+  <body class="fixed-top-nav ">
+
+    <!-- Header --><header>
+
+  <!-- Nav Bar -->
+  <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top">
+    <div class="container">
+      <a class="navbar-brand title font-weight-lighter" href="https://HaozheZhang6.github.io/">Haozhe Zhang</a>
+      <!-- Navbar Toggle -->
+      <button class="navbar-toggler collapsed ml-auto" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar top-bar"></span>
+        <span class="icon-bar middle-bar"></span>
+        <span class="icon-bar bottom-bar"></span>
+      </button>
+
+      <div class="collapse navbar-collapse text-right" id="navbarNav">
+        <ul class="navbar-nav ml-auto flex-nowrap">
+
+          <!-- About -->
+          <li class="nav-item ">
+            <a class="nav-link" href="/">About</a>
+          </li>
+          
+          <!-- Blog -->
+          <li class="nav-item ">
+            <a class="nav-link" href="/blog/">Blog</a>
+          </li>
+          <!-- Other pages -->
+          <li class="nav-item ">
+            <a class="nav-link" href="/projects/">Projects</a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" href="/publications/">Publications</a>
+          </li>
+
+          <!-- Toogle theme mode -->
+          <div class="toggle-container">
+            <a id="light-toggle">
+              <i class="fas fa-moon"></i>
+              <i class="fas fa-sun"></i>
+            </a>
+          </div>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+
+    <!-- Content -->
+    <div class="container mt-5">
+      <!-- _layouts/post.html -->
+
+<div class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">工业 CAD 远看是 RLVR 的好题目，做起来才发现每一层都很糙 / Industrial CAD looks like a clean RLVR target — every layer turns out rough</h1>
+    <p class="post-meta">May 11, 2026<span class="post-edited">· edited May 14, 2026</span></p>
+    <p class="post-tags">
+      <a href="/blog/2026"> <i class="fas fa-calendar fa-sm"></i> 2026 </a>
+        ·  
+        <a href="/blog/tag/cad">
+          <i class="fas fa-hashtag fa-sm"></i> cad</a>  
+          <a href="/blog/tag/vlm">
+          <i class="fas fa-hashtag fa-sm"></i> vlm</a>  
+          <a href="/blog/tag/benchmark">
+          <i class="fas fa-hashtag fa-sm"></i> benchmark</a>  
+          
+        ·  
+        <a href="/blog/category/evals">
+          <i class="fas fa-tag fa-sm"></i> evals</a>  
+          
+
+    </p>
+<p class="post-lang-toggle">
+      <a href="#cn" class="lang-btn">中文</a>
+      <a href="#en" class="lang-btn">English</a>
+    </p></header>
+
+  <article class="post-content">
+    <h2 id="cn">中文</h2>
+
+<p>让模型从一段意图描述生成基本的几何结构——一个齿轮、一个支架、一个法兰——是 AI for hardware 这条方向上最基础的一件事。</p>
+
+<p>这个题听起来非常适合 RLVR（Reinforcement Learning with Verifiable Rewards，reward 来自一个能确定地判 “对/不对” 的程序而不是来自人类反馈或 reward model）：参数化建模的操作集合有限（sketch 画 2D 草图、extrude 拉伸成 3D、revolve 旋转成型、sweep 沿路径扫描、loft 在多个截面间放样、fillet 倒圆角、chamfer 倒直角——这些是 CAD 软件里最基础的 7 个操作），每个 part 都可以用代码精确表达，render、voxel IoU（把生成的几何和 ground truth 都体素化后算 3D 的 Intersection over Union）、几何检查全部能 100% 自动化 verify。比起 math reasoning 那种 reward 容易被 hack（钻规则空子拿分但答案其实不对）的领域，CAD 的 reward 看上去是干干净净的”这块铁是不是符合规格”。</p>
+
+<p>学术圈这两年其实做了不少 CAD benchmark——<a href="https://arxiv.org/abs/2010.02392" target="_blank" rel="noopener noreferrer">Fusion 360 Gallery</a>、<a href="https://arxiv.org/abs/2105.09492" target="_blank" rel="noopener noreferrer">DeepCAD</a>、<a href="https://arxiv.org/abs/2207.04632" target="_blank" rel="noopener noreferrer">SkexGen</a>、<a href="https://arxiv.org/abs/2412.14042" target="_blank" rel="noopener noreferrer">CAD-Recode</a>——每一个都做了一件正确的事，但拼起来还是不够覆盖”frontier VLM 在工业建模上能走多远”这件事。所以做了 BenchCAD。</p>
+
+<p>做下来真正的难点不是 generation，是 verifiability。一个 part 能 render、code 能 exec、silhouette 看着像，这些都没办法证明它工程上能用。整套 metric 设计——voxel IoU、essential_pass、feature_f1、code edit 任务——是冲着堵掉一条一条具体的 shortcut 去的，让得分只跟”零件真的对”挂钩，不跟”零件看起来像”挂钩。</p>
+
+<h3 id="frontier-vlm-在工业图上认不出尺寸">Frontier VLM 在工业图上认不出尺寸</h3>
+
+<p>GPT、Claude、Gemini 在通用 VQA 上很强，放到工业 CAD 这个语境里 vision-text 对齐糟糕到出乎意料。能分得清”这是个圆柱”，但分不清”这是 5 mm 还是 50 mm”。给一个齿轮，能数出有齿，但齿轮模数、压力角、节圆直径这些信息——哪怕在图里以数字标注——也接不上几何意义。比例、尺寸、相对位置在工业里就是规格本身，被模型当成”附在图旁边的文字”。</p>
+
+<p>让 VLM 看图估”两个孔的中心距大概是法兰外径的 0.6 倍”，要么完全无视尺寸文字，要么记住数字但不知道这数字在三维空间里占多少 ratio。这跟它在 chartQA 或 OCR 上的表现是两件事。后果是 silhouette 看着像、剖面错——这就是为什么 metric 不能只看 silhouette，后面 essential_pass 和 feature_f1 都是冲这层来的。</p>
+
+<h3 id="自己训小模型撞在engineer-是要算的那一层">自己训小模型撞在”engineer 是要算的”那一层</h3>
+
+<p>如果绕过 frontier model 自己从头训一个，会撞到更深的问题：CAD 里相当多的几何关系是算出来的，不是看出来的。一个 spur gear 的 outside diameter 是 <code class="language-plaintext highlighter-rouge">(Z+2)·m</code>；一个公制螺纹的螺距按 ISO 标准查表给出；一个圆锥滚子轴承的滚子半角是按预定接触角推出来的。这种”engineer 通过公式得到答案”的关系，小模型基本学不到——它只能 see-and-imitate，看到圆就画圆，看到齿就画齿，没有公式这个抽象层。给它 10000 个齿轮训练样本，它能学会”齿轮长什么样”，学不会”齿数和直径的代数关系”。</p>
+
+<p>Frontier model 这条 abstraction 它是有的（推导 <code class="language-plaintext highlighter-rouge">OD = (Z+2)·m</code> 不难），只是 vision-text 对齐又不足以执行；小模型 vision 没问题，但没有公式抽象层。两端都有 gap，模型即使能 render 出”像那么回事”的几何，关键尺寸都是猜的——所以光看 IoU 也不够，必须有一项直接卡死”该有的 op 用没用”。</p>
+
+<h3 id="benchcad-实际在测什么">BenchCAD 实际在测什么</h3>
+
+<p>要量化”现在的模型到底差在哪、差多少”，市面上没有合适的工具。已有的 CAD 评测要么聚焦 sketch、要么聚焦 mesh，没有 cover “从图 / 描述生成 buildable 的工业零件代码”这件事。BenchCAD 是从日常跑 VLM 踩到的 failure mode 整理出来的。</p>
+
+<p>数据集是 17000+ 条 execution-verified 的 CadQuery 程序，覆盖 106 个工业零件家族——齿轮、弹簧、钻头、各种支架、叶轮、风罩、螺纹件、轴承零件——每个程序都跑得通、都 render 过。四个 task 分别测不同方向：VQA 在渲染图上问几何属性和尺寸关系；code QA 让模型从代码描述零件；image → code 看零件写程序；code edit 给一段已有代码加一个改动要求，期望模型只改三行就满足新约束。最后这一项最难，也是 production 真正用得到的形态。</p>
+
+<p>整套 benchmark 要回答两件事：目前最强的模型在普通工程师每天做的任务上能做到什么水平、能不能用有限数据训练让模型获得这种能力。结论是前者比预期差很多，后者基本是否定的，没有泛化。</p>
+
+<h3 id="评分怎么定">评分怎么定</h3>
+
+<p>headline number 是 <code class="language-plaintext highlighter-rouge">score = 0.60·iou + 0.20·essential_pass + 0.10·feature_f1 + 0.05·cd + 0.05·hd</code>，完整规范在 <code class="language-plaintext highlighter-rouge">bench/SCORING.md</code>。</p>
+
+<p><code class="language-plaintext highlighter-rouge">iou</code> 是 voxel IoU at 64³，fixed orientation 下算。不用 rotation-invariant 是因为摆放方向本身就是任务的一部分，让模型试 24 个 rotation 蒙到分等于把这子任务白送；<code class="language-plaintext highlighter-rouge">iou_rot24</code> 作为 diagnostic 列单独 report。<code class="language-plaintext highlighter-rouge">essential_pass</code> 是 per-family 手写的 op 检查——<code class="language-plaintext highlighter-rouge">sweep+helix</code> 对 <code class="language-plaintext highlighter-rouge">torsion_spring</code> 是 essential，<code class="language-plaintext highlighter-rouge">circle+extrude</code> 凑出来不算——专门治”圆柱伪装成弹簧”的 hack。某次某个 frontier 模型给我们生成的 torsion spring，silhouette 看着对、render 过了、exec 过了，剖开一看 helix 完全被它用平拉的圆柱糊过去，一根铁柱子套了一层弹簧外皮。<code class="language-plaintext highlighter-rouge">feature_f1</code> 是 <code class="language-plaintext highlighter-rouge">{chamfer, fillet, hole}</code> 三个 indicator 的 F1；<code class="language-plaintext highlighter-rouge">cd</code> 和 <code class="language-plaintext highlighter-rouge">hd</code>（Chamfer 和 Hausdorff）权重小是因为跟 IoU 相关性太高，主要用来在 IoU 0.9+ 区间拉开档次。13 个家族（chair / table 这种几何上没有 canonical 关键 op 的）在 essential_pass 上标 N/A，去掉 0.20 这项之后剩下 0.80 ×1.25 重归一化，使 N/A 样本既不被罚也不被加分。</p>
+
+<p>每一项权重都是对着真出现过的 hack 调出来的：IoU 0.6 是最直接的几何信号、必须占大头；essential_pass 0.2 治”silhouette 对 / topology 错”那一类；feature_f1 0.1 是第二层 anti-hack；cd / hd 加起来 0.1 是 tail-breaker，在 IoU ≥ 0.9 段才有意义。整套故意偏保守，anti-hack 三项加起来 0.30 让 silhouette 极好但缺关键 op 的样本压到 0.7 以下。没把 anti-hack 拉到 0.4 是因为现阶段模型连 silhouette 都没做对，过早加重那一项排名信号会被噪音覆盖；将来 frontier 稳定通过 essential_pass 那天再重新加权或加 metric。</p>
+
+<h3 id="模型擅长猜外壳工程在内部">模型擅长猜外壳，工程在内部</h3>
+
+<p>跑下来三件值得说的事。</p>
+
+<p>第一件是模型擅长”外壳”。silhouette 几乎所有模型都能做对、远看像那么回事，但视角换到剖面或者俯视，结构就崩——螺纹不见、fillet 全是 0、draft angle 全没了。模型在 visual 上摸得到的是 outline 不是 geometry，工程上能用的细节几乎全在内部。这跟前面”VLM 不懂尺寸”是一回事，呈现成两种 failure mode 而已。</p>
+
+<p>第二件是 production CAD 主要是 edit 不是 from scratch。没几个工程师真坐下来从空白文件写一个 part，都是改三行已有程序。我们的 code edit 是四个 task 里最难的一个，比 image → code 难得多——也最贴近 LLM 在 CAD 这块的实际工作形态。</p>
+
+<p>第三件是家族之间不迁移。在 gears 上 fine-tune 对 gears 有用，对 springs 帮助小到反直觉。直觉上 gears 和 splines 应该共享一些 helix / pitch 的几何先验，模型并不这么聚类——它学的是 surface-level 模式，不是工程意义上”相似零件”的内在结构。这是”小模型学不到公式”的另一面：没有”机械零件”的抽象，只有”长这样的物体”的抽象。</p>
+
+<h3 id="没解决的部分">没解决的部分</h3>
+
+<p>最大的一个还是 IoU 0.6 这条权重。voxel IoU 测的是”对了多少 voxel”，不是”对了多少 engineering content”——一颗 M8 螺栓的螺纹只占总体积 5%，但少了螺纹这颗螺栓就不能用。目前用 essential_pass 在外面兜底，但 part-aware 加权 IoU 才是更优雅的解法，没想清楚怎么做。</p>
+
+<p>essential_pass 本身也难规模化。106 个家族手写得动，开到几千个家族 per-family 那张 essential-op 表就写不动了。CADLoop 那个后续是从数据这头切——一个 agentic pipeline 把 IoU ~0.8 那条边界上的 near-miss 程序自动修对，给后续模型喂更干净的 SFT 对——但不替掉 essential_pass。</p>
+
+<p>“看起来对”跟”工程上对”的距离也不是常数。块板这种简单零件 IoU 0.9 基本就 buildable，齿轮 / 螺纹件 / 轴承这种 IoU 0.95 还可能完全不对。final score 跟实际工程价值的关系是非线性的，权重里没有完全 reflect。N/A handling 类似——chair / table 这种家族 essential_pass N/A 然后 ×1.25 重归一化名义上 fair，实际上把它们变成”只考 IoU”的赛道，对 leaderboard 总分的 noise 贡献更大。</p>
+
+<p>最后是 code edit 这一档：production 主形态是 edit，目前 metric 最弱——只用 final geometry IoU 评。模型如果重新生成整个文件、IoU 高也算赢。下一版要加 diff-aware metric，让”改三行”和”重写”区分开。</p>
+
+<p>详细 leaderboard 和提交入口在 <a href="https://benchcad.github.io/BenchCAD_webpage/" target="_blank" rel="noopener noreferrer">project page</a>，paper：<a href="https://arxiv.org/abs/2605.10865" target="_blank" rel="noopener noreferrer">arXiv:2605.10865</a>。CADLoop（CVPR-W 2026）是基于这个 benchmark 跑的 agentic data pipeline，把 ~91% Re-Act pass 率的样本修到 IoU ≥ 0.99 拿来当 SFT 训练对——dataset-side 的工作，不动 BenchCAD 这套 metric。</p>
+
+<hr>
+
+<h2 id="en">English</h2>
+
+<p>The most basic thing AI-for-hardware needs is a model that takes an intent description and produces the underlying geometric structure — a gear, a bracket, a flange.</p>
+
+<p>Industrial CAD sounds like a clean RLVR (Reinforcement Learning with Verifiable Rewards — the reward comes from a program that deterministically checks “right / wrong” rather than from human feedback or a learned reward model) target. The parametric op set is finite (sketch a 2D profile, extrude into 3D, revolve around an axis, sweep along a path, loft between cross-sections, fillet to round an edge, chamfer to bevel one — the seven basic operations in any CAD package), every part can be expressed exactly as code, and render, voxel IoU (Intersection over Union after voxelizing both the generated and ground-truth geometry), and geometric checks can be verified 100% automatically. Compared to math reasoning, where rewards are hackable (the model finds a way to score high without actually being right), the CAD reward looks like the cleanest “is this piece of metal to spec.”</p>
+
+<p>The literature has real CAD benchmarks — <a href="https://arxiv.org/abs/2010.02392" target="_blank" rel="noopener noreferrer">Fusion 360 Gallery</a>, <a href="https://arxiv.org/abs/2105.09492" target="_blank" rel="noopener noreferrer">DeepCAD</a>, <a href="https://arxiv.org/abs/2207.04632" target="_blank" rel="noopener noreferrer">SkexGen</a>, <a href="https://arxiv.org/abs/2412.14042" target="_blank" rel="noopener noreferrer">CAD-Recode</a> — and each does one thing well. None of them, individually or together, asks “how far do frontier VLMs go on industrial part generation,” which is what I wanted to measure. That’s why BenchCAD exists.</p>
+
+<p>The harder problem turned out to be verifiability, not generation. A part that renders cleanly, executes without errors, and looks right in silhouette can still be engineering-unusable. The whole metric set — voxel IoU, essential_pass, feature_f1, the code-edit task — exists to close off one specific shortcut at a time, so the score stays anchored to “the part is actually correct” rather than “the part looks correct.”</p>
+
+<h3 id="frontier-vlms-cant-read-dimensions-on-engineering-drawings">Frontier VLMs can’t read dimensions on engineering drawings</h3>
+
+<p>GPT, Claude, Gemini are strong at general VQA, but in industrial CAD their vision–text alignment is much worse than expected. The model can tell “this is a cylinder,” it can’t tell “this is 5 mm or 50 mm.” On a gear it can count teeth, but module, pressure angle, and pitch circle diameter — even when those numbers are right there on the drawing — don’t connect to any geometric meaning. Proportions and dimensions, which are the spec itself in industrial work, get treated as text floating next to the picture.</p>
+
+<p>Asked to look at a drawing and estimate “the center-to-center distance between these two holes is about 0.6× the flange OD,” the model either ignores the dimensional text outright or memorizes the numbers without knowing what ratio they occupy in 3D space. This isn’t the same failure mode as chartQA or OCR. The consequence is parts that look right in silhouette and wrong in cross-section, which is why the metric can’t be silhouette-only.</p>
+
+<h3 id="small-models-hit-the-wall-where-engineering-is-computed-not-seen">Small models hit the wall where engineering is computed, not seen</h3>
+
+<p>If you bypass frontier models and train your own, a deeper problem shows up: a significant fraction of CAD geometric relations are computed, not seen. A spur gear’s outside diameter is <code class="language-plaintext highlighter-rouge">(Z+2)·m</code>. Metric thread pitch is read from an ISO table. A tapered roller bearing’s roller half-angle is derived from the design contact angle. This “engineer computes the answer from a formula” relation is inaccessible to a small model — it can only see-and-imitate. Sees a circle, draws a circle. Sees teeth, draws teeth. No formula layer. Ten thousand gear training examples teach a small model what a gear looks like, not the algebraic relation between tooth count and diameter.</p>
+
+<p>Frontier models do have the abstraction (deriving <code class="language-plaintext highlighter-rouge">OD = (Z+2)·m</code> is trivial for them), but their vision–text alignment is too weak to execute on it. Small models have the vision but no formula layer. Both ends are gapped, which means even a model that renders something plausible has guessed every dimension — so IoU alone isn’t enough; the metric needs a term that locks down whether the right operations were actually used.</p>
+
+<h3 id="what-benchcad-measures">What BenchCAD measures</h3>
+
+<p>The dataset is 17,000+ execution-verified CadQuery programs across 106 industrial families — gears, springs, drills, brackets, impellers, fan shrouds, threaded fasteners, bearing components. Every program runs. Every part has been rendered.</p>
+
+<p>Four tasks probe different capabilities. VQA asks questions about a rendered part — geometric properties, dimensional relations. Code QA asks the model to describe the part from its program. Image → code asks the model to produce the program from a render. Code edit hands the model an existing program with a change request, with the expectation that only three lines should be modified. That last task is the hardest and the one closest to how CAD work actually happens in production.</p>
+
+<p>The benchmark is built to answer two questions: what’s the ceiling of current frontier models on tasks an engineer routinely does, and can limited fine-tuning give a model the missing capability. The answer to the first is “much worse than expected.” The answer to the second is “essentially no — the generalization isn’t there.”</p>
+
+<h3 id="how-the-score-is-structured">How the score is structured</h3>
+
+<p>The headline number is <code class="language-plaintext highlighter-rouge">score = 0.60·iou + 0.20·essential_pass + 0.10·feature_f1 + 0.05·cd + 0.05·hd</code>, fully specified in <code class="language-plaintext highlighter-rouge">bench/SCORING.md</code>.</p>
+
+<p><code class="language-plaintext highlighter-rouge">iou</code> is voxel IoU at 64³ in fixed orientation. We avoid rotation-invariant IoU in the headline because getting orientation right is part of the task, and crediting 24 trial rotations would credit luck; <code class="language-plaintext highlighter-rouge">iou_rot24</code> is reported separately as a diagnostic. <code class="language-plaintext highlighter-rouge">essential_pass</code> is a hand-written per-family op check — <code class="language-plaintext highlighter-rouge">sweep+helix</code> is required for <code class="language-plaintext highlighter-rouge">torsion_spring</code>, substitutes don’t count — and exists specifically to kill the cylinder-pretending-to-be-a-spring hack. One frontier model we ran produced a torsion spring whose silhouette looked correct, code executed, and render passed, but the helix was entirely replaced by a circle + extrude pillar under a spring-shaped outer skin. A solid rod in a spring costume. <code class="language-plaintext highlighter-rouge">feature_f1</code> is the F1 over <code class="language-plaintext highlighter-rouge">{chamfer, fillet, hole}</code> indicators. <code class="language-plaintext highlighter-rouge">cd</code> and <code class="language-plaintext highlighter-rouge">hd</code> (Chamfer and Hausdorff) carry small weights because they correlate heavily with IoU; they exist mainly to break ties above IoU 0.9. Thirteen families with no canonical defining op (chair, table) are marked N/A on <code class="language-plaintext highlighter-rouge">essential_pass</code>; we drop that 0.20 term and rescale the remaining 0.80 by ×1.25 so N/A samples are neither penalized nor rewarded.</p>
+
+<p>Every weight was set against an actually-observed hack. IoU at 0.60 because it’s the most direct geometric signal and has to carry the headline; essential_pass at 0.20 to crush the silhouette-correct / topology-wrong class; feature_f1 at 0.10 as the second layer of anti-hack on local-but-mandatory features; cd + hd at 0.05 each as tail-breakers in the IoU ≥ 0.9 range. Anti-hack terms together own 0.30, which is deliberately conservative — a silhouette-perfect part missing key ops still gets pushed below 0.7. We didn’t push anti-hack to 0.4 because at this stage models can’t even get silhouette right, and overweighting that term would let noise swallow the ranking signal. The day frontier models start passing essential_pass reliably the weights will need re-tuning.</p>
+
+<h3 id="models-are-good-at-the-outer-shell-engineering-lives-inside">Models are good at the outer shell; engineering lives inside</h3>
+
+<p>Three observations are worth pulling out of the run.</p>
+
+<p>Almost every model gets the silhouette right. From a distance the parts look like the parts. Cross-section or top view tells a different story — threads vanish, fillets read as 0, draft angles round to nothing. Models see outline, not geometry, and most of what makes a part buildable lives inside.</p>
+
+<p>The day-to-day of CAD work is editing, not authoring. No engineer sits down and writes a part from scratch. Our code-edit task is the hardest of the four, harder than image → code by a clear margin, and it’s the task closest to how CAD is actually used. The biggest gap between current LLM capability and what production needs lives in that single task.</p>
+
+<p>Families don’t transfer the way intuition suggests. Fine-tuning on gears helps with gears and surprisingly little with springs. Gears and splines visibly share helix and pitch geometry, but the model doesn’t cluster them that way — it learns surface-level patterns, not the engineering taxonomy. That’s the other face of “small models can’t learn formulas”: there’s no abstraction “mechanical part” inside the model, only “thing that looks like this.”</p>
+
+<h3 id="what-still-isnt-right">What still isn’t right</h3>
+
+<p>The biggest open issue is the 0.6 IoU weight. Voxel IoU measures “how many voxels match,” not “how much engineering content matches.” An M8 bolt’s threads occupy maybe 5% of its volume, but without them the bolt is unusable. <code class="language-plaintext highlighter-rouge">essential_pass</code> is the backstop today; a proper part-aware weighted IoU would be more elegant and I don’t have a clean version of it.</p>
+
+<p><code class="language-plaintext highlighter-rouge">essential_pass</code> itself doesn’t scale. Hand-writing it for 106 families is doable; opening that to thousands of families and the per-family table becomes unauthorable. The CADLoop follow-up attacks the data side instead — an agentic pipeline that auto-repairs near-miss programs around the IoU ~0.8 boundary so the right operations get exercised — feeding cleaner SFT pairs to whatever model trains against it, rather than replacing essential_pass.</p>
+
+<p>The distance from “looks correct” to “engineering-correct” isn’t constant either. For simple parts (blocks, plates) the gap is small and IoU 0.9 means buildable. For complex parts (gears, threaded fasteners, bearings) the gap is large and IoU 0.95 can still be wrong. The final score’s relationship to engineering value is nonlinear and the weights don’t fully reflect that. N/A handling has the same flavor — marking chair and table N/A and rescaling by ×1.25 reads as fair but effectively turns those families into an IoU-only sub-leaderboard whose noise contributes disproportionately to the headline.</p>
+
+<p>Code-edit is the last hole. It’s the production form of CAD work, but currently only judged on final-geometry IoU, so a model that regenerates the whole file and lands a high IoU still wins. A diff-aware metric is the next thing to add.</p>
+
+<p>Leaderboard and submission: <a href="https://benchcad.github.io/BenchCAD_webpage/" target="_blank" rel="noopener noreferrer">project page</a>. Paper: <a href="https://arxiv.org/abs/2605.10865" target="_blank" rel="noopener noreferrer">arXiv:2605.10865</a>. CADLoop (CVPR-W 2026) is the follow-up — an agentic data pipeline built on top of BenchCAD that pushes ~91% Re-Act-pass programs up to IoU ≥ 0.99 SFT pairs. It’s dataset-side; it doesn’t change the metric.</p>
+
+  </article>
+
+</div>
+
+    </div>
+
+    <!-- Footer -->    
+    <footer class="fixed-bottom">
+      <div class="container mt-0">
+        © Copyright 2026 Haozhe  Zhang. Powered by <a href="https://jekyllrb.com/" target="_blank" rel="noopener noreferrer">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio" target="_blank" rel="noopener noreferrer">al-folio</a> theme. Hosted by <a href="https://pages.github.com/" target="_blank" rel="noopener noreferrer">GitHub Pages</a>.
+
+      </div>
+    </footer>
+
+    <!-- JavaScripts -->
+    <!-- jQuery -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+    <!-- Bootsrap & MDB scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.2/dist/umd/popper.min.js" integrity="sha256-l/1pMF/+J4TThfgARS6KwWrk/egwuVvhRzfLAMQ6Ds4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" integrity="sha256-SyTu6CwrfOhaznYZPoolVw2rxoY7lKYKQvqbtqN93HI=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mdbootstrap@4.20.0/js/mdb.min.js" integrity="sha256-NdbiivsvWt7VYCt6hYNT3h/th9vSTL4EDWeGs5SN3DA=" crossorigin="anonymous"></script>
+
+    
+    <!-- Load Common JS -->
+  <script src="/assets/js/common.js"></script>
+
+    <!-- MathJax -->
+  <script type="text/javascript">
+    window.MathJax = {
+      tex: {
+        tags: 'ams'
+      }
+    };
+  </script>
+  <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js"></script>
+
+    
+  </body>
+</html>
+

@@ -1,71 +1,645 @@
----
-layout: default
-title: blog
-pagination:
-  enabled: true
-  collection: posts
-  permalink: /page/:num/
-  per_page: 10
-  sort_field: date
-  sort_reverse: true
-  trail:
-    before: 1 # The number of links before the current page
-    after: 3  # The number of links after the current page
----
+<!DOCTYPE html>
+<html lang="en">
 
-<div class="post">
+  <!-- Head -->
+  <head>    <!-- Metadata, OpenGraph and Schema.org -->
+    
+
+    <!-- Standard metadata -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Haozhe Zhang | blog</title>
+    <meta name="author" content="Haozhe  Zhang" />
+    <meta name="description" content="Ph.D. @ UVA
+" />
+    <meta name="keywords" content="jekyll, jekyll-theme, academic-website, portfolio-website" />
+
+
+    <!-- Bootstrap & MDB -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-DF7Zhf293AJxJNTmh5zhoYYIMs2oXitRfBjY+9L//AY=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdbootstrap@4.20.0/css/mdb.min.css" integrity="sha256-jpjYvU3G3N6nrrBwXJoVEYI/0zw8htfFnhT9ljN3JJw=" crossorigin="anonymous" />
+
+    <!-- Fonts & Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.1/css/academicons.min.css" integrity="sha256-i1+4qU2G2860dGGIOJscdC30s9beBXjFfzjWLjBRsBg=" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons">
+
+    <!-- Code Syntax Highlighting -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jwarby/jekyll-pygments-themes@master/github.css" media="none" id="highlight_theme_light" />
+
+    <!-- Styles -->
+    
+    <link rel="shortcut icon" href="/assets/img/android-chrome-512x512.png"/>
+    
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="canonical" href="https://haozhezhang6.github.io/blog/">
+    
+    <!-- Dark Mode -->
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jwarby/jekyll-pygments-themes@master/native.css" media="none" id="highlight_theme_dark" />
+
+    <script src="/assets/js/theme.js"></script>
+    <script src="/assets/js/dark_mode.js"></script>
+    
+
+  </head>
+
+  <!-- Body -->
+  <body class="fixed-top-nav ">
+
+    <!-- Header --><header>
+
+  <!-- Nav Bar -->
+  <nav id="navbar"
+    class="navbar navbar-light navbar-expand-sm fixed-top">
+    <div class="container">
+      <a class="navbar-brand title font-weight-lighter" href="https://HaozheZhang6.github.io/">Haozhe Zhang</a>
+      <!-- Navbar Toggle -->
+      <button class="navbar-toggler collapsed ml-auto" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar top-bar"></span>
+        <span class="icon-bar middle-bar"></span>
+        <span class="icon-bar bottom-bar"></span>
+      </button>
+
+      <div class="collapse navbar-collapse text-right" id="navbarNav">
+        <ul class="navbar-nav ml-auto flex-nowrap">
+
+          <!-- About -->
+          <li class="nav-item ">
+            <a class="nav-link" href="/">About</a>
+          </li>
+          
+          <!-- Blog -->
+          <li class="nav-item active">
+            <a class="nav-link" href="/blog/">Blog<span class="sr-only">(current)</span></a>
+          </li>
+          <!-- Other pages -->
+          <li class="nav-item ">
+            <a class="nav-link" href="/projects/">Projects</a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" href="/publications/">Publications</a>
+          </li>
+
+          <!-- Toogle theme mode -->
+          <div class="toggle-container">
+            <a id="light-toggle">
+              <i class="fas fa-moon"></i>
+              <i class="fas fa-sun"></i>
+            </a>
+          </div>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+
+    <!-- Content -->
+    <div class="container mt-5">
+      <div class="post">
 
   <div class="header-bar">
-    <h1>{{ site.blog_name }}</h1>
-    {% if site.blog_description %}<h2>{{ site.blog_description }}</h2>{% endif %}
+    <h1>Blog</h1>
+    
   </div>
 
 
   <ul class="post-list">
-    {% for post in paginator.posts %}
+    
 
-    {% assign read_time = post.content | number_of_words | divided_by: 180 | plus: 1 %}
-    {% assign year = post.date | date: "%Y" %}
-    {% assign tags = post.tags | join: "" %}
-    {% assign categories = post.categories | join: "" %}
+    
+    
+    
+    
 
     <li>
       <h3>
-        {% if post.redirect == blank %}
-          <a class="post-title" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-        {% else %}
-        <a class="post-title" href="{% if post.redirect contains '://' %}{{ post.redirect }}{% else %}{{ post.redirect | relative_url }}{% endif %}">{{ post.title }}</a>
-        {% endif %}
+        
+          <a class="post-title" href="/physics/2026/06/12/phase-transition.html">微观连续,宏观突变 / Continuous Below, Discontinuous Above</a>
+        
       </h3>
-      <p>{{ post.description }}</p>
-      <p class="post-meta"> {{read_time}} min read &nbsp; &middot; &nbsp;
-        {{ post.date | date: '%B %-d, %Y' }}
+      <p>从电池老化的 knee point 聊到相变——为什么连续的微观规律,会在宏观突然跳变;湍流、智能涌现、百倍股,以及线性世界里的非线性人生。</p>
+      <p class="post-meta"> 4 min read &nbsp; &middot; &nbsp;
+        June 12, 2026
       </p>
       <p class="post-tags">
-        <a href="{{ year | prepend: '/blog/' | prepend: site.baseurl}}">
-          <i class="fas fa-calendar fa-sm"></i> {{ year }} </a>
+        <a href="/blog/2026">
+          <i class="fas fa-calendar fa-sm"></i> 2026 </a>
 
-          {% if tags != "" %}
+          
           &nbsp; &middot; &nbsp;
-            {% for tag in post.tags %}
-            <a href="{{ tag | prepend: '/blog/tag/' | prepend: site.baseurl}}">
-              <i class="fas fa-hashtag fa-sm"></i> {{ tag }}</a> &nbsp;
-              {% endfor %}
-          {% endif %}
+            
+            <a href="/blog/tag/phase-transition">
+              <i class="fas fa-hashtag fa-sm"></i> phase-transition</a> &nbsp;
+              
+            <a href="/blog/tag/battery">
+              <i class="fas fa-hashtag fa-sm"></i> battery</a> &nbsp;
+              
+            <a href="/blog/tag/emergence">
+              <i class="fas fa-hashtag fa-sm"></i> emergence</a> &nbsp;
+              
+            <a href="/blog/tag/turbulence">
+              <i class="fas fa-hashtag fa-sm"></i> turbulence</a> &nbsp;
+              
+          
 
-          {% if categories != "" %}
+          
           &nbsp; &middot; &nbsp;
-            {% for category in post.categories %}
-            <a href="{{ category | prepend: '/blog/category/' | prepend: site.baseurl}}">
-              <i class="fas fa-tag fa-sm"></i> {{ category }}</a> &nbsp;
-              {% endfor %}
-          {% endif %}
+            
+            <a href="/blog/category/physics">
+              <i class="fas fa-tag fa-sm"></i> physics</a> &nbsp;
+              
+          
     </p>
     </li>
 
-    {% endfor %}
+    
+
+    
+    
+    
+    
+
+    <li>
+      <h3>
+        
+          <a class="post-title" href="/quant/2026/05/21/diversifier-matrix.html">你的 60/40 应该用什么资产 / What should the 40% in 60/40 actually be?</a>
+        
+      </h3>
+      <p>60/40 + 黄金每个最近窗口都打赢 100% SPY,60/40 + 长债在 2022 跌得比纯 SPY 还多。教科书 60/40 已经过时。</p>
+      <p class="post-meta"> 24 min read &nbsp; &middot; &nbsp;
+        May 21, 2026
+      </p>
+      <p class="post-tags">
+        <a href="/blog/2026">
+          <i class="fas fa-calendar fa-sm"></i> 2026 </a>
+
+          
+          &nbsp; &middot; &nbsp;
+            
+            <a href="/blog/tag/asset-allocation">
+              <i class="fas fa-hashtag fa-sm"></i> asset-allocation</a> &nbsp;
+              
+            <a href="/blog/tag/60-40">
+              <i class="fas fa-hashtag fa-sm"></i> 60-40</a> &nbsp;
+              
+            <a href="/blog/tag/gold">
+              <i class="fas fa-hashtag fa-sm"></i> gold</a> &nbsp;
+              
+            <a href="/blog/tag/bonds">
+              <i class="fas fa-hashtag fa-sm"></i> bonds</a> &nbsp;
+              
+          
+
+          
+          &nbsp; &middot; &nbsp;
+            
+            <a href="/blog/category/quant">
+              <i class="fas fa-tag fa-sm"></i> quant</a> &nbsp;
+              
+          
+    </p>
+    </li>
+
+    
+
+    
+    
+    
+    
+
+    <li>
+      <h3>
+        
+          <a class="post-title" href="/evals/2026/05/11/benchcad.html">工业 CAD 远看是 RLVR 的好题目，做起来才发现每一层都很糙 / Industrial CAD looks like a clean RLVR target — every layer turns out rough</a>
+        
+      </h3>
+      <p>商业 VLM 在 vision-text 对齐上很差，小模型又学不到几何公式——没有合适的 benchmark，所以做了 BenchCAD</p>
+      <p class="post-meta"> 13 min read &nbsp; &middot; &nbsp;
+        May 11, 2026
+      </p>
+      <p class="post-tags">
+        <a href="/blog/2026">
+          <i class="fas fa-calendar fa-sm"></i> 2026 </a>
+
+          
+          &nbsp; &middot; &nbsp;
+            
+            <a href="/blog/tag/cad">
+              <i class="fas fa-hashtag fa-sm"></i> cad</a> &nbsp;
+              
+            <a href="/blog/tag/vlm">
+              <i class="fas fa-hashtag fa-sm"></i> vlm</a> &nbsp;
+              
+            <a href="/blog/tag/benchmark">
+              <i class="fas fa-hashtag fa-sm"></i> benchmark</a> &nbsp;
+              
+          
+
+          
+          &nbsp; &middot; &nbsp;
+            
+            <a href="/blog/category/evals">
+              <i class="fas fa-tag fa-sm"></i> evals</a> &nbsp;
+              
+          
+    </p>
+    </li>
+
+    
+
+    
+    
+    
+    
+
+    <li>
+      <h3>
+        
+          <a class="post-title" href="/quant/2026/05/07/wheel-strategy.html">The wheel 策略到底赚不赚 / Does the wheel strategy actually make money?</a>
+        
+      </h3>
+      <p>Wheel 99% 胜率但 33 年下来比纯持 SPY 少 14 倍财富。胜率是 vanity metric,总财富才是衡量标准。</p>
+      <p class="post-meta"> 21 min read &nbsp; &middot; &nbsp;
+        May 7, 2026
+      </p>
+      <p class="post-tags">
+        <a href="/blog/2026">
+          <i class="fas fa-calendar fa-sm"></i> 2026 </a>
+
+          
+          &nbsp; &middot; &nbsp;
+            
+            <a href="/blog/tag/wheel">
+              <i class="fas fa-hashtag fa-sm"></i> wheel</a> &nbsp;
+              
+            <a href="/blog/tag/spy">
+              <i class="fas fa-hashtag fa-sm"></i> spy</a> &nbsp;
+              
+            <a href="/blog/tag/options">
+              <i class="fas fa-hashtag fa-sm"></i> options</a> &nbsp;
+              
+            <a href="/blog/tag/cash-secured-put">
+              <i class="fas fa-hashtag fa-sm"></i> cash-secured-put</a> &nbsp;
+              
+          
+
+          
+          &nbsp; &middot; &nbsp;
+            
+            <a href="/blog/category/quant">
+              <i class="fas fa-tag fa-sm"></i> quant</a> &nbsp;
+              
+          
+    </p>
+    </li>
+
+    
+
+    
+    
+    
+    
+
+    <li>
+      <h3>
+        
+          <a class="post-title" href="/quant/2026/04/23/covered-call-ablation.html">SPY 上写 covered call 到底赚不赚钱 / Are covered calls actually paying you?</a>
+        
+      </h3>
+      <p>33 年 SPY 数据:3% OTM covered call 每年比纯持 SPY 少赚 4 个点 CAGR,但 drawdown 砍半。是 Sharpe 交易,不是 return 交易。</p>
+      <p class="post-meta"> 26 min read &nbsp; &middot; &nbsp;
+        April 23, 2026
+      </p>
+      <p class="post-tags">
+        <a href="/blog/2026">
+          <i class="fas fa-calendar fa-sm"></i> 2026 </a>
+
+          
+          &nbsp; &middot; &nbsp;
+            
+            <a href="/blog/tag/covered-call">
+              <i class="fas fa-hashtag fa-sm"></i> covered-call</a> &nbsp;
+              
+            <a href="/blog/tag/spy">
+              <i class="fas fa-hashtag fa-sm"></i> spy</a> &nbsp;
+              
+            <a href="/blog/tag/jepi">
+              <i class="fas fa-hashtag fa-sm"></i> jepi</a> &nbsp;
+              
+            <a href="/blog/tag/options">
+              <i class="fas fa-hashtag fa-sm"></i> options</a> &nbsp;
+              
+          
+
+          
+          &nbsp; &middot; &nbsp;
+            
+            <a href="/blog/category/quant">
+              <i class="fas fa-tag fa-sm"></i> quant</a> &nbsp;
+              
+          
+    </p>
+    </li>
+
+    
+
+    
+    
+    
+    
+
+    <li>
+      <h3>
+        
+          <a class="post-title" href="/quant/2026/04/09/leveraged-etf-decay.html">3 倍 ETF 真的能让你发财吗 / Will leveraged ETFs actually make you rich?</a>
+        
+      </h3>
+      <p>TQQQ 同一个产品,2024 起步年化 66%,2021 起步年化 28% 还吃了 −82% drawdown。SQQQ 所有 3 年以上窗口都亏钱。</p>
+      <p class="post-meta"> 23 min read &nbsp; &middot; &nbsp;
+        April 9, 2026
+      </p>
+      <p class="post-tags">
+        <a href="/blog/2026">
+          <i class="fas fa-calendar fa-sm"></i> 2026 </a>
+
+          
+          &nbsp; &middot; &nbsp;
+            
+            <a href="/blog/tag/leveraged-etf">
+              <i class="fas fa-hashtag fa-sm"></i> leveraged-etf</a> &nbsp;
+              
+            <a href="/blog/tag/tqqq">
+              <i class="fas fa-hashtag fa-sm"></i> tqqq</a> &nbsp;
+              
+            <a href="/blog/tag/vol-drag">
+              <i class="fas fa-hashtag fa-sm"></i> vol-drag</a> &nbsp;
+              
+            <a href="/blog/tag/leaps">
+              <i class="fas fa-hashtag fa-sm"></i> leaps</a> &nbsp;
+              
+          
+
+          
+          &nbsp; &middot; &nbsp;
+            
+            <a href="/blog/category/quant">
+              <i class="fas fa-tag fa-sm"></i> quant</a> &nbsp;
+              
+          
+    </p>
+    </li>
+
+    
+
+    
+    
+    
+    
+
+    <li>
+      <h3>
+        
+          <a class="post-title" href="/quant/2026/03/26/nvda-iron-condor.html">NVDA 上卖期权能跑赢直接持有吗 / Can selling NVDA options beat just holding the stock?</a>
+        
+      </h3>
+      <p>30 个月真实 NVDA 期权数据:卖 5% OTM call+put 年化 94% 干净打赢 buy-and-hold,但只在 NVDA 上有效,且 BS+VIX 估的 premium 比真实低 10 倍。</p>
+      <p class="post-meta"> 23 min read &nbsp; &middot; &nbsp;
+        March 26, 2026
+      </p>
+      <p class="post-tags">
+        <a href="/blog/2026">
+          <i class="fas fa-calendar fa-sm"></i> 2026 </a>
+
+          
+          &nbsp; &middot; &nbsp;
+            
+            <a href="/blog/tag/options">
+              <i class="fas fa-hashtag fa-sm"></i> options</a> &nbsp;
+              
+            <a href="/blog/tag/iron-condor">
+              <i class="fas fa-hashtag fa-sm"></i> iron-condor</a> &nbsp;
+              
+            <a href="/blog/tag/nvda">
+              <i class="fas fa-hashtag fa-sm"></i> nvda</a> &nbsp;
+              
+            <a href="/blog/tag/covered-call">
+              <i class="fas fa-hashtag fa-sm"></i> covered-call</a> &nbsp;
+              
+            <a href="/blog/tag/wheel">
+              <i class="fas fa-hashtag fa-sm"></i> wheel</a> &nbsp;
+              
+          
+
+          
+          &nbsp; &middot; &nbsp;
+            
+            <a href="/blog/category/quant">
+              <i class="fas fa-tag fa-sm"></i> quant</a> &nbsp;
+              
+          
+    </p>
+    </li>
+
+    
+
+    
+    
+    
+    
+
+    <li>
+      <h3>
+        
+          <a class="post-title" href="/rl/2026/03/22/kl-estimators.html">估 KL penalty 的三个 estimator / Three ways to estimate the KL penalty</a>
+        
+      </h3>
+      <p>K1 / K2 / K3 三个 sample-based KL estimator 的 bias / variance 推导和实际选哪一个</p>
+      <p class="post-meta"> 9 min read &nbsp; &middot; &nbsp;
+        March 22, 2026
+      </p>
+      <p class="post-tags">
+        <a href="/blog/2026">
+          <i class="fas fa-calendar fa-sm"></i> 2026 </a>
+
+          
+          &nbsp; &middot; &nbsp;
+            
+            <a href="/blog/tag/kl-divergence">
+              <i class="fas fa-hashtag fa-sm"></i> kl-divergence</a> &nbsp;
+              
+            <a href="/blog/tag/estimator">
+              <i class="fas fa-hashtag fa-sm"></i> estimator</a> &nbsp;
+              
+            <a href="/blog/tag/control-variate">
+              <i class="fas fa-hashtag fa-sm"></i> control-variate</a> &nbsp;
+              
+          
+
+          
+          &nbsp; &middot; &nbsp;
+            
+            <a href="/blog/category/rl">
+              <i class="fas fa-tag fa-sm"></i> rl</a> &nbsp;
+              
+          
+    </p>
+    </li>
+
+    
+
+    
+    
+    
+    
+
+    <li>
+      <h3>
+        
+          <a class="post-title" href="/rl/2026/03/15/rl-training-notes.html">从 PPO 到 SAPO：每一代 RL 算法究竟在改什么 / From PPO to SAPO, what each version actually changes</a>
+        
+      </h3>
+      <p>PPO/DPO/GRPO/DAPO/GSPO/SAPO 的 anatomy、KL estimator、sync vs async、pass@k 上限</p>
+      <p class="post-meta"> 21 min read &nbsp; &middot; &nbsp;
+        March 15, 2026
+      </p>
+      <p class="post-tags">
+        <a href="/blog/2026">
+          <i class="fas fa-calendar fa-sm"></i> 2026 </a>
+
+          
+          &nbsp; &middot; &nbsp;
+            
+            <a href="/blog/tag/ppo">
+              <i class="fas fa-hashtag fa-sm"></i> ppo</a> &nbsp;
+              
+            <a href="/blog/tag/grpo">
+              <i class="fas fa-hashtag fa-sm"></i> grpo</a> &nbsp;
+              
+            <a href="/blog/tag/dpo">
+              <i class="fas fa-hashtag fa-sm"></i> dpo</a> &nbsp;
+              
+            <a href="/blog/tag/dapo">
+              <i class="fas fa-hashtag fa-sm"></i> dapo</a> &nbsp;
+              
+            <a href="/blog/tag/gspo">
+              <i class="fas fa-hashtag fa-sm"></i> gspo</a> &nbsp;
+              
+            <a href="/blog/tag/sapo">
+              <i class="fas fa-hashtag fa-sm"></i> sapo</a> &nbsp;
+              
+          
+
+          
+          &nbsp; &middot; &nbsp;
+            
+            <a href="/blog/category/rl">
+              <i class="fas fa-tag fa-sm"></i> rl</a> &nbsp;
+              
+          
+    </p>
+    </li>
+
+    
+
+    
+    
+    
+    
+
+    <li>
+      <h3>
+        
+          <a class="post-title" href="/agents/2025/11/30/voice-agent.html">通勤一小时，做了个聊股票的 voice agent / An hour-long commute, a voice agent for stocks</a>
+        
+      </h3>
+      <p>围绕 sub-1 秒延迟预算讲 voice agent 每一层的设计——WebRTC、endpointing、streaming ASR/TTS、offline KB、subagent timeout，带 ITU-T G.114 / LiveKit / OpenAI Realtime / Picovoice VAD 这些数字</p>
+      <p class="post-meta"> 13 min read &nbsp; &middot; &nbsp;
+        November 30, 2025
+      </p>
+      <p class="post-tags">
+        <a href="/blog/2025">
+          <i class="fas fa-calendar fa-sm"></i> 2025 </a>
+
+          
+          &nbsp; &middot; &nbsp;
+            
+            <a href="/blog/tag/webrtc">
+              <i class="fas fa-hashtag fa-sm"></i> webrtc</a> &nbsp;
+              
+            <a href="/blog/tag/latency">
+              <i class="fas fa-hashtag fa-sm"></i> latency</a> &nbsp;
+              
+            <a href="/blog/tag/asr-tts">
+              <i class="fas fa-hashtag fa-sm"></i> asr-tts</a> &nbsp;
+              
+          
+
+          
+          &nbsp; &middot; &nbsp;
+            
+            <a href="/blog/category/agents">
+              <i class="fas fa-tag fa-sm"></i> agents</a> &nbsp;
+              
+          
+    </p>
+    </li>
+
+    
   </ul>
 
-  {% include pagination.html %}
+  <nav aria-label="Blog page naviation">
+  <ul class="pagination pagination-lg justify-content-center">
+    <li class="page-item disabled">
+      <a class="page-link" href="" tabindex="-1" aria-disabled="">Newer</a>
+    </li><li class="page-item active"><a class="page-link" href="/blog/index.html" title="blog">1</a></li>
+      <li class="page-item "><a class="page-link" href="/blog/page/2/index.html" title="blog - page 2">2</a></li>
+      <li class="page-item ">
+      <a class="page-link" href="/blog/page/2/">Older</a>
+    </li>
+  </ul>
+</nav>
 
 </div>
+
+    </div>
+
+    <!-- Footer -->    
+    <footer class="fixed-bottom">
+      <div class="container mt-0">
+        &copy; Copyright 2026 Haozhe  Zhang. Powered by <a href="https://jekyllrb.com/" target="_blank">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio">al-folio</a> theme. Hosted by <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>.
+
+      </div>
+    </footer>
+
+    <!-- JavaScripts -->
+    <!-- jQuery -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+    <!-- Bootsrap & MDB scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.2/dist/umd/popper.min.js" integrity="sha256-l/1pMF/+J4TThfgARS6KwWrk/egwuVvhRzfLAMQ6Ds4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" integrity="sha256-SyTu6CwrfOhaznYZPoolVw2rxoY7lKYKQvqbtqN93HI=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mdbootstrap@4.20.0/js/mdb.min.js" integrity="sha256-NdbiivsvWt7VYCt6hYNT3h/th9vSTL4EDWeGs5SN3DA=" crossorigin="anonymous"></script>
+
+    
+    <!-- Load Common JS -->
+  <script src="/assets/js/common.js"></script>
+
+    <!-- MathJax -->
+  <script type="text/javascript">
+    window.MathJax = {
+      tex: {
+        tags: 'ams'
+      }
+    };
+  </script>
+  <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js"></script>
+
+    
+  </body>
+</html>
+
