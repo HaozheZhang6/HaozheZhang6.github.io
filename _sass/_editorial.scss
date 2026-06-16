@@ -185,3 +185,48 @@ h6 {
     font-size: 2rem;
   }
 }
+
+/*******************************************************************************
+ * Detail polish
+ ******************************************************************************/
+
+// Crisper type on the warm background.
+body {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+// Homepage name reads as a grounded masthead, not an accent — keep it ink.
+body.about-page .post-header {
+  .post-title {
+    color: var(--global-text-color);
+  }
+  margin-bottom: 1.6rem;
+}
+
+// Warm selection highlight.
+::selection {
+  background: rgba(164, 80, 42, 0.18);
+}
+html[data-theme="dark"] ::selection {
+  background: rgba(217, 138, 91, 0.26);
+}
+
+// Refined underlines for inline links (nav/buttons/post-content handle their own).
+a {
+  text-underline-offset: 0.14em;
+  text-decoration-thickness: 0.06em;
+}
+
+// Cards lift gently on hover (pointer devices only).
+@media (hover: hover) {
+  .projects .grid-item .card {
+    transition: transform 0.16s ease, box-shadow 0.16s ease,
+      border-color 0.16s ease;
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 22px rgba(33, 28, 21, 0.1);
+      border-color: var(--global-text-color-light);
+    }
+  }
+}
