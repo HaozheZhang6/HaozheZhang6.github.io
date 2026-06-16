@@ -16,7 +16,15 @@ layout: default
 <div class="post">
 
   <header class="post-header">
-    <h1 class="post-title">{{ page.title }}</h1>
+    {%- if page.categories != empty or page.date -%}
+    <p class="post-eyebrow">{%- if page.categories != empty -%}{{ page.categories | first | upcase }} &nbsp;&middot;&nbsp; {% endif -%}{{ page.date | date: "%B %Y" | upcase }}</p>
+    {%- endif -%}
+    {%- assign title_parts = page.title | split: " / " -%}
+    <h1 class="post-title">{{ title_parts[0] }}</h1>
+    {%- if title_parts.size > 1 -%}
+    <p class="post-subtitle">{{ title_parts[1] }}</p>
+    {%- endif -%}
+    <hr class="post-rule">
     <p class="post-meta">{{ page.date | date: "%B %-d, %Y" }}{%- if page.last_updated -%} <span class="post-edited">· edited {{ page.last_updated | date: "%B %-d, %Y" }}</span>{%- endif -%}{%- if page.author -%} • {{ page.author }}{%- endif -%}{%- if page.meta -%} • {{ page.meta }}{%- endif -%}</p>
     <p class="post-tags">
       <a href="{{ year | prepend: '/blog/' | prepend: site.baseurl}}"> <i class="fas fa-calendar fa-sm"></i> {{ year }} </a>

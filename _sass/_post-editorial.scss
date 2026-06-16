@@ -1,0 +1,161 @@
+/*******************************************************************************
+ * Editorial "cream" theme — scoped to the blog post reading page only.
+ * Applied via <body class="post-page"> (set when page.layout == 'post').
+ * Homepage, blog listing, projects, publications are untouched.
+ ******************************************************************************/
+
+$editorial-serif: "Newsreader", Georgia, "Songti SC", "Noto Serif SC",
+  "Source Han Serif SC", serif;
+$editorial-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+  sans-serif;
+
+// --- Palette overrides (light) -------------------------------------------
+// Override the global CSS vars only within the post page so descendants that
+// reference them (links, blockquote, code, dividers) harmonize automatically.
+body.post-page {
+  --global-bg-color: #f2eee3;
+  --global-text-color: #211c15;
+  --global-text-color-light: #6e6557;
+  --global-theme-color: #a4502a; // terracotta accent
+  --global-hover-color: #a4502a;
+  --global-divider-color: #d8d0be;
+  --global-card-bg-color: #f2eee3;
+  --global-code-bg-color: rgba(164, 80, 42, 0.06);
+
+  background-color: var(--global-bg-color);
+}
+
+// --- Palette overrides (dark) — deep warm "wood" so the toggle never clashes
+html[data-theme="dark"] body.post-page {
+  --global-bg-color: #1a1611;
+  --global-text-color: #e8e0d2;
+  --global-text-color-light: #a89b85;
+  --global-theme-color: #d98a5b;
+  --global-hover-color: #d98a5b;
+  --global-divider-color: #3a3228;
+  --global-card-bg-color: #1a1611;
+  --global-code-bg-color: rgba(217, 138, 91, 0.1);
+}
+
+// --- Typography -----------------------------------------------------------
+body.post-page .post {
+  font-family: $editorial-serif;
+
+  .post-header {
+    margin-bottom: 2.4rem;
+  }
+
+  // Small-caps kicker: CATEGORY · MONTH YEAR
+  .post-eyebrow {
+    font-family: $editorial-sans;
+    font-weight: 600;
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--global-text-color-light);
+    margin: 0 0 1.3rem;
+  }
+
+  .post-title {
+    font-family: $editorial-serif;
+    font-weight: 600;
+    font-size: 3rem;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    margin: 0 0 0.5rem;
+  }
+
+  // English half of a bilingual "中文 / English" title
+  .post-subtitle {
+    font-family: $editorial-serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 1.45rem;
+    line-height: 1.28;
+    color: var(--global-text-color-light);
+    margin: 0 0 1.2rem;
+  }
+
+  .post-rule {
+    width: 60px;
+    height: 2px;
+    border: 0;
+    background: var(--global-theme-color);
+    margin: 0 0 1.3rem;
+    opacity: 1;
+  }
+
+  .post-meta,
+  .post-tags {
+    font-family: $editorial-sans;
+    font-size: 0.8rem;
+  }
+
+  .post-edited {
+    font-style: italic;
+  }
+
+  .post-lang-toggle .lang-btn {
+    font-family: $editorial-sans;
+  }
+
+  // Body copy
+  .post-content {
+    font-family: $editorial-serif;
+    font-size: 1.2rem;
+    line-height: 1.78;
+
+    p {
+      margin: 0 0 1.5rem;
+    }
+
+    strong {
+      font-weight: 600;
+      color: var(--global-theme-color);
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-family: $editorial-serif;
+      font-weight: 600;
+      letter-spacing: -0.005em;
+    }
+
+    a {
+      text-decoration: none;
+      border-bottom: 1px solid rgba(164, 80, 42, 0.35);
+      &:hover {
+        text-decoration: none;
+        border-bottom-color: var(--global-theme-color);
+      }
+    }
+
+    blockquote {
+      font-family: $editorial-serif;
+    }
+
+    // Inline code keeps a mono face for clarity, just warm-tinted
+    code {
+      font-family: "SFMono-Regular", Menlo, Consolas, monospace;
+    }
+  }
+}
+
+// --- Responsive -----------------------------------------------------------
+@media (max-width: 576px) {
+  body.post-page .post {
+    .post-title {
+      font-size: 2.1rem;
+    }
+    .post-subtitle {
+      font-size: 1.2rem;
+    }
+    .post-content {
+      font-size: 1.1rem;
+    }
+  }
+}
