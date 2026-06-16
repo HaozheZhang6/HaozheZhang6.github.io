@@ -1,0 +1,187 @@
+/*******************************************************************************
+ * Editorial design system — applies site-wide.
+ * Warm "cream" palette + serif headings / sans body + terracotta accent,
+ * with one consistent treatment for page titles, section labels and cards so
+ * every page (home, blog, projects, publications) reads as one publication.
+ ******************************************************************************/
+
+$ed-serif: "Newsreader", Georgia, "Songti SC", "Noto Serif SC",
+  "Source Han Serif SC", serif;
+$ed-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+  sans-serif;
+
+// --- Palette (overrides theme vars at :root, imported after themes) --------
+:root {
+  --global-bg-color: #f2eee3;
+  --global-text-color: #211c15;
+  --global-text-color-light: #6e6557;
+  --global-theme-color: #a4502a; // terracotta
+  --global-hover-color: #a4502a;
+  --global-divider-color: #d8d0be;
+  --global-card-bg-color: #fbf8f1;
+  --global-code-bg-color: rgba(164, 80, 42, 0.06);
+  --global-footer-bg-color: #211c15;
+  --global-footer-text-color: #c9bea8;
+  --global-footer-link-color: #f6f1e7;
+}
+
+html[data-theme="dark"] {
+  --global-bg-color: #1a1611; // warm "wood"
+  --global-text-color: #e8e0d2;
+  --global-text-color-light: #a89b85;
+  --global-theme-color: #d98a5b;
+  --global-hover-color: #d98a5b;
+  --global-divider-color: #3a3228;
+  --global-card-bg-color: #221c15;
+  --global-code-bg-color: rgba(217, 138, 91, 0.1);
+  --global-footer-bg-color: #100d0a;
+  --global-footer-text-color: #a89b85;
+  --global-footer-link-color: #e8e0d2;
+}
+
+// --- Base typography -------------------------------------------------------
+body {
+  background-color: var(--global-bg-color);
+  font-family: $ed-sans;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: $ed-serif;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.navbar-brand {
+  font-family: $ed-serif;
+}
+
+// --- ONE page title ---------------------------------------------------------
+// home name, Blog, Projects, Publications, and the post hero all share this.
+.post-header .post-title,
+.header-bar h1,
+.publications h1 {
+  font-family: $ed-serif;
+  font-weight: 600;
+  font-size: 2.8rem;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--global-theme-color);
+  text-align: left;
+  margin: 0 0 0.4rem;
+}
+
+// Blog index header: was centered 5rem with huge padding — bring in line.
+.header-bar {
+  text-align: left;
+  border-bottom: 1px solid var(--global-divider-color);
+  padding-top: 0.5rem;
+  padding-bottom: 1.5rem;
+  margin-bottom: 1.5rem;
+
+  h1 {
+    font-size: 2.8rem;
+  }
+
+  h2 {
+    font-family: $ed-sans;
+    font-weight: 400;
+    font-size: 1rem;
+    color: var(--global-text-color-light);
+    margin-top: 0.4rem;
+  }
+}
+
+// Publications title: was centered 2rem.
+.publications {
+  h1 {
+    text-align: left;
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+  }
+}
+
+// Page descriptions / about subtitle — sans, muted.
+.post-description,
+.post-header .desc {
+  font-family: $ed-sans;
+  color: var(--global-text-color-light);
+}
+
+// --- ONE section label ------------------------------------------------------
+// Projects categories (AI / Physics), publication years, news, featured.
+.projects h2.category,
+.publications h2.year,
+.news h2,
+.publications h2:not(.year) {
+  font-family: $ed-sans;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--global-text-color-light);
+  text-align: left;
+  border: 0;
+  border-top: 1px solid var(--global-divider-color);
+  padding-top: 1.25rem;
+  margin-top: 3rem;
+  margin-bottom: 1.25rem;
+}
+// The publication year sits in a span sized 1.5rem — bring it to label size.
+.publications h2.year,
+.publications h2.year span {
+  font-size: 0.78rem;
+}
+
+// --- Cards & blog list titles ----------------------------------------------
+.projects .card .card-title {
+  font-family: $ed-serif;
+  font-weight: 600;
+  font-size: 1.2rem;
+  letter-spacing: -0.01em;
+}
+
+// Subtle separation on cream + consistent rounding.
+.projects .grid-item .card {
+  background-color: var(--global-card-bg-color);
+  border: 1px solid var(--global-divider-color);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.post-list li {
+  h3 a.post-title {
+    font-family: $ed-serif;
+    font-weight: 600;
+    font-size: 1.45rem;
+    letter-spacing: -0.01em;
+    color: var(--global-text-color);
+  }
+  > p {
+    font-family: $ed-sans;
+    color: var(--global-text-color-light);
+  }
+  .post-meta,
+  .post-tags {
+    font-family: $ed-sans;
+  }
+}
+
+// Warm gradient for image-less project cards (was navy → cyan).
+.card-thumb-placeholder {
+  background: linear-gradient(135deg, #a4502a 0%, #c9824e 100%);
+}
+
+// --- Responsive -------------------------------------------------------------
+@media (max-width: 576px) {
+  .post-header .post-title,
+  .header-bar h1,
+  .header-bar,
+  .publications h1 {
+    font-size: 2rem;
+  }
+}
