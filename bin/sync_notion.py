@@ -292,6 +292,64 @@ def find_existing_file(notion_id):
     return None
 
 
+_QUOTE_PH = ""  # private-use placeholder, won't appear in real text
+
+
+def _smarten_line(line):
+    stash = []
+
+    def protect(m):
+        stash.append(m.group(0))
+        return f"{_QUOTE_PH}{len(stash) - 1}"
+
+    # protect inline code, inline math, link targets, bare URLs — no quote edits there
+    line = re.sub(r"`[^`]*`", protect, line)
+    line = re.sub(r"\$\$[^$]*\$\$", protect, line)
+    line = re.sub(r"\]\([^)]*\)", protect, line)
+    line = re.sub(r"https?://\S+", protect, line)
+    # double quotes: per-line open/close toggle (balanced within a paragraph)
+    res, open_d = [], True
+    for ch in line:
+        if ch == '"':
+            res.append("“" if open_d else "”")
+            open_d = not open_d
+        else:
+            res.append(ch)
+    line = "".join(res)
+    # english apostrophes (it's, don't, models') -> right single quote
+    line = re.sub(r"(?<=[A-Za-z])'(?=[A-Za-z])", "’", line)
+    line = re.sub(r"(?<=[A-Za-z])'(?=$|\s|[.,;:!?)])", "’", line)
+    # remaining single quotes: toggle -> ‘ ’ (handles CN/EN single-quote pairs)
+    res, open_s = [], True
+    for ch in line:
+        if ch == "'":
+            res.append("‘" if open_s else "’")
+            open_s = not open_s
+        else:
+            res.append(ch)
+    line = "".join(res)
+    return re.sub(_QUOTE_PH + r"(\d+)", lambda m: stash[int(m.group(1))], line)
+
+
+def smarten_quotes(md):
+    """Convert straight quotes to correctly-directioned curly quotes for both
+    Chinese and English, skipping code blocks/spans, math, and links. kramdown's
+    SmartyPants gets CJK quote direction wrong; doing it here (only ASCII quotes
+    are touched, and only in prose) yields correct quotes that kramdown leaves
+    alone. Applied to the body only — never the YAML frontmatter."""
+    out, in_fence = [], False
+    for line in md.split("\n"):
+        s = line.lstrip()
+        if s.startswith("```") or s.startswith("~~~"):
+            in_fence = not in_fence
+            out.append(line)
+        elif in_fence or (s.startswith("$$") and s.endswith("$$")):
+            out.append(line)
+        else:
+            out.append(_smarten_line(line))
+    return "\n".join(out)
+
+
 def render_page(page, token):
     props = page.get("properties", {})
     title = prop_text(props.get("Title")) or "Untitled"
@@ -324,6 +382,7 @@ def render_page(page, token):
             out.append(sep)
         out.append(md)
     body = "".join(out)
+    body = smarten_quotes(body)
 
     bilingual = detect_bilingual(body)
     content = frontmatter(page, title, date, cats, tags, description, bilingual, last_edited) + "\n\n" + body + "\n"

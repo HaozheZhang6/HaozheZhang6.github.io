@@ -64,7 +64,7 @@ $$\mathrm{KL} \approx \tfrac{1}{2}\mathbb{E}[(r-1)^2].$$
 
 所以 $$K_2 \approx \mathrm{KL}$$ 只在 $$\pi$$ 跟 $$\pi_{\text{ref}}$$ 距离很小时成立；policy 漂得越远，K2 偏差越大。
 
-实践上 K2 的风险是它在训练过程中"看起来"很稳——非负、variance 低——但监控的不是想 penalize 的那个 KL。Policy 大幅偏离 ref 的时候，K2 给的数字可能远低于真实 KL，模型已经漂飞但监控看不到，penalty 也压不回来。
+实践上 K2 的风险是它在训练过程中“看起来”很稳——非负、variance 低——但监控的不是想 penalize 的那个 KL。Policy 大幅偏离 ref 的时候，K2 给的数字可能远低于真实 KL，模型已经漂飞但监控看不到，penalty 也压不回来。
 
 ### K3：control variate 救场 {#cn-k3}
 
@@ -96,7 +96,7 @@ leading term $$\tfrac{1}{2}(r-1)^2 \ge 0$$。更严格地：$$K_3(1) = 0$$、$$K
 
 ### 三个 estimator 的实际差距 {#cn-impact}
 
-不同 estimator 在同一份 RL 配方上的影响并不小。Schulman (2020) 的 blog 和后续社区复现都给出过 single-digit 百分点级别的 final reward 差距，具体大小看任务。Paper 里几乎不写自己用了哪一个 estimator，意味着 published 的"算法提升"里有一部分实际上是 estimator 差异，不是算法差异。
+不同 estimator 在同一份 RL 配方上的影响并不小。Schulman (2020) 的 blog 和后续社区复现都给出过 single-digit 百分点级别的 final reward 差距，具体大小看任务。Paper 里几乎不写自己用了哪一个 estimator，意味着 published 的“算法提升”里有一部分实际上是 estimator 差异，不是算法差异。
 
 实践上默认用 K3。K2 有人用，但要意识到它在大 policy drift 下估的根本不是想要的 KL；K1 主要出现在教学代码或 sanity check 里——variance 高到训练根本起不来。
 
@@ -126,7 +126,7 @@ PPO and GRPO both need to compute
 
 $$\mathrm{KL}(\pi \,\|\, \pi_{\text{ref}}) = \mathbb{E}_{x \sim \pi}\!\left[\log \frac{\pi(x)}{\pi_{\text{ref}}(x)}\right]$$
 
-at every training step, as the reference-policy anchor — π_ref is the frozen initial LLM (usually the post-SFT checkpoint) — that prevents the model from drifting too far. KL here is Kullback-Leibler divergence, the standard measure of how different two distributions are; a bigger KL means the current policy has drifted further from where it started. Computing this exactly by summing over the entire vocabulary isn't feasible — the logits tensor for a single step already eats a substantial fraction of VRAM, and a full-vocab KL summation pushes it over. So the community estimates it from a handful of sampled tokens instead.
+at every training step, as the reference-policy anchor — π_ref is the frozen initial LLM (usually the post-SFT checkpoint) — that prevents the model from drifting too far. KL here is Kullback-Leibler divergence, the standard measure of how different two distributions are; a bigger KL means the current policy has drifted further from where it started. Computing this exactly by summing over the entire vocabulary isn’t feasible — the logits tensor for a single step already eats a substantial fraction of VRAM, and a full-vocab KL summation pushes it over. So the community estimates it from a handful of sampled tokens instead.
 
 Schulman (2020), [Approximating KL Divergence](http://joschu.net/blog/kl-approx.html), lays out three **sample-based estimators**, conventionally called **K1**, **K2**, and **K3**. Papers almost never document which one they used, but swapping K1 for K3 inside the same RL recipe moves the final reward by single-digit percentage points. This post walks through the derivations, the bias / variance trade-offs, and which one to actually use.
 
@@ -145,7 +145,7 @@ By definition K1 is **unbiased**:
 
 $$\mathbb{E}_{x \sim \pi}[-\log r] = \mathbb{E}_{x \sim \pi}\!\left[\log \frac{\pi(x)}{\pi_{\text{ref}}(x)}\right] = \mathrm{KL}(\pi \,\|\, \pi_{\text{ref}}).$$
 
-K1 has no sign constraint at the single-sample level. When $$r > 1$$ (the reference assigns this sample more mass than the current policy does), $$-\log r$$ is negative; when $$r < 1$$, it's positive. Under any real policy drift, $$r$$ has heavy tails on both sides, and the per-sample estimate can be a large positive or large negative number. K1 has the highest variance of the three.
+K1 has no sign constraint at the single-sample level. When $$r > 1$$ (the reference assigns this sample more mass than the current policy does), $$-\log r$$ is negative; when $$r < 1$$, it’s positive. Under any real policy drift, $$r$$ has heavy tails on both sides, and the per-sample estimate can be a large positive or large negative number. K1 has the highest variance of the three.
 
 A practical consequence: KL estimated with K1 on a small batch can come out negative on average — mathematically impossible for the true KL. In training, this shows up as a negative KL-penalty contribution to the loss, briefly rewarding the model for moving away from the reference. It looks absurd, but on a small enough batch K1 actually allows it.
 
@@ -153,7 +153,7 @@ A practical consequence: KL estimated with K1 on a small batch can come out nega
 
 $$K_2 = \tfrac{1}{2}(\log r)^2$$
 
-K2 is always **non-negative** (a square), and its single-sample variance is about an order of magnitude lower than K1's. Intuitively, K2 throws away the sign of $$\log r$$ and keeps only magnitude.
+K2 is always **non-negative** (a square), and its single-sample variance is about an order of magnitude lower than K1‘s. Intuitively, K2 throws away the sign of $$\log r$$ and keeps only magnitude.
 
 The cost is **bias**. K2 estimates $$\tfrac{1}{2}\mathbb{E}[(\log r)^2]$$, **not KL**. The two coincide only when $$\pi \approx \pi_{\text{ref}}$$, via Taylor expansion:
 
@@ -195,11 +195,11 @@ So K3 collects all three properties at once: unbiased (like K1), non-negative (l
 
 ### What the difference looks like in practice {#en-impact}
 
-The gap between estimators matters more than the literature suggests. Schulman (2020) and subsequent community reproductions report single-digit percentage-point differences in final reward when swapping K1 for K3 inside the same recipe, with the exact magnitude task-dependent. Most papers don't state which estimator they used, which means published "algorithm improvements" can be partially or entirely attributable to estimator choice across the comparison.
+The gap between estimators matters more than the literature suggests. Schulman (2020) and subsequent community reproductions report single-digit percentage-point differences in final reward when swapping K1 for K3 inside the same recipe, with the exact magnitude task-dependent. Most papers don’t state which estimator they used, which means published “algorithm improvements” can be partially or entirely attributable to estimator choice across the comparison.
 
-The practical default is K3. K2 has its users, but anyone reaching for it should know that under real policy drift the quantity being measured isn't the KL anymore. K1 mostly appears in pedagogical contexts or sanity checks — its variance makes training too unstable to actually use.
+The practical default is K3. K2 has its users, but anyone reaching for it should know that under real policy drift the quantity being measured isn’t the KL anymore. K1 mostly appears in pedagogical contexts or sanity checks — its variance makes training too unstable to actually use.
 
-The control-variate trick isn't specific to KL estimation. REINFORCE's baseline subtraction (Williams, 1992) — advantage = reward − baseline — is the same idea: subtract a zero-mean quantity to reduce variance without moving the expectation. K3 is that pattern applied very neatly to KL.
+The control-variate trick isn’t specific to KL estimation. REINFORCE’s baseline subtraction (Williams, 1992) — advantage = reward − baseline — is the same idea: subtract a zero-mean quantity to reduce variance without moving the expectation. K3 is that pattern applied very neatly to KL.
 
 ### References {#en-refs}
 
