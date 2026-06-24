@@ -16,7 +16,7 @@ Findings: current models often recover the coarse outer geometry of a part but f
 
 ## Cited in Anthropic's System Card
 
-Anthropic used BenchCAD in their official [Claude Fable 5 &amp; Claude Mythos 5 System Card](https://www-cdn.anthropic.com/2f9323abbcc4abe219577539efe19a623c9ca2bd/Claude%20Fable%205%20&%20Claude%20Mythos%205%20System%20Card.pdf) (§8.16.4), evaluating their frontier models on the Vision2Code task over all 17,874 published files. They also ran a Python-tools ablation, where Vision2Code performance jumped from 0.379 to 0.650 voxel IoU once the model could render and visually verify its output — and proposed the system-prompt and grading fixes back to our repository.
+Anthropic used BenchCAD in their official [Claude Fable 5 &amp; Claude Mythos 5 System Card](https://www-cdn.anthropic.com/2f9323abbcc4abe219577539efe19a623c9ca2bd/Claude%20Fable%205%20&%20Claude%20Mythos%205%20System%20Card.pdf) (§8.16.4), evaluating their frontier models on the Vision2Code task over all 17,874 published files. They also ran a Python-tools ablation, where Vision2Code performance jumped from 0.379 to 0.650 voxel IoU once the model could render and visually verify its output.
 
 <img src="/assets/img/projects/benchcad_syscard_full.png" alt="BenchCAD Vision2Code scores, full benchmark" style="display:block;max-width:100%;height:auto;margin:1rem auto;border-radius:6px;">
 
