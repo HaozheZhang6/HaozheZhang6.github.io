@@ -124,6 +124,9 @@
           <div class="periodical">
             {{ periodical | strip }}
           </div>
+          {%- if entry.corr %}
+          <div class="corr-note" style="font-size: 0.78rem; color: var(--global-text-color-light); margin-top: 0.15rem;">{{ entry.corr }}</div>
+          {%- endif %}
           {%- if entry.award %}
           <div class="award">
             <span class="badge" style="background-color: var(--global-theme-color); color: #fff;">★ {{ entry.award }}</span>
