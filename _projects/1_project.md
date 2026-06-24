@@ -1,7 +1,7 @@
 ---
 layout: page
 title: BenchCAD
-description: Industry-standard benchmark for programmatic CAD with LLMs
+description: "Industry-standard benchmark for programmatic CAD — used by Anthropic in the Claude Fable 5 & Mythos 5 System Card"
 img: assets/img/projects/benchcad.png
 importance: 1
 category: ai
