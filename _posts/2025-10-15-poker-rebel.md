@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "教扑克 bot 接近 GTO：从 CFR 到实时重解，还有差点把我骗了的那次实验 / Teaching a poker bot to approach GTO: from CFR to real-time re-solving, and the run that almost fooled me"
-date: 2026-06-23
+date: 2025-10-15
 description: 一个业余 side project——用自对弈把德州扑克 bot 推向 GTO（CFR → R-NaD → ReBeL 实时重解 → 多人局），以及在 Slumbot 上几乎下错结论的方差教训
 tags: [cfr, rebel, poker, self-play]
 categories: [rl]
 notion_id: 38858ac4-b0ac-810c-a15f-e88301b0506b
-last_updated: 2026-06-24
+last_updated: 2026-06-25
 bilingual: true
 ---
 
