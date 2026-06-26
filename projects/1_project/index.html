@@ -2,16 +2,16 @@
 <html lang="en">
 
   <!-- Head -->
-  <head><meta http-equiv="refresh" content="3; url=https://HaozheZhang6.github.io/" />    <!-- Metadata, OpenGraph and Schema.org -->
+  <head>    <!-- Metadata, OpenGraph and Schema.org -->
     
 
     <!-- Standard metadata -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Haozhe Zhang | Page not found</title>
+    <title>Haozhe Zhang | BenchCAD</title>
     <meta name="author" content="Haozhe  Zhang" />
-    <meta name="description" content="Looks like there has been a mistake. Nothing exists here." />
+    <meta name="description" content="Industry-standard benchmark for programmatic CAD — used by Anthropic in the Claude Fable 5 & Mythos 5 System Card" />
     <meta name="keywords" content="jekyll, jekyll-theme, academic-website, portfolio-website" />
 
 
@@ -36,7 +36,7 @@
     <link rel="shortcut icon" href="/assets/img/android-chrome-512x512.png"/>
     
     <link rel="stylesheet" href="/assets/css/main.css">
-    <link rel="canonical" href="https://haozhezhang6.github.io/404.html">
+    <link rel="canonical" href="https://haozhezhang6.github.io/projects/1_project/">
     
     <!-- Dark Mode -->
     
@@ -105,12 +105,27 @@
         <div class="post">
 
           <header class="post-header">
-            <h1 class="post-title">Page not found</h1>
-            <p class="post-description">Looks like there has been a mistake. Nothing exists here.</p>
+            <h1 class="post-title">BenchCAD</h1>
+            <p class="post-description">Industry-standard benchmark for programmatic CAD — used by Anthropic in the Claude Fable 5 &amp; Mythos 5 System Card</p>
           </header>
 
           <article>
-            <p>You will be redirected to the main page within 3 seconds. If not redirected, please click <a href="https://HaozheZhang6.github.io/">here</a>.</p>
+            <p>BenchCAD is a comprehensive benchmark for evaluating how well large language models generate programmatic CAD code. It contains over 17,000 execution-verified CadQuery programs across 106 industrial part families — gears, springs, drills, brackets and more — and probes models across four tasks: visual question answering, code analysis, image-to-code conversion, and code editing.</p>
+
+<p>Findings: current models often recover the coarse outer geometry of a part but fail to produce faithful parametric CAD programs. Common failure modes include missing structural details and oversimplified operations, and generalization to unseen part families remains limited even after fine-tuning.</p>
+
+<p><a href="https://benchcad.github.io/BenchCAD_webpage/" target="_blank" rel="noopener noreferrer">Project page</a> · <a href="https://arxiv.org/abs/2605.10865" target="_blank" rel="noopener noreferrer">arXiv:2605.10865</a></p>
+
+<h2 id="cited-in-anthropics-system-card">Cited in Anthropic’s System Card</h2>
+
+<p>Anthropic used BenchCAD in their official <a href="https://www-cdn.anthropic.com/2f9323abbcc4abe219577539efe19a623c9ca2bd/Claude%20Fable%205%20&amp;%20Claude%20Mythos%205%20System%20Card.pdf" target="_blank" rel="noopener noreferrer">Claude Fable 5 &amp; Claude Mythos 5 System Card</a> (§8.16.4), evaluating their frontier models on the Vision2Code task over all 17,874 published files. They also ran a Python-tools ablation, where Vision2Code performance jumped from 0.379 to 0.650 voxel IoU once the model could render and visually verify its output.</p>
+
+<p><img src="/assets/img/projects/benchcad_syscard_full.png" alt="BenchCAD Vision2Code scores, full benchmark" style="display:block;max-width:100%;height:auto;margin:1rem auto;border-radius:6px;"></p>
+
+<p><img src="/assets/img/projects/benchcad_syscard_tools.png" alt="BenchCAD Vision2Code scores with and without Python tools" style="display:block;max-width:100%;height:auto;margin:1rem auto;border-radius:6px;"></p>
+
+<p><small>Figures: Anthropic, <em>Claude Fable 5 &amp; Claude Mythos 5 System Card</em> (June 2026), §8.16.4.</small></p>
+
           </article>
 
         </div>

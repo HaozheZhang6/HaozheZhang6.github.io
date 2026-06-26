@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <!-- Head -->
+  <head>    <!-- Metadata, OpenGraph and Schema.org -->
+    
+
+    <!-- Standard metadata -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Haozhe Zhang | NVDA 上卖期权能跑赢直接持有吗 / Can selling NVDA options beat just holding the stock?</title>
+    <meta name="author" content="Haozhe  Zhang" />
+    <meta name="description" content="30 个月真实 NVDA 期权数据:卖 5% OTM call+put 年化 94% 干净打赢 buy-and-hold,但只在 NVDA 上有效,且 BS+VIX 估的 premium 比真实低 10 倍。" />
+    <meta name="keywords" content="jekyll, jekyll-theme, academic-website, portfolio-website" />
+
+
+    <!-- Bootstrap & MDB -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-DF7Zhf293AJxJNTmh5zhoYYIMs2oXitRfBjY+9L//AY=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdbootstrap@4.20.0/css/mdb.min.css" integrity="sha256-jpjYvU3G3N6nrrBwXJoVEYI/0zw8htfFnhT9ljN3JJw=" crossorigin="anonymous" />
+
+    <!-- Fonts & Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.1/css/academicons.min.css" integrity="sha256-i1+4qU2G2860dGGIOJscdC30s9beBXjFfzjWLjBRsBg=" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons">
+    <!-- Editorial serif (blog post pages) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Inter:wght@500;600&display=swap">
+
+    <!-- Code Syntax Highlighting -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jwarby/jekyll-pygments-themes@master/github.css" media="none" id="highlight_theme_light" />
+
+    <!-- Styles -->
+    
+    <link rel="shortcut icon" href="/assets/img/android-chrome-512x512.png"/>
+    
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="canonical" href="https://haozhezhang6.github.io/quant/2026/03/26/nvda-iron-condor.html">
+    
+    <!-- Dark Mode -->
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jwarby/jekyll-pygments-themes@master/native.css" media="none" id="highlight_theme_dark" />
+
+    <script src="/assets/js/theme.js"></script>
+    <script src="/assets/js/dark_mode.js"></script>
+    
+
+  </head>
+
+  <!-- Body -->
+  <body class="fixed-top-nav  post-page ">
+
+    <!-- Header --><header>
+
+  <!-- Nav Bar -->
+  <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top">
+    <div class="container">
+      <a class="navbar-brand title font-weight-lighter" href="https://HaozheZhang6.github.io/">Haozhe Zhang</a>
+      <!-- Navbar Toggle -->
+      <button class="navbar-toggler collapsed ml-auto" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar top-bar"></span>
+        <span class="icon-bar middle-bar"></span>
+        <span class="icon-bar bottom-bar"></span>
+      </button>
+
+      <div class="collapse navbar-collapse text-right" id="navbarNav">
+        <ul class="navbar-nav ml-auto flex-nowrap">
+
+          <!-- About -->
+          <li class="nav-item ">
+            <a class="nav-link" href="/">About</a>
+          </li>
+          
+          <!-- Blog -->
+          <li class="nav-item ">
+            <a class="nav-link" href="/blog/">Blog</a>
+          </li>
+          <!-- Other pages -->
+          <li class="nav-item ">
+            <a class="nav-link" href="/projects/">Projects</a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" href="/publications/">Publications</a>
+          </li>
+
+          <!-- Toogle theme mode -->
+          <div class="toggle-container">
+            <a id="light-toggle">
+              <i class="fas fa-moon"></i>
+              <i class="fas fa-sun"></i>
+            </a>
+          </div>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+
+    <!-- Content -->
+    <div class="container mt-5">
+      <!-- _layouts/post.html -->
+
+<div class="post">
+
+  <header class="post-header"><p class="post-eyebrow">QUANT  ·  MARCH 2026</p>
+<h1 class="post-title">NVDA 上卖期权能跑赢直接持有吗</h1>
+<p class="post-subtitle">Can selling NVDA options beat just holding the stock?</p>
+<hr class="post-rule">
+    <p class="post-meta">March 26, 2026<span class="post-edited">· edited May 22, 2026</span></p>
+    <p class="post-tags">
+      <a href="/blog/2026"> <i class="fas fa-calendar fa-sm"></i> 2026 </a>
+        ·  
+        <a href="/blog/tag/options">
+          <i class="fas fa-hashtag fa-sm"></i> options</a>  
+          <a href="/blog/tag/iron-condor">
+          <i class="fas fa-hashtag fa-sm"></i> iron-condor</a>  
+          <a href="/blog/tag/nvda">
+          <i class="fas fa-hashtag fa-sm"></i> nvda</a>  
+          <a href="/blog/tag/covered-call">
+          <i class="fas fa-hashtag fa-sm"></i> covered-call</a>  
+          <a href="/blog/tag/wheel">
+          <i class="fas fa-hashtag fa-sm"></i> wheel</a>  
+          
+        ·  
+        <a href="/blog/category/quant">
+          <i class="fas fa-tag fa-sm"></i> quant</a>  
+          
+
+    </p>
+<p class="post-lang-toggle">
+      <a href="#cn" class="lang-btn">中文</a>
+      <a href="#en" class="lang-btn">English</a>
+    </p></header>
+
+  <article class="post-content">
+    <h2 id="cn">中文</h2>
+
+<p>跑完一系列 SPY（S&amp;P 500 指数 ETF）上的卖期权 backtest 之后基本是同一个结论：risk-adjusted（单位风险下的收益，比如 Sharpe）比纯持仓好，但<strong>绝对收益</strong>打不过 buy-and-hold（直接买入并长期持有）。NVDA 是整个 repo 里<strong>唯一的反例</strong>——单只股票上 sell options（卖期权收 premium 当 income）干净打赢底层，所以单独拎一篇出来讲，顺便把“为什么是 NVDA、能不能复制到别的票”这件事讲清楚。数据用的是 2023-06 到 2026-01 这 2.5 年的真实 NVDA 期权报价，正好 cover 了 AI 浪潮起来到上一轮调整。下面所有结论都是<strong>最近 regime 的</strong>，不是 30 年长期常量。</p>
+
+<p>NVDA 从 2023 年中到 2026 年初翻了 3 倍。直接持有股票年化 81%。同期每个月卖 covered call（持股 + 卖一个 call 期权,把超出某个 strike 的上涨封顶,换 premium 现金）反而<strong>亏了 7 个点的 CAGR</strong>（年化复合收益率）——cap on upside 在 NVDA 飞涨的时候咬得太狠。但是如果你<strong>同时</strong>卖 call <strong>和</strong> put（双向各 5% OTM 的 “iron condor”——OTM = out-of-the-money,strike 离现价 5% 远;iron condor = 同时卖一个高位 call 和一个低位 put,赌价格在两个 strike 之间），年化 <strong>94%</strong>，回撤还比纯持 NVDA 浅。原因是结构性的：NVDA 的期权市场对保险定价过高，即使每隔几个月被 NVDA 暴涨咬一口，累计 premium 也足够 compensate。</p>
+
+<p>第二个同等重要的发现：教科书的方法（Black-Scholes 用 VIX 当 implied vol）<strong>比真实 NVDA premium 低估了 9-14 倍</strong>。如果你用这个方法在 simulator 里 backtest，结论会是策略亏钱——但真实市场上策略赚 94%。</p>
+
+<h3 id="短答">短答</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>策略</th>
+      <th>30 trades 后 CAGR</th>
+      <th>Sharpe</th>
+      <th>MaxDD</th>
+      <th>$100k →</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>纯持 NVDA</td>
+      <td>80.8%</td>
+      <td>7.27</td>
+      <td>−21.6%</td>
+      <td>$441k</td>
+    </tr>
+    <tr>
+      <td>Real covered call</td>
+      <td>73.8%</td>
+      <td>5.01</td>
+      <td>−27.9%</td>
+      <td>$388k</td>
+    </tr>
+    <tr>
+      <td><strong>Iron condor (real)</strong></td>
+      <td><strong>94.3%</strong></td>
+      <td>6.66</td>
+      <td><strong>−19.1%</strong></td>
+      <td><strong>$523k</strong></td>
+    </tr>
+    <tr>
+      <td>BS+VIX covered call</td>
+      <td>24.5%</td>
+      <td>3.07</td>
+      <td>−66.6%</td>
+      <td>$164k</td>
+    </tr>
+    <tr>
+      <td>Wheel</td>
+      <td>33.3%</td>
+      <td>9.31</td>
+      <td>−9.1%</td>
+      <td>$210k</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><img src="https://haozhezhang6.github.io/assets/img/blog/nvda-iron-condor/equity_curves.png" alt="Daily equity curves, all five strategies"></p>
+
+<p>两个最重要的对比：</p>
+
+<p><strong>1. Iron condor 在 30 个月里赚了 $523k，纯持 NVDA 是 $441k</strong>。差 $82k。同时 MaxDD 还浅 −19% vs −22%。Calmar 4.94——是整个 repo 里最高的数字。</p>
+
+<p><strong>2. BS+VIX covered call 在同样的设定下“只赚” 24.5% CAGR</strong>——同期 real 数据是 73.8%。<strong>用错了 vol input 导致策略看起来在亏钱</strong>，实际上真实 premium 远高于模型估计。</p>
+
+<h3 id="iron-condor-或者准确说-short-strangle-是什么">Iron condor (或者准确说 “short strangle”) 是什么</h3>
+
+<p>两件事同时做：</p>
+
+<ul>
+  <li>
+<strong>卖一个 5% OTM 的 call</strong>——收 premium。如果 NVDA 涨过 strike，你要赔。如果没涨到，你保留 premium。</li>
+  <li>
+<strong>卖一个 5% OTM 的 put</strong>——同理但镜像。如果 NVDA 跌穿 strike，你要赔。否则保留 premium。</li>
+</ul>
+
+<p>两个一起跑，等于在 NVDA 当前价上下各 5% 圈了一个价格走廊。如果 NVDA 那一个月内<strong>待在走廊里</strong>，两个 premium 都进你兜——干净的胜利。如果跑出走廊，一边赔钱、另一边赚。</p>
+
+<blockquote>
+  <p>术语注解：option 圈子叫这个 <strong>short strangle</strong>（没有保护翼）或者 <strong>iron condor</strong>（加保护翼把 max loss 锁定）。我们的 backtest 是 naked 版本（没翼）。但 retail platform 普遍用 “iron condor” 概括两种。下面通用“iron condor”指我们 backtest 的 short strangle 版本。要在 Reg-T 账户里跑，必须用带翼的 iron condor。</p>
+</blockquote>
+
+<h3 id="几个术语">几个术语</h3>
+
+<ul>
+  <li>
+<strong>CAGR</strong> — 年化复合回报。NVDA 80.8% over 2.5 年 ≈ 翻 3 倍</li>
+  <li>
+<strong>Sharpe</strong> — 单位波动收益。1 以上算好，5+ 罕见</li>
+  <li>
+<strong>MaxDD</strong> — 最差从峰值到谷值的损失</li>
+  <li>
+<strong>Calmar</strong> — CAGR / drawdown 深度</li>
+  <li>
+<strong>IV (implied volatility)</strong> — 期权价格里隐含的波动率。把 Black-Scholes 反向解出来的 σ</li>
+  <li>
+<strong>VIX</strong> — S&amp;P 500 一个月期权的 IV。常被误用为所有股票的“恐惧指标”</li>
+  <li>
+<strong>5% OTM</strong> — strike 在标的当前价格的 ±5% 位置</li>
+</ul>
+
+<h3 id="我们测了啥">我们测了啥</h3>
+
+<p>30 个连续月度 trades，2023 年 6 月到 2026 年 1 月，用 ThetaData 抓的 NVDA 真实 EOD option 报价。每个 trade：</p>
+
+<ul>
+  <li>月末最后一个交易日，找到下一个月度到期</li>
+  <li>Call strike 选离当前价 +5% 最近的</li>
+  <li>Put strike 选 −5% 最近的</li>
+  <li>读真实 mid 价格（不是模型估计）</li>
+  <li>持到到期。按 NVDA 到期日收盘价结算</li>
+</ul>
+
+<p>测了 5 个 strategy variant：buy-and-hold、real covered call、BS+VIX covered call（“教科书版本”）、iron condor、wheel。</p>
+
+<p>2024-06-10 的 10:1 拆股做了正确处理：拆股前 contract 的 per-share P&amp;L 按拆股前的 dollar 换算上去；拆股后 contract 用直接 per-share math。一个 contract 跨拆股期被丢弃。4 个 anchor 缺有效报价被丢弃。30 个干净 trades。</p>
+
+<h3 id="为啥卖-nvda-option-真的能赚钱">为啥卖 NVDA option 真的能赚钱</h3>
+
+<p>教科书 option 理论不会告诉你的核心事实：<strong>NVDA option 在我们这个窗口里被市场系统性 over-priced</strong>。</p>
+
+<p>30 个 trades 累计 premium 收入：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>方向</th>
+      <th>真实总 premium (per share, 30 trades)</th>
+      <th>BS+VIX 估出来的</th>
+      <th>比例</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Call</td>
+      <td>$299.81</td>
+      <td>$30.56</td>
+      <td><strong>9.81×</strong></td>
+    </tr>
+    <tr>
+      <td>Put</td>
+      <td>$256.94</td>
+      <td>$18.56</td>
+      <td><strong>13.84×</strong></td>
+    </tr>
+  </tbody>
+</table>
+
+<p><img src="https://haozhezhang6.github.io/assets/img/blog/nvda-iron-condor/real_vs_bs_premium.png" alt="Real option premium vs Black-Scholes+VIX estimate, per trade"></p>
+
+<p>差不多 10 倍。为什么？</p>
+
+<p>NVDA 在这段时间的 ATM IV 平均约 45-50%。VIX 平均 16-17%。所以教科书用错了 vol input——<strong>用了实际值的三分之一</strong>。option price 对短期合约 roughly 跟 σ 线性比例，所以 3× IV 比例直接造成 3× 的 premium gap。再加上 “smile”（OTM option 比 ATM 价更高）贡献 1.5-2×。乘起来 4-5×。我们看到 9-14×，剩下来自 <strong>NVDA-specific event risk</strong>（财报、AI 竞争、供应链）——这些 VIX 完全看不到。</p>
+
+<p><strong>策略能赚钱的原因是：市场支付你 10 倍模型估的 premium，但 NVDA 实际波动并不支撑这个价格</strong>。这就是 edge。</p>
+
+<p><strong>一句话教训</strong>：<strong>不要把 VIX 当单股 IV 输入</strong>。要用单股自己的 IV surface，没有数据就别跑这个 backtest。</p>
+
+<h3 id="哪些月份亏了">哪些月份亏了</h3>
+
+<p>30 个 trade per-share P&amp;L 的模式：</p>
+
+<ul>
+  <li>
+<strong>18/30 trades 是净正的</strong>。大部分月份 NVDA 不会涨穿 +5% 也不会跌穿 −5%，两个 wing 都过期，留下两份 premium。</li>
+  <li>
+<strong>12 个月 call 那条腿亏</strong>——NVDA 涨过 +5% strike。最差 3 个：2024-04 (−$145/share)、2024-01 (−$156)、2023-12 (−$82)。NVDA 那些月份涨了 15-35%。</li>
+  <li>
+<strong>6 个月 put 那条腿亏</strong>——NVDA 跌过 −5%。最差：2023-08 (−$23)、2025-10 (−$8)。<strong>put 端损失比 call 端</strong>小很多——NVDA 分布右偏（大涨的幅度比大跌大）。</li>
+</ul>
+
+<p>策略撑过去的原因是：<strong>call 受伤的月份，put 几乎肯定 expire worthless，赚一份 premium 抵消一部分 call 损失</strong>。月度组合下来净正的比净负的多，长期 premium 累积超过了损失。</p>
+
+<p>可以这么类比：你在经营一家小保险公司。大部分保单不付钱。少数季度有大灾难，你赔钱。只要长期收的保费超过赔出的钱，你就是一家赚钱的保险公司。<strong>NVDA 2023-2025 的期权市场在付你凯迪拉克级别的保费，而保单上是本田思域级别的赔付</strong>。</p>
+
+<p><img src="https://haozhezhang6.github.io/assets/img/blog/nvda-iron-condor/strategy_pnl_per_trade.png" alt="Per-trade P&amp;L by month"></p>
+
+<h3 id="为什么-wheel-在-nvda-上严重跑输">为什么 wheel 在 NVDA 上严重跑输</h3>
+
+<p>Wheel 在 NVDA 上跑出 33% CAGR，$210k——纯持 NVDA 的一半都不到。听起来已经不错——但记住同期 NVDA 涨了 250%。</p>
+
+<p>机制：wheel 80% 的时间在 cash phase 等 put assign。NVDA 一路猛涨，put 几乎从来不 assign，所以你大部分时间在收 ~5% 的现金利息 + 几个点的 put premium。<strong>Wheel 只在 put assign 的 20% 时间真正持有 NVDA shares</strong>——而那段时间 call 又频繁 assign，把你 flip 回 cash。</p>
+
+<p>结果：wheel Sharpe 9.31（最高），但<strong>那是 insurance product Sharpe，不是 wealth Sharpe</strong>。最终 $210k 不如纯持 $441k 的一半。</p>
+
+<h3 id="我真要跑这个策略需要多少-capital">“我真要跑这个策略需要多少 capital”</h3>
+
+<p>94% CAGR 的 headline 暗中假设你可以不锁定全部 strike 价值作为 put 的抵押。<strong>Reg-T 账户做不到这一点</strong>。NVDA 现价 $200 时的抵押大致：</p>
+
+<ul>
+  <li>
+<strong>Reg-T margin (大部分 retail)</strong>：5% OTM put @ $190 strike 大约要锁 <strong>$19,000</strong> 抵押（put strike 全额）。你收的 $15 premium 摊到 $19k 抵押上 = 一年大约 1%。意义有限。</li>
+  <li>
+<strong>Portfolio margin (PRO 账户, 一般 $100k+ 净资产)</strong>：broker 按整个组合的 risk 评估保证金，同一个 put 可能只占 <strong>$3,000-5,000</strong> buying power。同样 $15 premium 摊到 $3k = 一年大约 6%——再加上释放的资金可以同时开 5 倍的仓位。</li>
+</ul>
+
+<p>backtest 的 94% 数字本质是 portfolio margin 数字。<strong>Reg-T 账户里实际 CAGR 大约 15-25%</strong>——还是有吸引力，但远没那么戏剧化。</p>
+
+<p>如果你没有 portfolio margin，<strong>还是可以跑，只是仓位上限远低于 backtest 暗示的水平</strong>。开一张 contract，跑半年，再决定要不要 scale。</p>
+
+<h3 id="财报月份要不要交易">财报月份要不要交易</h3>
+
+<p>NVDA 每年 4 次财报（2、5、8、11 月）。财报前后：</p>
+
+<ul>
+  <li>ATM IV 飙 20-40 个百分点（从 ~45% 涨到 65-85%）</li>
+  <li>标的常常在隔夜跳动 5-15%</li>
+  <li>错位的那条腿付出代价</li>
+</ul>
+
+<p>我们 backtest 里 2024 年 4 次财报里有 3 次打穿 5% OTM call 腿，每次大约 $50/股损失。2025 Q1 财报损失 $80/股。年化下来财报月对 call 腿造成 $200-300/股伤害。</p>
+
+<p>三种处理财报月的方式：</p>
+
+<ul>
+  <li>
+<strong>直接 trade through</strong>：收高 premium，接受一条腿肯定挨打。Backtest 是这个版本。</li>
+  <li>
+<strong>跳过财报月</strong>：那个月不开仓。损失四分之一 trade count，但避免 80% 的灾难性 call 损失。预期累计 P&amp;L 大约是 trade-through 版本的 50-60%。</li>
+  <li>
+<strong>拉宽 strike</strong>：财报月卖 10% OTM 而不是 5%。Premium 少 30%，但打穿率从 ~50% 降到 ~10%。介于 trade-through 和 skip 之间。</li>
+</ul>
+
+<p>Backtest 用了第一种。换成二、三种可能更优——未来 Exp 候选。</p>
+
+<h3 id="如果换-strike-距离呢">“如果换 strike 距离呢”</h3>
+
+<p>我们测的是 5% OTM。其他距离的粗略直觉（NVDA 完整 sweep 还没跑——后续 Exp 候选）：</p>
+
+<ul>
+  <li>
+<strong>3% OTM</strong>：premium 约翻倍，但 strike 在约 50% 的月份会被打穿。spike 月份是灾难</li>
+  <li>
+<strong>5% OTM</strong>（这个研究）：平衡点——94% CAGR、Sharpe 6.66</li>
+  <li>
+<strong>7% OTM</strong>：premium 约半，打穿率 ~20%。Sharpe 估计相近，CAGR 低</li>
+  <li>
+<strong>10% OTM</strong>：premium 约 1/4，几乎不打穿。Sharpe 4-5，CAGR 30-40%</li>
+</ul>
+
+<p><strong>3-5% OTM 是经验上的 sweet spot</strong>。</p>
+
+<h3 id="iron-condoriron-flynaked-strangle-哪个对">Iron condor、Iron fly、Naked strangle 哪个对</h3>
+
+<p>Backtest 跑的是 <strong>naked</strong>（无保护翼）。意味着如果 NVDA 隔夜跳 50%，你要赔 strike 跟收盘的差额，<strong>没有 cap</strong>。这是大部分 retail broker 不会让你做的尾部场景。</p>
+
+<p>带翼版本 = 同时<strong>买</strong>一个更远 OTM 的 call（比如 10% OTM）和更远 OTM 的 put。翼会吃掉 30-50% 的 premium，但把 max loss 锁死。CAGR 可能掉到 40-60% 区间，但策略变成 <strong>Reg-T 友好</strong>，max drawdown 也按比例减小。</p>
+
+<p><strong>大部分 retail 应该用带翼的 iron condor，不是 naked</strong>。用 backtest 数字当上限，不是目标。</p>
+
+<h3 id="税务能吃掉一半">税务能吃掉一半</h3>
+
+<p>taxable 账户里每收的 premium 都是 STCG，按 ordinary income 交税。加州 top bracket 联邦 35% + 州 10% = 综合 45%。</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>税前</th>
+      <th>联邦 35% STCG 之后</th>
+      <th>联邦+加州 45% 之后</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>94% CAGR</td>
+      <td>~61%</td>
+      <td>~52%</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>税后 NVDA iron condor 大约 52% CAGR（加州 high earner）——还是惊人，但 headline 94% 是 Roth IRA 数字，不是 Schwab brokerage 数字。</p>
+
+<p><strong>要跑这个策略 + 有 IRA 容量 → 放 IRA</strong>。这对 repo 里每个 option-selling 策略都成立，但 NVDA 这个数字差距最大。</p>
+
+<h3 id="什么会让策略失效">什么会让策略失效</h3>
+
+<p>3 个 regime shift 会破掉 NVDA iron condor 的 edge：</p>
+
+<ol>
+  <li>
+<strong>NVDA IV 压缩到 SPY 水平</strong>。如果 AI 炒作冷却、NVDA 变成“无聊的大盘股” IV 从 47% 降到 25%——premium 减半，edge 也减半。</li>
+  <li>
+<strong>尾部风险频率上升</strong>。NVDA 开始更频繁出 20%+ 月度移动（中国关税、AI 泡沫破、产能过剩）——call 腿挨打的频率超过 premium 能补的速度。</li>
+  <li>
+<strong>财报移动比 implied 还大</strong>。现在 NVDA 财报 IV 正好够 cover 实际 move。如果反过来（IV 看着贵，但 realized variance 更高），edge 翻负。</li>
+</ol>
+
+<p><strong>这是 regime-dependent 的交易，不是永久 inefficiency</strong>。</p>
+
+<h3 id="这个能-generalize-到其他股票吗">这个能 generalize 到其他股票吗</h3>
+
+<p>短答：<strong>几乎不行</strong>。</p>
+
+<p>Exp 42 在 4 个高 IV 名字 (AAPL, NVDA, TSLA, GOOGL) 上跑同样的 mechanic。<strong>只有 NVDA 干净打赢 buy-and-hold</strong>。TSLA 60% IV 也很高，但 IC 跑输。AAPL、GOOGL 都跑输。Portfolio 平均也跑输股票本身。</p>
+
+<p>结论：NVDA 在这个窗口里<strong>有结构性高估的 premium</strong>——retail 大量买 call、财报波动、AI 叙事拉高 implied vs realized。这些条件是 NVDA 特定的。其他“高 IV”名字的 IV 高是<strong>因为现实价格也乱跳</strong>，卖 premium 不是免费午餐。</p>
+
+<p>可能候选（值得测，没测过）：MSTR（BTC 代理炒作）、SMCI、PLTR。不太可能的：TSLA（已测，没用）、AAPL（premium 太贴近 realized vol）。</p>
+
+<h3 id="行为成本">行为成本</h3>
+
+<p>这个策略最大的敌人是跑它的人。</p>
+
+<p>NVDA 月度 P&amp;L 是双峰分布：~60% 的月份小赚 (+1% 到 +3%)，~10% 的月份大亏 call 腿 (−10% 到 −30%)。当你在 −15% 月度回撤里看着 NVDA 又涨了 20%——策略看起来已经废了。是教科书的“我早说过卖 momentum 股 option 是 stupid”时刻。</p>
+
+<p>94% CAGR specifically 要求<strong>坐穿 2024 Q1 那 $156/股月度亏损</strong>。任何在 2024 Q2 cut 掉策略的人错过反弹、锁住 30-50% drawdown。</p>
+
+<p>要跑这个，<strong>进场前写下规则</strong>：</p>
+
+<ul>
+  <li>单月坏不 cut</li>
+  <li>6 个月累计 P&amp;L 评估一次，不是单笔</li>
+  <li>预定仓位规模。好月份不加，坏月份不减</li>
+</ul>
+
+<p>策略对<strong>事先决定了坏月份怎么办</strong>的 trader 有效。对在坏月份现场决定的 trader 无效。</p>
+
+<h3 id="我会怎么操作">我会怎么操作</h3>
+
+<p>如果我真要把这个放进 portfolio：</p>
+
+<ol>
+  <li>
+<strong>没有 portfolio margin 就别做</strong>。Reg-T 抵押吃掉 headline return。$100k+ 才有资格 qualify。</li>
+  <li>
+<strong>跑带翼版本，不是 naked strangle</strong>。10% OTM 翼吃 30% premium，换硬 cap on loss。值得。</li>
+  <li>
+<strong>跳过财报月或者拉宽 strike</strong>。两种都大致砍掉一半最坏月份，对 total return 影响小。</li>
+  <li>
+<strong>用真实 option mid，不要用模型估</strong>。拿不到真实数据就别 scale 仓位。</li>
+  <li>
+<strong>放 IRA</strong>。税差近一半 return。</li>
+  <li>
+<strong>Sizing 让单月 30% loss 能扛</strong>。大约 NVDA 等效 notional 的 20%，不是 100%。</li>
+  <li>
+<strong>进场前写下 “我不慌” 规则</strong>。看得见的位置。</li>
+  <li>
+<strong>每 6 个月重新评估 edge</strong>。Edge 来自 NVDA 当前 inflated IV。当 IV 压缩到合理价位，edge 死。那时候停。</li>
+</ol>
+
+<h4 id="一些技术细节">一些技术细节</h4>
+
+<ul>
+  <li>只有 30 个月数据。NVDA 2023-06 到 2026-01 是个<strong>特殊牛市</strong>。包含 NVDA bear leg 的未来窗口 call 腿表现可能不一样</li>
+  <li>Backtest 无摩擦。30 个 trades × 5-10 bps 往返 → 一年几个 bps 成本。对 IC 影响小，对 wheel 影响大</li>
+  <li>Put 腿假设 cash-secured。真实 portfolio margin 下 effective CAGR 大约 60-70% 不是 94%</li>
+  <li>固定 30 DTE。短 DTE 在 SPY covered call 上更优（Exp 37 结论），NVDA 上没专门测</li>
+  <li>NVDA-specific premium 富集。AAPL 上 BS-VIX gap 是 ~2×，NVDA 是 9-14×。其他名字中间</li>
+  <li>财报集中。NVDA 最大 move 经常在财报。Skipping earnings month 可能是免费 improvement，没专门测</li>
+</ul>
+
+<h4 id="文件">文件</h4>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">experiments/exp_33_real_nvda_strategies.py</code></li>
+  <li>
+<code class="language-plaintext highlighter-rouge">trades.csv</code> — 30 个月度 trades 含真实 + 模型 premium + payoffs</li>
+  <li>
+<code class="language-plaintext highlighter-rouge">summary.csv</code> — 5 个 strategy 的 CAGR / Sharpe / MaxDD / Calmar</li>
+  <li>
+<code class="language-plaintext highlighter-rouge">plots/equity_curves.png</code> — 每日 equity</li>
+  <li>
+<code class="language-plaintext highlighter-rouge">plots/real_vs_bs_premium.png</code> — 真实 vs 模型 premium 对比</li>
+  <li>
+<code class="language-plaintext highlighter-rouge">plots/strategy_pnl_per_trade.png</code> — 每月 P&amp;L 柱状</li>
+</ul>
+
+<hr>
+
+<h2 id="en">English</h2>
+
+<p>The SPY (the S&amp;P 500 index ETF) option-selling backtests in the rest of this repo all land on the same conclusion: risk-adjusted return (return per unit of risk, e.g. Sharpe) goes up, <strong>absolute</strong> return doesn’t beat buy-and-hold. NVDA is the <strong>one exception</strong> — the single name where selling options (collecting premium as income from option buyers) cleanly beats holding the underlying — so it gets its own post, and a real look at <em>why it’s NVDA</em> and whether the result transfers anywhere else. The data is 2.5 years of real NVDA option quotes from June 2023 to January 2026, which spans the run-up of the AI rally and the pullback that followed. Every finding below is a <em>recent-regime</em> result, not a long-run constant.</p>
+
+<p>NVDA tripled between mid-2023 and early-2026. Owning the shares earned about <strong>81 % per year</strong>. Selling a covered call (holding the shares plus selling a call option to cap the upside above some strike in exchange for cash premium) against those shares each month <em>lost you</em> 7 percentage points of CAGR (compound annual growth rate); the cap on upside bit hard when NVDA ripped. But if you sold a call AND a put each month — both 5 % away from the current price (out-of-the-money, OTM, in options jargon; selling both at once is an “iron condor,” betting price stays inside the two strikes) — you earned <strong>94 % per year, with a shallower drawdown than just owning NVDA</strong>. The reason is structural: NVDA’s option market was systematically over-paying for protection, so even after eating big losses when NVDA ripped, the cumulative premium more than compensated.</p>
+
+<p>The second finding is just as important: the textbook way to estimate single-stock option premium (Black-Scholes with VIX plugged in) was <strong>9-14× too low</strong>. Anyone running this strategy in simulation using that method would have rejected it as unprofitable — and missed the trade.</p>
+
+<h3 id="the-short-version">The short version</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Strategy</th>
+      <th>CAGR over 30 trades</th>
+      <th>Sharpe</th>
+      <th>MaxDD</th>
+      <th>$100k →</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Buy-and-hold NVDA</td>
+      <td>80.8 %</td>
+      <td>7.27</td>
+      <td>−21.6 %</td>
+      <td>$441 k</td>
+    </tr>
+    <tr>
+      <td>Real covered call</td>
+      <td>73.8 %</td>
+      <td>5.01</td>
+      <td>−27.9 %</td>
+      <td>$388 k</td>
+    </tr>
+    <tr>
+      <td><strong>Iron condor (real)</strong></td>
+      <td><strong>94.3 %</strong></td>
+      <td>6.66</td>
+      <td><strong>−19.1 %</strong></td>
+      <td><strong>$523 k</strong></td>
+    </tr>
+    <tr>
+      <td>BS+VIX covered call</td>
+      <td>24.5 %</td>
+      <td>3.07</td>
+      <td>−66.6 %</td>
+      <td>$164 k</td>
+    </tr>
+    <tr>
+      <td>Wheel</td>
+      <td>33.3 %</td>
+      <td>9.31</td>
+      <td>−9.1 %</td>
+      <td>$210 k</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><img src="https://haozhezhang6.github.io/assets/img/blog/nvda-iron-condor/equity_curves.png" alt="Daily equity curves, all five strategies"></p>
+
+<p>Two key comparisons:</p>
+
+<p><strong>1. Iron condor earned $523 k over 30 months. Plain NVDA earned $441 k.</strong> A $82 k gap. With a shallower drawdown (−19 % vs −22 %). Calmar 4.94 — the highest number in the entire repo.</p>
+
+<p><strong>2. BS+VIX covered call shows 24.5 % CAGR for the same setup — actual real-data CC returned 73.8 %.</strong> Using the wrong volatility input makes the strategy look unprofitable when real premium is 10× the modeled estimate.</p>
+
+<h3 id="whats-an-iron-condor-technically-a-short-strangle">What’s an iron condor (technically a “short strangle”)</h3>
+
+<p>Two things at once:</p>
+
+<ul>
+  <li>
+<strong>Sell a 5 % OTM call.</strong> Collect premium. Pay if NVDA closes above strike at expiry.</li>
+  <li>
+<strong>Sell a 5 % OTM put.</strong> Mirror image. Pay if NVDA closes below strike.</li>
+</ul>
+
+<p>Together you box a price corridor ±5 % around the current price. If NVDA <strong>stays inside the corridor</strong> that month, you keep both premiums — clean win. If it breaks out, one side pays, the other still collects.</p>
+
+<blockquote>
+  <p>Terminology: option traders call this a <strong>short strangle</strong> (no protective wings) or an <strong>iron condor</strong> (with further-OTM long wings capping max loss). Our backtest is the naked version (no wings). Retail platforms use “iron condor” loosely for both. We use “iron condor” throughout to match common usage — but for a Reg-T account, you’d want the wing-protected version (more below).</p>
+</blockquote>
+
+<h3 id="a-few-terms">A few terms</h3>
+
+<ul>
+  <li>
+<strong>CAGR</strong> — annualized compound return. NVDA 80.8 % over 2.5y ≈ tripled.</li>
+  <li>
+<strong>Sharpe</strong> — return per unit of volatility. Above 1 is good, 5+ is rare.</li>
+  <li>
+<strong>MaxDD</strong> — worst peak-to-trough loss.</li>
+  <li>
+<strong>Calmar</strong> — CAGR ÷ drawdown depth.</li>
+  <li>
+<strong>IV (implied volatility)</strong> — the volatility figure embedded in option prices. Solving Black-Scholes backward from a real market price gives you σ.</li>
+  <li>
+<strong>VIX</strong> — implied vol of 1-month SPX options. Often misused as a “fear gauge” for all stocks.</li>
+  <li>
+<strong>5 % OTM</strong> — strike is 5 % above (call) or below (put) the current price.</li>
+</ul>
+
+<h3 id="what-we-tested">What we tested</h3>
+
+<p>30 consecutive monthly trades, June 2023 to January 2026, using real EOD option quotes from ThetaData. Each trade:</p>
+
+<ul>
+  <li>Last trading day of the month, find the next monthly expiration</li>
+  <li>Pick the call strike closest to +5 % above current price</li>
+  <li>Pick the put strike closest to −5 %</li>
+  <li>Read real mid prices (not modeled)</li>
+  <li>Hold to expiry, settle at closing price</li>
+</ul>
+
+<p>Five strategy variants: buy-and-hold, real covered call, BS+VIX covered call (“textbook version”), iron condor, wheel.</p>
+
+<p>The 2024-06-10 10:1 stock split is handled correctly. One contract spanning the split was discarded. Four anchors missing valid quotes were discarded. 30 clean trades remain.</p>
+
+<h3 id="why-selling-nvda-options-actually-works">Why selling NVDA options actually works</h3>
+
+<p>The textbook option theory doesn’t tell you the core fact: <strong>NVDA options were systematically over-priced relative to realized vol</strong> in our window.</p>
+
+<p>Cumulative premium collected over 30 trades:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Side</th>
+      <th>Real premium per share (sum)</th>
+      <th>BS+VIX estimate</th>
+      <th>Ratio</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Calls</td>
+      <td>$299.81</td>
+      <td>$30.56</td>
+      <td><strong>9.81×</strong></td>
+    </tr>
+    <tr>
+      <td>Puts</td>
+      <td>$256.94</td>
+      <td>$18.56</td>
+      <td><strong>13.84×</strong></td>
+    </tr>
+  </tbody>
+</table>
+
+<p><img src="https://haozhezhang6.github.io/assets/img/blog/nvda-iron-condor/real_vs_bs_premium.png" alt="Real option premium vs Black-Scholes+VIX estimate, per trade"></p>
+
+<p>About 10× the model. Why?</p>
+
+<p>NVDA’s ATM IV averaged ~45-50 % during this window. VIX averaged 16-17 %. So the textbook used the wrong vol input — <strong>a third of the actual value</strong>. Option price scales roughly linearly with σ for short-dated contracts, so a 3× IV ratio drives most of the 3× premium gap. The “smile” (OTM options priced even higher than ATM) adds another 1.5-2×. Multiply: 4-5×. We see 9-14×, so the remaining gap comes from <strong>NVDA-specific event risk</strong> (earnings, AI competition, supply chain) that VIX can’t see.</p>
+
+<p><strong>The strategy works because the market pays you 10× the modeled premium, while NVDA’s actual moves don’t justify a price that high.</strong> That’s the edge.</p>
+
+<p><strong>One-line takeaway</strong>: <strong>never use VIX as IV for single names.</strong> Use the underlying’s own IV surface. If you can’t get that data, don’t run the backtest.</p>
+
+<h3 id="which-months-lost-money">Which months lost money</h3>
+
+<p>The per-trade P&amp;L pattern:</p>
+
+<ul>
+  <li>
+<strong>18/30 trades were net positive.</strong> Most months NVDA neither rose past +5 % nor dropped past −5 %; both wings expired and we kept both premiums.</li>
+  <li>
+<strong>12 months the call leg lost.</strong> Worst three: April 2024 (−$145/share), January 2024 (−$156), December 2023 (−$82). NVDA ripped 15-35 % those months.</li>
+  <li>
+<strong>6 months the put leg lost.</strong> Worst: August 2023 (−$23), October 2025 (−$8). Put losses are <strong>much smaller</strong> than call losses — NVDA’s distribution skews right.</li>
+</ul>
+
+<p>The strategy survives because <strong>when the call leg gets hit, the put leg almost always expires worthless and contributes positive P&amp;L</strong>. More months were net positive than negative, and the long-run accumulation of premium exceeded the losses.</p>
+
+<p>Think of it like running a small insurance company. Most policies pay nothing. A few quarters somebody has a really bad accident and you write a big check. As long as your premiums collected exceed your claims paid, you’re a profitable insurer. <strong>NVDA’s options market in 2023-2025 was paying you Cadillac premiums on Honda Civic claims.</strong></p>
+
+<p><img src="https://haozhezhang6.github.io/assets/img/blog/nvda-iron-condor/strategy_pnl_per_trade.png" alt="Per-trade P&amp;L by month"></p>
+
+<h3 id="why-the-wheel-underperformed-badly-on-nvda">Why the wheel underperformed badly on NVDA</h3>
+
+<p>The wheel on NVDA returned 33 % CAGR, $210 k — less than half what holding NVDA paid. Sounds good in isolation — but NVDA itself went up 250 % over the window.</p>
+
+<p>Mechanism: the wheel sits in cash 80 % of the time waiting for puts to assign. NVDA marched up relentlessly, puts rarely assigned, so most of the time the strategy collected ~5 % cash interest + a few percent in put premium. <strong>The wheel only owned NVDA shares 20 % of the time</strong> — and during those stretches calls assigned frequently, flipping back to cash and missing the next rally.</p>
+
+<p>Result: wheel Sharpe 9.31 (highest in the table). But <strong>that’s insurance-product Sharpe, not wealth Sharpe</strong>. The final $210 k can’t compete with B&amp;H’s $441 k.</p>
+
+<h3 id="how-much-capital-do-i-actually-need">“How much capital do I actually need?”</h3>
+
+<p>The 94 % CAGR headline quietly assumes you can sell short puts without setting aside the full strike value as collateral. <strong>Reg-T accounts can’t do that.</strong> Rough collateral math with NVDA at $200:</p>
+
+<ul>
+  <li>
+<strong>Reg-T margin (most retail)</strong>: a 5 % OTM put at $190 strike requires roughly <strong>$19 000</strong> of collateral (full put strike). Your $15 premium on $19 k = ~1 % a year. Material but not life-changing.</li>
+  <li>
+<strong>Portfolio margin (PRO accounts, typically $100 k+ equity)</strong>: broker risk-scores the whole position. Same put might block off only <strong>$3 000-5 000</strong> of buying power. Now $15 premium = ~6 % a year on collateral — and you can stack 5× more positions with the freed capital.</li>
+</ul>
+
+<p><strong>The 94 % CAGR is a portfolio-margin number.</strong> In a Reg-T account the realistic CAGR is more like 15-25 % — still attractive, but not the screenshot-worthy figure.</p>
+
+<p>If you don’t have portfolio margin, <strong>you can still run this, just at much smaller size than the backtest implies.</strong> Sell one contract, run it for 6 months, then decide whether to scale.</p>
+
+<h3 id="earnings-months-are-different">Earnings months are different</h3>
+
+<p>NVDA reports earnings 4 times a year (Feb, May, Aug, Nov). Around earnings:</p>
+
+<ul>
+  <li>ATM IV balloons 20-40 percentage points (~45 % → 65-85 %)</li>
+  <li>The stock often moves 5-15 % overnight</li>
+  <li>Whichever leg is on the wrong side pays out big</li>
+</ul>
+
+<p>In the backtest, 3 of 4 NVDA earnings in 2024 broke the 5 %-OTM call leg, costing ~$50/share each. The Q1 2025 earnings cost ~$80/share. Annualized, earnings-month damage is $200-300/share on the call leg.</p>
+
+<p>Three ways to handle earnings months:</p>
+
+<ul>
+  <li>
+<strong>Trade through.</strong> Collect inflated premium, accept that one leg will get crushed. (Backtest does this.)</li>
+  <li>
+<strong>Skip earnings months.</strong> Lose a quarter of trades but avoid 80 % of catastrophic call losses. Cumulative P&amp;L roughly 50-60 % of trade-through.</li>
+  <li>
+<strong>Widen strikes in earnings months.</strong> Sell 10 % OTM instead of 5 % OTM. Premium ~30 % lower, binding rate ~10 % instead of ~50 %.</li>
+</ul>
+
+<p>Backtest used the first version. Versions two and three are likely improvements — future Exp candidates.</p>
+
+<h3 id="what-if-i-widen-the-strikes">“What if I widen the strikes?”</h3>
+
+<p>We tested 5 % OTM both sides. Rough intuition for other widths (full NVDA sweep not done — candidate Exp):</p>
+
+<ul>
+  <li>
+<strong>3 % OTM</strong>: roughly double the premium, strikes bind ~50 % of months. Catastrophic in spike months.</li>
+  <li>
+<strong>5 % OTM</strong> (this study): the empirical sweet spot — 94 % CAGR, Sharpe 6.66.</li>
+  <li>
+<strong>7 % OTM</strong>: ~50 % of the premium, binds ~20 %. Similar Sharpe, lower CAGR.</li>
+  <li>
+<strong>10 % OTM</strong>: ~25 % premium, almost never binds. Sharpe 4-5, CAGR 30-40 %.</li>
+</ul>
+
+<p><strong>3-5 % OTM is the empirical sweet spot.</strong></p>
+
+<h3 id="iron-condor-vs-iron-fly-vs-naked-strangle">Iron condor vs iron fly vs naked strangle</h3>
+
+<p>Backtest sold <strong>naked</strong> (no protective wings). If NVDA gapped up 50 % overnight, you’d owe strike-to-close with <strong>no cap</strong>. Most retail brokers won’t let you take that exposure.</p>
+
+<p>The wing-protected version: same setup, but also <em>buy</em> a further-OTM call (say at 10 % OTM) and a further-OTM put. Wings cost 30-50 % of premium but cap max loss. CAGR probably drops to 40-60 % range, but the strategy becomes <strong>Reg-T eligible</strong> and max drawdown shrinks proportionally.</p>
+
+<p><strong>Most retail should run the wing-protected iron condor, not the naked strangle.</strong> Use the backtest number as an upper bound, not a target.</p>
+
+<h3 id="taxes-can-take-half">Taxes can take half</h3>
+
+<p>Every premium is short-term capital gains in a taxable account, taxed as ordinary income. California top-bracket: 35 % federal + 10 % state = 45 % blended.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Pre-tax</th>
+      <th>After 35 % federal STCG</th>
+      <th>After full 45 % CA</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>94 % CAGR</td>
+      <td>~61 %</td>
+      <td>~52 %</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>After-tax CA NVDA iron condor ~52 % CAGR — still extraordinary, but the 94 % headline is a Roth IRA number.</p>
+
+<p><strong>Run this in an IRA if you have the capacity.</strong> True for every option-selling strategy in the repo, but the gap is biggest here.</p>
+
+<h3 id="what-kills-the-strategy">What kills the strategy</h3>
+
+<p>Three regime shifts would break the edge:</p>
+
+<ol>
+  <li>
+<strong>NVDA’s IV compresses to SPY levels.</strong> If AI hype cools and NVDA becomes a “boring mega-cap” with 25 % IV instead of 47 %, premium halves and so does the edge.</li>
+  <li>
+<strong>Tail-risk frequency rises.</strong> If NVDA starts having 20 %+ monthly moves more often (China tariffs, AI bubble pop, capacity glut), the call leg gets crushed faster than premium can replace.</li>
+  <li>
+<strong>Earnings moves grow larger than implied.</strong> Currently NVDA earnings IV is rich enough to cover actual moves. If that flips (vol becomes “expensive” but realized variance even higher), edge goes negative.</li>
+</ol>
+
+<p><strong>This is a regime-dependent trade, not a permanent inefficiency.</strong></p>
+
+<h3 id="does-this-generalize-to-other-stocks">Does this generalize to other stocks?</h3>
+
+<p>Short answer: <strong>mostly no</strong>.</p>
+
+<p>A separate experiment on 4 high-IV names (AAPL, NVDA, TSLA, GOOGL) running the same iron-condor mechanic showed <strong>only NVDA cleanly beat buy-and-hold</strong>. TSLA’s 60 % IV is high too but IC underperformed. AAPL and GOOGL underperformed. The portfolio average lost to a basket of the stocks.</p>
+
+<p>Conclusion: NVDA had <strong>structurally over-priced premium</strong> during this window — retail call-buying interest, earnings volatility, AI narrative all pumped implied vs realized vol. These conditions are NVDA-specific. Other “high IV” names typically have high IV <strong>because they actually move that much</strong>, so selling premium isn’t a free lunch.</p>
+
+<p>Plausible candidates worth testing: MSTR (BTC-proxy hype), SMCI, PLTR. Unlikely: TSLA (already tested, didn’t work), AAPL (premium too close to realized vol).</p>
+
+<h3 id="behavioral-cost">Behavioral cost</h3>
+
+<p>The biggest enemy of this strategy is the person running it.</p>
+
+<p>NVDA’s monthly P&amp;L is bimodal: ~60 % of months are small wins (+1 % to +3 %), ~10 % are big losses on the call leg (−10 % to −30 %). When you’re sitting in a −15 % monthly drawdown while watching NVDA rip another 20 %, the strategy looks broken. It’s the textbook “I told you so” moment.</p>
+
+<p>The 94 % CAGR <strong>specifically requires sitting through Q1 2024‘s $156/share monthly loss</strong>. Anyone who cut the strategy in Q2 2024 missed the recovery and locked in a 30-50 % drawdown.</p>
+
+<p>To run this, <strong>write down the rules before the first trade</strong>:</p>
+
+<ul>
+  <li>Don’t cut after a single bad month</li>
+  <li>Re-evaluate after 6 months of cumulative P&amp;L, not after one print</li>
+  <li>Pre-commit position sizing — don’t double up after good months, don’t halve after bad</li>
+</ul>
+
+<p>The strategy works for traders who decided <strong>in advance</strong> what they’d do when it looked broken. It doesn’t work for the trader who improvises mid-drawdown.</p>
+
+<h3 id="what-i-would-actually-do">What I would actually do</h3>
+
+<p>If I were putting this into a real portfolio:</p>
+
+<ol>
+  <li>
+<strong>Don’t run this without portfolio margin.</strong> Reg-T collateral kills the headline return. Need $100 k+ equity to qualify.</li>
+  <li>
+<strong>Run the wing-protected version, not naked.</strong> 10 % OTM wings cost 30 % of premium but hard-cap loss. Worth it.</li>
+  <li>
+<strong>Skip or widen strikes for earnings months.</strong> Roughly halves the worst losses with smaller hit to total return.</li>
+  <li>
+<strong>Use real option mids, not modeled.</strong> If you can’t get actual quotes, don’t size up.</li>
+  <li>
+<strong>Run it in an IRA if you have capacity.</strong> Tax difference is roughly half your return.</li>
+  <li>
+<strong>Size such that a 30 % loss month is survivable.</strong> That’s about 20 % of NVDA-equivalent notional, not 100 %.</li>
+  <li>
+<strong>Write your “I won’t panic” rules on paper before the first trade.</strong> Keep them visible.</li>
+  <li>
+<strong>Re-evaluate the edge every 6 months.</strong> The strategy works because NVDA IV is currently inflated. When it compresses to fair value, the edge dies. Stop trading then.</li>
+</ol>
+
+<h4 id="boring-stuff">Boring stuff</h4>
+
+<ul>
+  <li>Only 30 months of data. NVDA’s 2023-06 to 2026-01 was a <strong>unique bull run</strong>. A future window including a NVDA bear leg may show different call-leg behavior.</li>
+  <li>Frictionless backtest. 30 trades × 5-10 bps round-trip = a few bps/yr cost. Material to the wheel, immaterial to IC.</li>
+  <li>Put leg assumed cash-secured. Real portfolio-margin execution yields closer to 60-70 % CAGR than 94 %.</li>
+  <li>Fixed 30 DTE. Shorter cycles dominate for SPY (separate experiment) — likely true for NVDA but unverified.</li>
+  <li>NVDA-specific premium richness. AAPL’s BS-VIX gap is ~2×, NVDA’s is 9-14×. Other names in between.</li>
+  <li>Earnings concentration. Some of NVDA’s biggest moves are at earnings. Skipping the month with earnings might be a free improvement, untested.</li>
+</ul>
+
+<h4 id="files">Files</h4>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">experiments/exp_33_real_nvda_strategies.py</code></li>
+  <li>
+<code class="language-plaintext highlighter-rouge">trades.csv</code> — 30 monthly trades with real and modeled premiums + payoffs.</li>
+  <li>
+<code class="language-plaintext highlighter-rouge">summary.csv</code> — CAGR / Sharpe / MaxDD / Calmar for all 5 strategies.</li>
+  <li>
+<code class="language-plaintext highlighter-rouge">plots/equity_curves.png</code> — daily equity curves.</li>
+  <li>
+<code class="language-plaintext highlighter-rouge">plots/real_vs_bs_premium.png</code> — per-trade real vs modeled premium.</li>
+  <li>
+<code class="language-plaintext highlighter-rouge">plots/strategy_pnl_per_trade.png</code> — per-trade P&amp;L bars.</li>
+</ul>
+
+  </article>
+
+</div>
+
+    </div>
+
+    <!-- Footer -->    
+    <footer class="fixed-bottom">
+      <div class="container mt-0">
+        © Copyright 2026 Haozhe  Zhang. Powered by <a href="https://jekyllrb.com/" target="_blank" rel="noopener noreferrer">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio" target="_blank" rel="noopener noreferrer">al-folio</a> theme. Hosted by <a href="https://pages.github.com/" target="_blank" rel="noopener noreferrer">GitHub Pages</a>.
+
+      </div>
+    </footer>
+
+    <!-- JavaScripts -->
+    <!-- jQuery -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+    <!-- Bootsrap & MDB scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.2/dist/umd/popper.min.js" integrity="sha256-l/1pMF/+J4TThfgARS6KwWrk/egwuVvhRzfLAMQ6Ds4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" integrity="sha256-SyTu6CwrfOhaznYZPoolVw2rxoY7lKYKQvqbtqN93HI=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mdbootstrap@4.20.0/js/mdb.min.js" integrity="sha256-NdbiivsvWt7VYCt6hYNT3h/th9vSTL4EDWeGs5SN3DA=" crossorigin="anonymous"></script>
+
+    
+    <!-- Load Common JS -->
+  <script src="/assets/js/common.js"></script>
+
+    <!-- MathJax -->
+  <script type="text/javascript">
+    window.MathJax = {
+      tex: {
+        tags: 'ams'
+      }
+    };
+  </script>
+  <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js"></script>
+
+    
+  </body>
+</html>
+

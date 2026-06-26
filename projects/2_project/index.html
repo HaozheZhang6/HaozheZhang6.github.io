@@ -2,16 +2,16 @@
 <html lang="en">
 
   <!-- Head -->
-  <head><meta http-equiv="refresh" content="3; url=https://HaozheZhang6.github.io/" />    <!-- Metadata, OpenGraph and Schema.org -->
+  <head>    <!-- Metadata, OpenGraph and Schema.org -->
     
 
     <!-- Standard metadata -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Haozhe Zhang | Page not found</title>
+    <title>Haozhe Zhang | voice agent for stocks</title>
     <meta name="author" content="Haozhe  Zhang" />
-    <meta name="description" content="Looks like there has been a mistake. Nothing exists here." />
+    <meta name="description" content="LLM-powered voice agent for daily stock-market chat, with offline KB pre-processing" />
     <meta name="keywords" content="jekyll, jekyll-theme, academic-website, portfolio-website" />
 
 
@@ -36,7 +36,7 @@
     <link rel="shortcut icon" href="/assets/img/android-chrome-512x512.png"/>
     
     <link rel="stylesheet" href="/assets/css/main.css">
-    <link rel="canonical" href="https://haozhezhang6.github.io/404.html">
+    <link rel="canonical" href="https://haozhezhang6.github.io/projects/2_project/">
     
     <!-- Dark Mode -->
     
@@ -105,12 +105,17 @@
         <div class="post">
 
           <header class="post-header">
-            <h1 class="post-title">Page not found</h1>
-            <p class="post-description">Looks like there has been a mistake. Nothing exists here.</p>
+            <h1 class="post-title">voice agent for stocks</h1>
+            <p class="post-description">LLM-powered voice agent for daily stock-market chat, with offline KB pre-processing</p>
           </header>
 
           <article>
-            <p>You will be redirected to the main page within 3 seconds. If not redirected, please click <a href="https://HaozheZhang6.github.io/">here</a>.</p>
+            <p>A voice agent for daily stock-market conversation — earnings, macro, ticker news. The design sidesteps the usual latency-vs-reasoning trade-off in voice products: every morning a frontier model pre-processes the day’s news, analyst notes, and price action into a semantically-indexed brief; at runtime the voice layer only retrieves from that brief and reads it out. You get frontier-quality content with small-model latency, at the cost of being scoped to a single domain.</p>
+
+<p>Stack: FastAPI + WebRTC, <code class="language-plaintext highlighter-rouge">webrtcvad</code>, Whisper ASR (SenseVoice as self-hosted fallback), Edge-TTS, GLM-4.5-air, Supabase + Upstash Redis.</p>
+
+<p><a href="https://www.laurionai.com/" target="_blank" rel="noopener noreferrer">laurionai.com</a> · <a href="/agents/2025/11/30/voice-agent.html">Writeup</a></p>
+
           </article>
 
         </div>
