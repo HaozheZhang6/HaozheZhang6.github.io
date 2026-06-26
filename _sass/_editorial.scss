@@ -153,6 +153,40 @@ h6 {
   overflow: hidden;
 }
 
+// Uniform cards: same width (grid is already 1fr columns) AND same height.
+// `grid-auto-rows: 1fr` levels every row to the tallest card, the card fills
+// its cell as a flex column, and a fixed image aspect ratio + object-fit:cover
+// makes every thumbnail occupy an identical area regardless of the source
+// image's proportions (some are 2:1, one is ~5:1). Shorter text just leaves a
+// little whitespace at the bottom rather than shrinking the card.
+.projects .grid {
+  grid-auto-rows: 1fr;
+  align-items: stretch;
+}
+.projects .grid-item .card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.projects .grid-item .card figure {
+  margin: 0;
+}
+.projects .grid-item .card figure,
+.projects .grid-item .card picture {
+  display: block;
+  width: 100%;
+}
+.projects .grid-item .card img,
+.projects .grid-item .card .card-thumb-placeholder {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  display: block;
+}
+.projects .grid-item .card .card-body {
+  flex: 1 1 auto;
+}
+
 .post-list li {
   h3 a.post-title {
     font-family: $ed-serif;
