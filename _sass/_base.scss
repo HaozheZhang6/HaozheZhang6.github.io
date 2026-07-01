@@ -251,6 +251,24 @@ blockquote {
   color: var(--global-text-color);
 }
 
+// News images must show in full. A wide image in a table cell would push the
+// table past its container and get clipped by .table-responsive's horizontal
+// overflow. Pinning the table layout to the container width makes the image
+// scale down to the cell instead of being cut off.
+.news .table {
+  table-layout: fixed;
+  width: 100%;
+}
+.news .table th {
+  width: 7rem;
+}
+.news .table td img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 0.6rem 0;
+}
+
 // Social (bottom)
 
 .social {
