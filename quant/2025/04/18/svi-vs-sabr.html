@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <!-- Head -->
+  <head>    <!-- Metadata, OpenGraph and Schema.org -->
+    
+
+    <!-- Standard metadata -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Haozhe Zhang | SVI vs SABR：短期合约 vol smile 上的差距 / SVI vs SABR, the gap on short-tenor smiles</title>
+    <meta name="author" content="Haozhe  Zhang" />
+    <meta name="description" content="对 SDE 金融建模起了兴趣，跑了一下 AAPL vol surface 拟合——short tenor SVI 比 SABR 好 2–5×" />
+    <meta name="keywords" content="jekyll, jekyll-theme, academic-website, portfolio-website" />
+
+
+    <!-- Bootstrap & MDB -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-DF7Zhf293AJxJNTmh5zhoYYIMs2oXitRfBjY+9L//AY=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdbootstrap@4.20.0/css/mdb.min.css" integrity="sha256-jpjYvU3G3N6nrrBwXJoVEYI/0zw8htfFnhT9ljN3JJw=" crossorigin="anonymous" />
+
+    <!-- Fonts & Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.1/css/academicons.min.css" integrity="sha256-i1+4qU2G2860dGGIOJscdC30s9beBXjFfzjWLjBRsBg=" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons">
+    <!-- Editorial serif (blog post pages) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Inter:wght@500;600&display=swap">
+
+    <!-- Code Syntax Highlighting -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jwarby/jekyll-pygments-themes@master/github.css" media="none" id="highlight_theme_light" />
+
+    <!-- Styles -->
+    
+    <link rel="shortcut icon" href="/assets/img/android-chrome-512x512.png"/>
+    
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="canonical" href="https://haozhezhang6.github.io/quant/2025/04/18/svi-vs-sabr.html">
+    
+    <!-- Dark Mode -->
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jwarby/jekyll-pygments-themes@master/native.css" media="none" id="highlight_theme_dark" />
+
+    <script src="/assets/js/theme.js"></script>
+    <script src="/assets/js/dark_mode.js"></script>
+    
+
+  </head>
+
+  <!-- Body -->
+  <body class="fixed-top-nav  post-page ">
+
+    <!-- Header --><header>
+
+  <!-- Nav Bar -->
+  <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top">
+    <div class="container">
+      <a class="navbar-brand title font-weight-lighter" href="https://HaozheZhang6.github.io/">Haozhe Zhang</a>
+      <!-- Navbar Toggle -->
+      <button class="navbar-toggler collapsed ml-auto" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar top-bar"></span>
+        <span class="icon-bar middle-bar"></span>
+        <span class="icon-bar bottom-bar"></span>
+      </button>
+
+      <div class="collapse navbar-collapse text-right" id="navbarNav">
+        <ul class="navbar-nav ml-auto flex-nowrap">
+
+          <!-- About -->
+          <li class="nav-item ">
+            <a class="nav-link" href="/">About</a>
+          </li>
+          
+          <!-- Blog -->
+          <li class="nav-item ">
+            <a class="nav-link" href="/blog/">Blog</a>
+          </li>
+          <!-- Other pages -->
+          <li class="nav-item ">
+            <a class="nav-link" href="/projects/">Projects</a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" href="/publications/">Publications</a>
+          </li>
+
+          <!-- Toogle theme mode -->
+          <div class="toggle-container">
+            <a id="light-toggle">
+              <i class="fas fa-moon"></i>
+              <i class="fas fa-sun"></i>
+            </a>
+          </div>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+
+    <!-- Content -->
+    <div class="container mt-5">
+      <!-- _layouts/post.html -->
+
+<div class="post">
+
+  <header class="post-header"><p class="post-eyebrow">QUANT  ·  APRIL 2025</p>
+<h1 class="post-title">SVI vs SABR：短期合约 vol smile 上的差距</h1>
+<p class="post-subtitle">SVI vs SABR, the gap on short-tenor smiles</p>
+<hr class="post-rule">
+    <p class="post-meta">April 18, 2025<span class="post-edited">· edited May 14, 2026</span></p>
+    <p class="post-tags">
+      <a href="/blog/2025"> <i class="fas fa-calendar fa-sm"></i> 2025 </a>
+        ·  
+        <a href="/blog/tag/vol-smile">
+          <i class="fas fa-hashtag fa-sm"></i> vol-smile</a>  
+          <a href="/blog/tag/sabr">
+          <i class="fas fa-hashtag fa-sm"></i> sabr</a>  
+          <a href="/blog/tag/svi">
+          <i class="fas fa-hashtag fa-sm"></i> svi</a>  
+          <a href="/blog/tag/sde">
+          <i class="fas fa-hashtag fa-sm"></i> sde</a>  
+          
+        ·  
+        <a href="/blog/category/quant">
+          <i class="fas fa-tag fa-sm"></i> quant</a>  
+          
+
+    </p>
+<p class="post-lang-toggle">
+      <a href="#cn" class="lang-btn">中文</a>
+      <a href="#en" class="lang-btn">English</a>
+    </p></header>
+
+  <article class="post-content">
+    <h2 id="cn">中文</h2>
+
+<p>去年春天偶然对 stochastic volatility（波动率本身按一个随机过程在演化，不是常数）起了兴趣。option pricing（给 call/put 期权定价）教科书一上来就是 Black-Scholes 的 constant-vol 假设，但实际市场给的是一个 K（strike，行权价）和 T（到期时间）两个维度的 vol surface（波动率曲面），而且这个曲面还在动。底层是一组耦合的 SDE（stochastic differential equation），理论自洽性高，实际拟合一直 messy。</p>
+
+<p>vol surface fitting 这件事，<a href="https://arxiv.org/abs/1204.0646" target="_blank" rel="noopener noreferrer">Gatheral &amp; Jacquier 2014</a> 把 SVI 这一支推到 SSVI / no-butterfly 的完整框架后基本定型；SABR 自 <a href="https://www.researchgate.net/publication/235622441_Managing_Smile_Risk" target="_blank" rel="noopener noreferrer">Hagan 2002</a> 之后也有大量改进（<a href="https://www.researchgate.net/publication/265252097_Arbitrage-Free_SABR" target="_blank" rel="noopener noreferrer">Hagan et al. 2014 “Arbitrage-Free SABR”</a> 用 PDE 替掉 asymptotic 是其中一个代表）。但 desk 上谁该用哪个，文献里的回答比想象中模糊。挑了 vanilla SVI 和 vanilla Hagan-SABR——工业上最常用的两个 baseline——在 AAPL 真实数据上跑了一次对比，记一下。</p>
+
+<p>选哪一个本质上是两件事在打架：参数有没有金融意义、跟数据贴得有多紧。SABR 是参数派的极致——4 个参数全部有意义、能 stress test 也能外推——但 Hagan asymptotic 大 T 还行、小 T 上拉不动曲率。SVI 反过来：fit 起来能贴任何 smile 形状，但参数跟 SDE 切断，看不出“市场在想什么”。</p>
+
+<h3 id="两个模型的设计选择">两个模型的设计选择</h3>
+
+<p><a href="https://www.researchgate.net/publication/235622441_Managing_Smile_Risk" target="_blank" rel="noopener noreferrer">SABR</a> 是真正意义上的 stochastic-vol model：vol 服从一个独立的扩散过程，跟价格扩散通过 correlation <code class="language-plaintext highlighter-rouge">ρ</code> 耦合。它的 4 个参数 <code class="language-plaintext highlighter-rouge">α, β, ρ, ν</code> 都有金融意义——<code class="language-plaintext highlighter-rouge">α</code> 是 ATM vol，<code class="language-plaintext highlighter-rouge">β</code> 决定 stickiness（lognormal vs normal），<code class="language-plaintext highlighter-rouge">ν</code> 是 vol-of-vol，<code class="language-plaintext highlighter-rouge">ρ</code> 是 spot-vol 相关性。卖点是参数可解释、可外推；缺点是它给出的 implied vol 公式（Hagan asymptotic expansion）是大 T 近似，短期、深 OTM 时假设 break down。</p>
+
+<p><a href="https://www.researchgate.net/publication/265252297_A_Parsimonious_Arbitrage-Free_Implied_Volatility_Parameterization_with_Application_to_the_Valuation_of_Volatility_Derivatives" target="_blank" rel="noopener noreferrer">SVI</a> 走另一条路：直接 parameterize implied total variance</p>
+
+<p>```plain text
+w(k) = a + b · (ρ · (k − m) + √((k − m)² + σ²))</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+5 个参数纯 descriptive。它不来自任何 SDE，所以拿到 SVI 参数后说不出市场在想什么；但作为 fitter 它极其灵活，可以贴合任何形状的 smile。SABR 解释市场，SVI 只负责把曲线弯过去。
+
+### 实验：AAPL 跨十个 expiry
+
+AAPL 2024-09-13 snapshot，10 个 expiry 从 13 天到 6 个月。每个 expiry 的流程是 pull call mid quote → solve BS implied vol → 同时用 SVI 和 SABR 拟合 → 算 per-strike RMSE。SVI 还要做一个 butterfly-arbitrage diagnostic：implied density `g(k) = ∂²C/∂K²` 处处 ≥ 0 等价于该 slice 无 butterfly 套利。
+
+| Expiry | T (y) | SVI RMSE (bps) | SABR RMSE (bps) |
+|---|---|---|---|
+| 2024-09-27 | 0.04 | 121 | 577 |
+| 2024-10-04 | 0.06 | 68 | 285 |
+| 2024-10-11 | 0.08 | 84 | 424 |
+| 2024-10-18 | 0.10 | 40 | 287 |
+| 2024-10-25 | 0.12 | 125 | 282 |
+| 2024-11-01 | 0.13 | 158 | 246 |
+| 2024-11-15 | 0.17 | 18 | 97 |
+| 2024-12-20 | 0.27 | 14 | 40 |
+| 2025-01-17 | 0.35 | 10 | 13 |
+| 2025-03-21 | 0.52 | 7 | 5 |
+
+### 结果是一个干净的 regime split
+
+T ≤ 0.13y（六周以内）SVI 比 SABR 好 2-5×，13 天合约上 SVI 121 bps 对 SABR 577 bps，差不多 5 倍。直观解释是短期 smile 是 deeply U 形，两翼都很陡，SVI 的 5 个参数可以弯过去，SABR 的 Hagan 近似公式在这种 regime 下根本拉不出那么大的曲率。
+
+T ≥ 0.35y 两者基本打平，SABR 反而略好。smile flatten，曲线接近线性，谁拟合都行——SABR 在长端略胜，可能是因为它的 lognormal-plus-vol-of-vol 设定本来就匹配长期 smile 的轻微 skew。所以“哪个模型更好”这个问题本身没有 standalone 答案，要看 tenor。
+
+### Butterfly arbitrage 是 SVI 必须自己监控的一步
+
+SVI 灵活，理论上能把曲线弯到 implied density 局部为负，产生 butterfly 套利。所以每次拟合完都要算一下 `g(k)` 的正性。这个 snapshot 10 个 slice 全部 `g_min &gt; 0`，最紧的是 13 天那一个 `g_min = 0.03`——离 arb-free 边界很近但还在内侧。短期 SVI 是要监控的。SABR 反过来 SDE-grounded，butterfly arb 默认不会违反（Hagan expansion 在 deep OTM 可能违反 wing 单调性，但 butterfly 不会）。“贴得紧”的代价就是要自己盯套利。
+
+### 实际 desk 上的用法
+
+实际生产里这两个模型都用，分工不同。短期 vol slice 用 SVI 拟合，差距大到不是 SABR 调一调参数能补回来的；长期那一段 SABR 也行，而且参数有 financial meaning，方便 risk management 和 stress test。一种比较常见的混合方案是 SVI 负责 marking（精度优先），完了再 fit 一组 SABR 在 SVI 出来的 surface 上提取 `ρ` / `ν` 等可解释量。底层 SDE 理论很漂亮，但工业实践里需要的常常是一个能精确弯到市场形状、且 numerically 无套利的 fitter，SVI 在这个位置上几乎没有竞争对手。
+
+### 这次实验留下的几个坑
+
+最该补的是 PDE-SABR。这套对比只跑了 vanilla Hagan，“Arbitrage-Free SABR”（PDE 方法）按理应该能在短期 smile 上把 SABR 拉回来，代价是 closed-form 公式换成数值求解，calibration 慢一个数量级。下一次做这件事的正确姿势是 SVI vs Hagan SABR vs PDE SABR 三方对比，集中在 T ≤ 0.13y。
+
+第二个是只跑了 AAPL。在 large-cap、liquidity 中等、event-driven 程度也中等的标的上结果应该普适，但 index option（SPX 长 tenor 几乎没有 skew kink）和 single-name 高 leverage 标的的 regime split 位置可能完全不一样。
+
+剩下几件比较细。Butterfly 检查只看了离散网格，`g(k) &gt; 0` 是逐点条件，离散采样会漏掉 narrow region 的负密度，生产里要走 SVI raw-form constraint（[Gatheral &amp; Jacquier 2014](https://arxiv.org/abs/1204.0646) Theorem 4.2）或者直接 SSVI no-butterfly 参数化。这次也没碰 SABR 的 vol-of-vol 跨 tenor 稳定性——`ν` 在长 tenor fit 出来能不能用来推短 tenor 的 smile shape，是 SABR 真正区别于 SVI 的地方，per-slice fitting 没用到，所以这套对比里 SABR 大概被低估。fit metric 是 implied vol RMSE 不是 PnL，bps 上“差 5×”在 hedging error 上可能根本看不到，desk 上真正决定用哪个模型的是后者。
+
+---
+
+## English {#en}
+
+Last spring I picked up an interest in stochastic volatility (vol itself evolving as its own random process, not a constant). Option-pricing textbooks open with Black-Scholes’ constant-vol assumption, but the real market gives you a vol surface (implied vol as a function of both strike and time-to-expiry) that keeps moving. The system underneath is a coupled SDE (stochastic differential equation) — theoretically clean, practically a mess to fit.
+
+The SVI lineage was closed out by [Gatheral and Jacquier 2014](https://arxiv.org/abs/1204.0646) into SSVI with no-butterfly conditions; SABR has had its share of upgrades since [Hagan 2002](https://www.researchgate.net/publication/235622441_Managing_Smile_Risk), notably [Hagan et al. 2014 “Arbitrage-Free SABR”](https://www.researchgate.net/publication/265252097_Arbitrage-Free_SABR), which replaces the asymptotic expansion with a PDE solve. But which model a desk should actually use is less clear in the literature than you’d expect. So I ran vanilla SVI against vanilla Hagan-SABR — the two textbook baselines — on real AAPL data.
+
+The choice between the two reduces to a fight between two properties: whether the parameters carry financial meaning, and how tightly the curve fits the market. SABR sits at the parameter end — all four parameters are quantities someone on a desk can stress-test or extrapolate — but Hagan’s asymptotic expansion runs out of curvature at short tenors. SVI sits at the fit end: it bends to any smile shape, but the parameters carry no information about the underlying SDE.
+
+### The design choices in each model
+
+[SABR](https://www.researchgate.net/publication/235622441_Managing_Smile_Risk) is a genuine stochastic-vol model: volatility follows its own diffusion, coupled to the price diffusion via a correlation `ρ`. Its four parameters `α, β, ρ, ν` all carry financial meaning — `α` is ATM vol, `β` controls stickiness (lognormal vs normal), `ν` is vol-of-vol, `ρ` is spot–vol correlation. The selling point is interpretable, extrapolable parameters. The cost is that the implied-vol formula SABR ships with (Hagan’s asymptotic expansion) is a long-tenor approximation, and its assumptions break down in short, deeply-OTM regimes.
+
+[SVI](https://www.researchgate.net/publication/265252297_A_Parsimonious_Arbitrage-Free_Implied_Volatility_Parameterization_with_Application_to_the_Valuation_of_Volatility_Derivatives) takes the other path. It directly parameterizes implied total variance:
+
+```plain text
+w(k) = a + b · (ρ · (k − m) + √((k − m)² + σ²))
+</code></pre></div></div>
+
+<p>Five purely descriptive parameters, none traceable to an SDE. Without an SDE, SVI parameters don’t tell you what the market is thinking. As a fitter, it bends to whatever the smile is doing. The cleanest framing is that SABR is in the business of explaining the market, and SVI is in the business of matching the curve.</p>
+
+<h3 id="the-experiment-aapl-across-ten-expiries">The experiment: AAPL across ten expiries</h3>
+
+<p>AAPL on 2024-09-13, ten expiries from 13 days to six months. For each expiry: pull call mids → solve BS implied vol → fit both SVI and SABR → compute per-strike RMSE. SVI additionally gets a butterfly-arbitrage diagnostic — the implied density <code class="language-plaintext highlighter-rouge">g(k) = ∂²C/∂K²</code> must stay ≥ 0 everywhere, otherwise the slice contains a butterfly arb.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Expiry</th>
+      <th>T (y)</th>
+      <th>SVI RMSE (bps)</th>
+      <th>SABR RMSE (bps)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>2024-09-27</td>
+      <td>0.04</td>
+      <td>121</td>
+      <td>577</td>
+    </tr>
+    <tr>
+      <td>2024-10-04</td>
+      <td>0.06</td>
+      <td>68</td>
+      <td>285</td>
+    </tr>
+    <tr>
+      <td>2024-10-11</td>
+      <td>0.08</td>
+      <td>84</td>
+      <td>424</td>
+    </tr>
+    <tr>
+      <td>2024-10-18</td>
+      <td>0.10</td>
+      <td>40</td>
+      <td>287</td>
+    </tr>
+    <tr>
+      <td>2024-10-25</td>
+      <td>0.12</td>
+      <td>125</td>
+      <td>282</td>
+    </tr>
+    <tr>
+      <td>2024-11-01</td>
+      <td>0.13</td>
+      <td>158</td>
+      <td>246</td>
+    </tr>
+    <tr>
+      <td>2024-11-15</td>
+      <td>0.17</td>
+      <td>18</td>
+      <td>97</td>
+    </tr>
+    <tr>
+      <td>2024-12-20</td>
+      <td>0.27</td>
+      <td>14</td>
+      <td>40</td>
+    </tr>
+    <tr>
+      <td>2025-01-17</td>
+      <td>0.35</td>
+      <td>10</td>
+      <td>13</td>
+    </tr>
+    <tr>
+      <td>2025-03-21</td>
+      <td>0.52</td>
+      <td>7</td>
+      <td>5</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="the-result-is-a-clean-regime-split">The result is a clean regime split</h3>
+
+<p>At short tenors (T ≤ 0.13y, roughly six weeks and in) SVI beats SABR by 2–5×. At 13 days SVI sits at 121 bps and SABR at 577 bps — almost 5×. Short-tenor smiles are deeply U-shaped with both wings steep, and SVI’s five parameters can bend to that. SABR’s lognormal asymptotic expansion can’t generate enough curvature in this regime.</p>
+
+<p>At long tenors (T ≥ 0.35y) the two essentially tie, and SABR slightly pulls ahead. Smiles flatten, the curve approaches linear, both models fit. SABR’s edge at the long end probably comes from its lognormal-plus-vol-of-vol structure matching the gentle long-tenor skew shape natively. “Which model is better” has no standalone answer — it depends on the tenor.</p>
+
+<h3 id="svis-flexibility-costs-an-explicit-arbitrage-check">SVI’s flexibility costs an explicit arbitrage check</h3>
+
+<p>Because SVI can bend a curve into a negative implied density in principle, butterfly arbitrage is something the fitter can produce without warning. So every fit needs <code class="language-plaintext highlighter-rouge">g(k) = ∂²C/∂K²</code> checked for non-negativity. On this snapshot all ten slices stay strictly positive; the tightest is the 13-day expiry at <code class="language-plaintext highlighter-rouge">g_min = 0.03</code> — close to the arb-free boundary but still inside. Short-tenor SVI needs monitoring. SABR is the opposite — SDE-grounded, butterfly arbitrage is precluded by construction (Hagan can violate wing monotonicity in deep OTM, but not butterfly). The price of bending tighter is having to police your own arbitrage.</p>
+
+<h3 id="what-this-actually-looks-like-on-a-desk">What this actually looks like on a desk</h3>
+
+<p>In production both models tend to get used, with different roles. Short-tenor slices are fit by SVI — the gap is too large to close by retuning SABR. The long end is fine with SABR, and the interpretable parameters get used downstream for risk management and stress tests. A common hybrid is SVI marking the surface for accuracy, with SABR then fit <em>to</em> the calibrated SVI surface to extract interpretable quantities (<code class="language-plaintext highlighter-rouge">ρ</code>, <code class="language-plaintext highlighter-rouge">ν</code>). The SDE-grounded theory is beautiful, but day-to-day what production needs is a fitter that bends accurately to whatever shape the market is in and stays numerically arbitrage-free. SVI occupies that role with essentially no competition.</p>
+
+<h3 id="what-this-experiment-leaves-on-the-table">What this experiment leaves on the table</h3>
+
+<p>The most obvious follow-up is PDE-SABR. I only tested vanilla Hagan; the PDE variant (Arbitrage-Free SABR) should pull SABR back at short tenors, at the cost of swapping a closed-form formula for a numerical solve and slowing calibration by an order of magnitude. The right next round is SVI vs Hagan SABR vs PDE SABR specifically in T ≤ 0.13y.</p>
+
+<p>AAPL is one underlying. The pattern probably generalizes across large-cap, liquid, moderately event-driven names, but index options (SPX, almost no skew kink at the long end) and high-leverage single names will probably sit at a different regime-split point.</p>
+
+<p>A few smaller items. The butterfly check was a discrete grid: <code class="language-plaintext highlighter-rouge">g(k) &gt; 0</code> is pointwise, and sparse sampling can miss a narrow negative-density region — production code should use SVI raw-form constraints from <a href="https://arxiv.org/abs/1204.0646" target="_blank" rel="noopener noreferrer">Gatheral and Jacquier 2014</a> Theorem 4.2, or adopt SSVI’s no-butterfly parameterization directly. I also didn’t exercise SABR’s vol-of-vol stability across tenors, which is exactly where SABR’s parameters earn their keep; per-slice fitting underuses that, so this comparison probably understates SABR. The metric throughout is implied-vol RMSE, not PnL — a 5× gap in bps may not show up in hedging error at all, and a desk deciding which model to use cares about hedging error first.</p>
+
+  </article>
+
+</div>
+
+    </div>
+
+    <!-- Footer -->    
+    <footer class="fixed-bottom">
+      <div class="container mt-0">
+        © Copyright 2026 Haozhe  Zhang. Powered by <a href="https://jekyllrb.com/" target="_blank" rel="noopener noreferrer">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio" target="_blank" rel="noopener noreferrer">al-folio</a> theme. Hosted by <a href="https://pages.github.com/" target="_blank" rel="noopener noreferrer">GitHub Pages</a>.
+
+      </div>
+    </footer>
+
+    <!-- JavaScripts -->
+    <!-- jQuery -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+    <!-- Bootsrap & MDB scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.2/dist/umd/popper.min.js" integrity="sha256-l/1pMF/+J4TThfgARS6KwWrk/egwuVvhRzfLAMQ6Ds4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" integrity="sha256-SyTu6CwrfOhaznYZPoolVw2rxoY7lKYKQvqbtqN93HI=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mdbootstrap@4.20.0/js/mdb.min.js" integrity="sha256-NdbiivsvWt7VYCt6hYNT3h/th9vSTL4EDWeGs5SN3DA=" crossorigin="anonymous"></script>
+
+    
+    <!-- Load Common JS -->
+  <script src="/assets/js/common.js"></script>
+
+    <!-- MathJax -->
+  <script type="text/javascript">
+    window.MathJax = {
+      tex: {
+        tags: 'ams'
+      }
+    };
+  </script>
+  <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js"></script>
+
+    
+  </body>
+</html>
+
