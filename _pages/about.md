@@ -23,7 +23,7 @@ I’m a modeling engineer at Tesla, working at the intersection of physics-based
 
 My background is heavy on physics. I’ve spent years working out closed-form theoretical solutions across mechanics and multi-physics fields — soft-hard material integration, stretchable metasurfaces, mechanical Janus structures, nanoconfined fluid mechanics. I pair the theory with hands-on engineering, so most of what I’ve built has gone end-to-end from the math to a working system.
 
-Outside the day job, what pulls me from one thing to the next is curiosity and a long-running urge to build new things. I keep gravitating toward LLMs, agentic systems, RL training infrastructure, voice agents for narrow domains, and AI for hardware — all self-taught.
+Outside the day job, what pulls me from one thing to the next is curiosity and a long-running urge to build new things. I keep gravitating toward LLMs, agentic systems, RL training infrastructure, voice agents for narrow domains, and AI for hardware.
 
 Before Tesla, I earned my PhD in mechanical engineering from the University of Virginia and a BS from the University of Science and Technology of China. My doctoral work centered on theoretical and computational modeling of multi-physics fields.
 
