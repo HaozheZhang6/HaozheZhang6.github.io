@@ -39,6 +39,16 @@ html[data-theme="dark"] {
   --global-footer-link-color: #e8e0d2;
 }
 
+// Always reserve the vertical scrollbar's gutter. The content column is
+// centered with margin:auto, so when the scrollbar appears after the page
+// grows past the viewport (on load), the usable width drops by ~15px and the
+// whole column re-centers — that's the "everything shifts sideways then snaps
+// back" flash. Reserving the gutter keeps the width constant, so nothing moves.
+html {
+  scrollbar-gutter: stable;
+  overflow-y: scroll; // fallback for browsers without scrollbar-gutter
+}
+
 // --- Base typography -------------------------------------------------------
 body {
   background-color: var(--global-bg-color);
