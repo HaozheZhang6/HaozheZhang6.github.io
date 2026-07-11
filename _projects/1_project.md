@@ -10,16 +10,20 @@ period: May 2026
 
 Programmatic CAD is the entrance to AI for hardware — the parametric code that turns a model's output into a manufacturable part. BenchCAD measures how well AI systems can reconstruct that code, which is a genuinely multimodal problem: it stacks cross-modal alignment, 3D spatial reasoning, and numeric-precision recovery into a single task.
 
-The benchmark is built from **17,900 execution-verified CadQuery parts** across **106 industrial part families** — gears, springs, fittings, fasteners, and more. It's grounded in real engineering standards: **47 specification codes** (ISO, DIN, EN, ASME, IEC), with **52 of the 106 families** anchored to actual specification tables rather than free-form shapes.
+The benchmark is built from 17,900 execution-verified CadQuery parts across 106 industrial part families — gears, springs, fittings, fasteners, and more. It's grounded in real engineering standards: 47 specification codes (ISO, DIN, EN, ASME, IEC), with 52 of the 106 families anchored to actual specification tables rather than free-form shapes.
 
-It decomposes model capability into **four matched tasks** over the same underlying parts:
+It decomposes model capability into four matched tasks over the same underlying parts:
 
 - **img2cq (Vision2Code)** — turn four orthographic renders into executable CadQuery code
 - **qa_img (Vision QA)** — answer numeric geometric questions from rendered views, across capability levels L1–L4
 - **qa_code (Code QA)** — the same questions, conditioned on the source code instead of images
 - **edit_code (Code Edit)** — carry out instruction-guided edits to an existing program
 
-Where models stand today: even the frontier's best re-graded IoU score is only **~0.29**. Models tend to recover a part's coarse outer shape but miss the internal structure and exact dimensions that make it manufacturable, and generalization to unseen families stays limited even after fine-tuning. Far from solved.
+<img src="/assets/img/projects/benchcad_capability_pyramid.png" alt="BenchCAD capability tiers with example Vision-QA and Code-QA items" style="display:block;width:100%;height:auto;margin:1rem auto;border-radius:6px;">
+
+<small>The four capability tiers, with example Vision-QA and Code-QA items.</small>
+
+Where models stand today: even the frontier's best re-graded IoU score is only ~0.29. Models tend to recover a part's coarse outer shape but miss the internal structure and exact dimensions that make it manufacturable, and generalization to unseen families stays limited even after fine-tuning. Far from solved.
 
 [benchcad.com](https://benchcad.com) · [arXiv:2605.10865](https://arxiv.org/abs/2605.10865)
 
